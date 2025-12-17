@@ -3,17 +3,18 @@ import { BarChart3, TrendingUp, Award, ArrowUp } from 'lucide-react';
 
 export const ScorecardSection: React.FC = () => {
   return (
-    <section id="scorecard" className="py-24 relative bg-hayrok-dark overflow-hidden">
-      {/* Dynamic Background */}
-      <div className="absolute right-0 top-1/2 -translate-y-1/2 w-1/2 h-full bg-gradient-to-l from-hayrok-orange/5 to-transparent pointer-events-none"></div>
+    <section id="scorecard" className="py-24 relative bg-white overflow-hidden">
+      {/* Dynamic Background - Light Theme */}
+      <div className="absolute right-0 top-1/2 -translate-y-1/2 w-1/2 h-full bg-gradient-to-l from-orange-100/40 to-transparent pointer-events-none"></div>
+      <div className="absolute left-0 bottom-0 w-96 h-96 bg-gray-100 rounded-full blur-3xl -translate-x-1/2 translate-y-1/2 pointer-events-none"></div>
 
       <div className="container mx-auto px-6">
         <div className="flex flex-col lg:flex-row items-center gap-16">
           
-          {/* Visual UI Card */}
+          {/* Visual UI Card - Keeping Dark for Contrast (Dashboard Mockup) */}
           <div className="w-full lg:w-1/2">
             <div className="relative group">
-              <div className="absolute -inset-1 bg-gradient-to-r from-hayrok-orange via-yellow-500 to-orange-600 rounded-2xl opacity-30 blur-xl group-hover:opacity-50 transition-opacity duration-500"></div>
+              <div className="absolute -inset-1 bg-gradient-to-r from-hayrok-orange via-yellow-500 to-orange-600 rounded-2xl opacity-20 blur-xl group-hover:opacity-40 transition-opacity duration-500"></div>
               
               <div className="relative bg-hayrok-panel border border-hayrok-border rounded-xl p-6 md:p-8 shadow-2xl">
                 <div className="flex justify-between items-start mb-8">
@@ -80,33 +81,33 @@ export const ScorecardSection: React.FC = () => {
             </div>
           </div>
 
-          {/* Text Content */}
+          {/* Text Content - Updated for Light Theme */}
           <div className="w-full lg:w-1/2">
-            <h2 className="text-4xl font-bold mb-6">
+            <h2 className="text-4xl font-bold mb-6 text-slate-900">
                Board-Ready <br />
                <span className="text-hayrok-orange">Security Benchmarking</span>
             </h2>
-            <p className="text-lg text-slate-400 mb-8 leading-relaxed">
+            <p className="text-lg text-slate-600 mb-8 leading-relaxed">
                Stop guessing where you stand. Our <strong>Security Scorecard</strong> provides an objective, real-time rating of your security posture compared to industry peers.
             </p>
             
             <ul className="space-y-6">
                <li className="flex gap-4">
-                  <div className="mt-1 bg-hayrok-orange/10 p-2 rounded-lg text-hayrok-orange">
+                  <div className="mt-1 bg-orange-100 p-2 rounded-lg text-hayrok-orange">
                      <BarChart3 size={20} />
                   </div>
                   <div>
-                     <h4 className="text-white font-bold text-lg mb-1">Executive Reporting</h4>
-                     <p className="text-slate-500 text-sm">Beautiful, jargon-free reports designed for CISOs and Board of Directors.</p>
+                     <h4 className="text-slate-900 font-bold text-lg mb-1">Executive Reporting</h4>
+                     <p className="text-slate-600 text-sm">Beautiful, jargon-free reports designed for CISOs and Board of Directors.</p>
                   </div>
                </li>
                <li className="flex gap-4">
-                  <div className="mt-1 bg-hayrok-orange/10 p-2 rounded-lg text-hayrok-orange">
+                  <div className="mt-1 bg-orange-100 p-2 rounded-lg text-hayrok-orange">
                      <TrendingUp size={20} />
                   </div>
                   <div>
-                     <h4 className="text-white font-bold text-lg mb-1">Competitive Benchmarking</h4>
-                     <p className="text-slate-500 text-sm">See how you stack up against companies of similar size and sector.</p>
+                     <h4 className="text-slate-900 font-bold text-lg mb-1">Competitive Benchmarking</h4>
+                     <p className="text-slate-600 text-sm">See how you stack up against companies of similar size and sector.</p>
                   </div>
                </li>
             </ul>
