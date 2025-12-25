@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { 
@@ -6,7 +5,7 @@ import {
   Gavel, UserCheck, Eye, Sparkles, 
   Award, ArrowRight, Briefcase, Heart,
   Terminal, Globe, Cpu, CheckCircle2,
-  Scale, FileText, History, Zap
+  Scale, FileText, History, Zap, Lightbulb, Quote
 } from 'lucide-react';
 
 const fadeInUp = {
@@ -24,6 +23,27 @@ const staggerContainer = {
     }
   }
 };
+
+const AnalystProfile = ({ name, role, bio, image }: { name: string, role: string, bio: React.ReactNode, image: string }) => (
+  <motion.div 
+    variants={fadeInUp}
+    className="bg-white border border-slate-200 rounded-[2.5rem] p-8 lg:p-12 hover:border-hayrok-orange/30 transition-all duration-500 hover:shadow-xl flex flex-col h-full group"
+  >
+    <div className="flex items-start gap-6 mb-8">
+      <div className="w-20 h-20 rounded-2xl overflow-hidden bg-slate-100 shrink-0 border border-slate-100">
+        <img src={image} alt={name} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" />
+      </div>
+      <div className="pt-1">
+        <h3 className="text-2xl font-black text-slate-900 leading-tight mb-2">{name}</h3>
+        <p className="text-[10px] font-black text-hayrok-orange uppercase tracking-[0.2em] bg-orange-50 px-2 py-1 rounded inline-block">{role}</p>
+      </div>
+    </div>
+    
+    <div className="text-slate-600 font-medium leading-relaxed text-sm lg:text-base space-y-4">
+      {bio}
+    </div>
+  </motion.div>
+);
 
 export const LeadershipPage: React.FC = () => {
   const { scrollYProgress } = useScroll();
@@ -70,7 +90,7 @@ export const LeadershipPage: React.FC = () => {
       </section>
 
       {/* Philosophy Pillars */}
-      <section className="container mx-auto px-6 mb-40 relative z-10">
+      <section className="container mx-auto px-6 mb-32 relative z-10">
         <div className="bg-slate-50 border border-slate-200 rounded-[4rem] p-10 md:p-20 overflow-hidden relative shadow-sm">
           <div className="grid lg:grid-cols-2 gap-20 items-center">
             <motion.div {...fadeInUp}>
@@ -103,75 +123,69 @@ export const LeadershipPage: React.FC = () => {
         </div>
       </section>
 
-      {/* Founder Spotlight */}
-      <section className="container mx-auto px-6 mb-40 relative z-10">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid lg:grid-cols-12 gap-16 items-start">
-            <div className="lg:col-span-5">
-              <motion.div 
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                className="relative aspect-[4/5] rounded-[3.5rem] overflow-hidden shadow-2xl border-8 border-white group"
-              >
-                <img 
-                  src="https://raw.githubusercontent.com/Hayrok/media/main/herberth.jpg" 
-                  alt="Herberth Osiemele" 
-                  className="w-full h-full object-cover transition-all duration-1000 group-hover:scale-105" 
-                  onError={(e) => {
-                    // Fallback to the user's provided image via a descriptive placeholder if the external link isn't ready
-                    // In a production environment, this would be a local asset path
-                    (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070&auto=format&fit=crop";
-                  }}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 via-transparent to-transparent" />
-                <div className="absolute bottom-8 left-8 right-8 p-6 bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl">
-                   <div className="flex flex-col gap-1 text-white">
-                      <span className="font-black text-2xl tracking-tight">Herberth Osiemele</span>
-                      <span className="font-black uppercase tracking-[0.4em] text-[10px] text-hayrok-orange">Founder & CEO</span>
-                   </div>
-                </div>
-              </motion.div>
-            </div>
-
-            <motion.div 
-              {...fadeInUp}
-              className="lg:col-span-7 pt-12"
-            >
-              <h3 className="text-[10px] font-black text-hayrok-orange uppercase tracking-[0.5em] mb-8">Executive Profile</h3>
-              <h4 className="text-4xl md:text-5xl font-black text-slate-900 mb-8 tracking-tight leading-tight">
-                Herberth is a practitioner <br/> <span className="text-slate-400 italic">first.</span>
-              </h4>
-              <div className="space-y-6 text-xl text-slate-600 font-medium leading-relaxed mb-12">
-                <p>
-                  Herberth is a cybersecurity practitioner and product leader with deep experience across application security, risk management, and enterprise security programs in regulated environments.
-                </p>
-                <p>
-                  After years working alongside security teams overwhelmed by alerts and opaque platforms, Herberth recognized a fundamental gap: <span className="text-slate-900 font-bold">autonomous security that organizations could actually trust.</span>
-                </p>
-                <p>
-                  He founded Hayrok to build the first agentic AI security platform designed with governance, accountability, and auditability at its core — ensuring autonomy never comes at the expense of trust.
-                </p>
-              </div>
-              
-              <div className="p-10 bg-slate-900 rounded-[2.5rem] text-white relative overflow-hidden">
-                <div className="absolute top-0 right-0 p-8 opacity-5">
-                   <Zap size={100} className="text-hayrok-orange" />
-                </div>
-                <div className="relative z-10">
-                   <p className="text-[10px] font-black text-hayrok-orange uppercase tracking-[0.4em] mb-4">The Mission</p>
-                   <p className="text-2xl font-black leading-snug">"We build for the future of agentic AI, where governance is not a feature — it's the architecture."</p>
-                </div>
-              </div>
-            </motion.div>
-          </div>
+      {/* Founders Section (Analyst Profile Style) */}
+      <section className="container mx-auto px-6 mb-32 relative z-10">
+        <div className="text-center max-w-3xl mx-auto mb-20">
+           <h2 className="text-[10px] font-black text-hayrok-orange uppercase tracking-[0.5em] mb-6">Executive Team</h2>
+           <h3 className="text-4xl md:text-6xl font-black text-slate-900 mb-6 tracking-tight">Founder Profiles</h3>
+           <p className="text-lg text-slate-500 font-medium">Factual positioning for analyst and procurement reviews.</p>
         </div>
+
+        <div className="grid lg:grid-cols-2 gap-8">
+          <AnalystProfile 
+            name="Herberth Oshiemele"
+            role="Founder & Chief Executive Officer"
+            image="https://raw.githubusercontent.com/Hayrok/media/main/herberth.jpg"
+            bio={
+              <p>
+                Herberth Oshiemele is a cybersecurity professional with experience in application security, enterprise security operations, and risk management. As Founder and CEO, he is responsible for Hayrok’s overall strategy, execution, and alignment with enterprise security and governance requirements.
+              </p>
+            }
+          />
+          <AnalystProfile 
+            name="Ebuka Igwegbe"
+            role="Co‑Founder & Chief Product Officer"
+            image="https://api.dicebear.com/7.x/initials/svg?seed=EI&backgroundColor=1e293b&textColor=ffffff"
+            bio={
+              <p>
+                Ebuka Igwegbe is an AI and product leader with experience in applied AI, machine learning, and enterprise software development. As Co‑Founder and CPO, he leads Hayrok’s product strategy and roadmap, with a focus on delivering AI‑driven capabilities that support transparency, control, and enterprise usability.
+              </p>
+            }
+          />
+        </div>
+      </section>
+
+      {/* Origin Story / Partnership Callout */}
+      <section className="container mx-auto px-6 mb-32 relative z-10">
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            className="bg-hayrok-dark rounded-[3rem] p-12 md:p-20 text-center relative overflow-hidden shadow-2xl"
+          >
+             <div className="absolute inset-0 bg-grid-white opacity-5"></div>
+             <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-hayrok-orange/20 to-transparent blur-[100px]"></div>
+             
+             <div className="relative z-10 max-w-4xl mx-auto">
+                <Quote size={48} className="text-hayrok-orange mx-auto mb-8 opacity-50" />
+                <h3 className="text-3xl md:text-5xl font-black text-white mb-8 leading-tight">
+                   Where Security Meets Intelligence.
+                </h3>
+                <p className="text-xl text-slate-300 font-medium leading-relaxed mb-10">
+                   Hayrok was born at the intersection of AI and Cybersecurity — where Ebuka’s expertise in intelligent systems met Herberth’s experience securing complex environments. What started as late-night college conversations became a company built to redefine how AI should responsibly operate in security.
+                </p>
+                <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-white/10 bg-white/5 text-white text-xs font-bold uppercase tracking-widest backdrop-blur-md">
+                   <Lightbulb size={14} className="text-hayrok-orange" />
+                   The Hayrok Origin Story
+                </div>
+             </div>
+          </motion.div>
       </section>
 
       {/* Leadership Standards Grid */}
       <section className="container mx-auto px-6 mb-40 relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-20">
           <h2 className="text-[10px] font-black text-hayrok-orange uppercase tracking-[0.5em] mb-6">The Standard</h2>
-          <h3 className="text-4xl md:text-6xl font-black text-slate-900 mb-8 tracking-tight">How we Lead.</h3>
+          <h3 className="text-4xl md:text-6xl font-black text-slate-900 mb-8 tracking-tight">Leadership Standards.</h3>
           <p className="text-lg text-slate-500 font-medium">Every leader at Hayrok is held to the same standards we expect from our AI systems.</p>
         </div>
 
