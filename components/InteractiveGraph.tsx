@@ -17,6 +17,7 @@ const connections = [
 
 export const InteractiveGraph: React.FC = () => {
   const [activeNode, setActiveNode] = useState<number | null>(null);
+  const [progress, setProgress] = useState(0);
 
   // Randomly scan nodes to simulate AI finding vulnerabilities
   useEffect(() => {
@@ -26,6 +27,14 @@ export const InteractiveGraph: React.FC = () => {
       setTimeout(() => setActiveNode(null), 1500);
     }, 2000);
     return () => clearInterval(interval);
+  }, []);
+
+  // Simulate scanning progress loop
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setProgress((prev) => (prev >= 100 ? 0 : prev + 1));
+    }, 100);
+    return () => clearInterval(timer);
   }, []);
 
   return (
@@ -58,7 +67,6 @@ export const InteractiveGraph: React.FC = () => {
               const startNode = nodes.find(n => n.id === start)!;
               const endNode = nodes.find(n => n.id === end)!;
               
-              // Check if connection is active (part of a scanned path)
               const isActive = activeNode === start || activeNode === end;
 
               return (
@@ -83,7 +91,6 @@ export const InteractiveGraph: React.FC = () => {
               
               return (
                 <g key={node.id}>
-                  {/* Pulse Effect when Active */}
                   {isActive && (
                     <motion.circle
                       cx={`${node.x}%`}
@@ -98,7 +105,6 @@ export const InteractiveGraph: React.FC = () => {
                     />
                   )}
                   
-                  {/* Node Circle */}
                   <motion.circle
                     cx={`${node.x}%`}
                     cy={`${node.y}%`}
@@ -110,7 +116,6 @@ export const InteractiveGraph: React.FC = () => {
                     whileHover={{ scale: 1.2 }}
                   />
 
-                  {/* Label Tooltip Simulation */}
                   {isActive && (
                      <foreignObject x={`${node.x}%`} y={`${node.y}%`} width="120" height="60" className="overflow-visible pointer-events-none">
                         <div className="transform translate-x-4 -translate-y-1/2 bg-hayrok-panel border border-hayrok-orange/40 text-xs p-2 rounded text-white shadow-lg backdrop-blur-md">
@@ -127,26 +132,54 @@ export const InteractiveGraph: React.FC = () => {
       </div>
 
       {/* Floating UI Elements simulating scanning */}
-      <div className="absolute bottom-6 right-6 glass-panel p-3 rounded-lg flex flex-col gap-2 min-w-[200px]">
+      <div className="absolute bottom-6 right-6 glass-panel p-4 rounded-xl flex flex-col gap-3 min-w-[240px] shadow-2xl border border-white/10 backdrop-blur-xl bg-black/60">
         <div className="flex items-center justify-between text-xs font-mono text-slate-300">
            <div className="flex items-center gap-2">
-              <div className="w-2 h-2 bg-hayrok-orange rounded-full animate-pulse"></div>
-              <span>Scanning...</span>
+              <div className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-hayrok-orange opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-hayrok-orange"></span>
+              </div>
+              <span className="font-bold text-white tracking-wide">
+                Hay-AI Scanning...
+              </span>
            </div>
-           <span>84%</span>
+           <span className="font-bold text-hayrok-orange">{progress}%</span>
         </div>
         
-        {/* Animated Progress Bar */}
-        <div className="w-full h-1.5 bg-slate-700/50 rounded-full overflow-hidden">
-           <div className="h-full bg-hayrok-orange rounded-full animate-[progress_2s_ease-in-out_infinite] w-[84%] relative overflow-hidden">
-              <div className="absolute top-0 left-0 bottom-0 right-0 bg-gradient-to-r from-transparent via-white/30 to-transparent translate-x-[-100%] animate-[shimmer_1s_infinite]"></div>
-           </div>
+        {/* Dynamic Progress Bar */}
+        <div className="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden">
+           <motion.div 
+             className="h-full bg-hayrok-orange rounded-full relative"
+             initial={{ width: 0 }}
+             animate={{ width: `${progress}%` }}
+             transition={{ type: "tween", ease: "linear", duration: 0.1 }}
+           >
+              <div className="absolute inset-0 bg-white/30 animate-pulse"></div>
+           </motion.div>
         </div>
         
-        <div className="flex gap-1 mt-1">
-           <span className="w-1 h-1 rounded-full bg-slate-500 animate-bounce delay-0"></span>
-           <span className="w-1 h-1 rounded-full bg-slate-500 animate-bounce delay-100"></span>
-           <span className="w-1 h-1 rounded-full bg-slate-500 animate-bounce delay-200"></span>
+        {/* Blinking Dots Sequence */}
+        <div className="flex gap-1.5 mt-1 pl-1 items-center">
+           {[0, 1, 2].map((i) => (
+             <motion.div
+               key={i}
+               className="w-1.5 h-1.5 rounded-full bg-slate-500"
+               animate={{ 
+                 opacity: [0.3, 1, 0.3], 
+                 scale: [0.8, 1.2, 0.8],
+                 backgroundColor: ["#64748b", "#FF6B00", "#64748b"]
+               }}
+               transition={{ 
+                 duration: 1.5, 
+                 repeat: Infinity, 
+                 delay: i * 0.2,
+                 ease: "easeInOut"
+               }}
+             />
+           ))}
+           <span className="text-[9px] text-slate-400 font-mono ml-2">
+             {progress < 30 ? 'Mapping assets' : progress < 70 ? 'Validating paths' : 'Generating proof'}
+           </span>
         </div>
       </div>
     </div>

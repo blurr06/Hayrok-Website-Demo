@@ -1,61 +1,67 @@
+
 import React from 'react';
-import { Twitter, Linkedin, Github, Mail } from 'lucide-react';
+import { Twitter, Linkedin, Github, Mail, ShieldCheck } from 'lucide-react';
 import { Logo } from './Logo';
 
-export const Footer: React.FC = () => {
+interface FooterProps {
+  onNavigate: (page: string) => void;
+}
+
+export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
   return (
-    <footer className="bg-black border-t border-hayrok-border pt-20 pb-10">
+    <footer className="bg-white border-t border-slate-100 pt-24 pb-12">
       <div className="container mx-auto px-6">
-        <div className="grid md:grid-cols-4 gap-12 mb-16">
+        <div className="grid md:grid-cols-4 gap-16 mb-20">
           <div className="col-span-1 md:col-span-2">
-            <div className="flex items-center gap-2 mb-6">
-               <Logo />
+            <div className="flex items-center gap-2 mb-8 cursor-pointer" onClick={() => onNavigate('home')}>
+               <Logo color="dark" />
             </div>
-            <p className="text-slate-500 max-w-sm mb-6">
-              Next-generation cybersecurity risk management. 
-              Empowering organizations to anticipate and neutralize threats with Genesis.
+            <p className="text-slate-500 max-w-sm mb-10 text-lg font-medium leading-relaxed">
+              Hayrok — Agentic AI for Security, Built With Accountability.
             </p>
             <div className="flex gap-4">
-              <a href="#" className="w-10 h-10 rounded-full bg-hayrok-panel flex items-center justify-center text-slate-400 hover:text-white hover:bg-hayrok-orange transition-colors">
-                <Twitter size={18} />
+              <a href="#" className="w-12 h-12 rounded-2xl bg-slate-50 border border-slate-200 flex items-center justify-center text-slate-400 hover:text-hayrok-orange hover:bg-white hover:border-hayrok-orange hover:shadow-xl transition-all">
+                <Twitter size={20} />
               </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-hayrok-panel flex items-center justify-center text-slate-400 hover:text-white hover:bg-hayrok-orange transition-colors">
-                <Linkedin size={18} />
+              <a href="#" className="w-12 h-12 rounded-2xl bg-slate-50 border border-slate-200 flex items-center justify-center text-slate-400 hover:text-hayrok-orange hover:bg-white hover:border-hayrok-orange hover:shadow-xl transition-all">
+                <Linkedin size={20} />
               </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-hayrok-panel flex items-center justify-center text-slate-400 hover:text-white hover:bg-hayrok-orange transition-colors">
-                <Github size={18} />
+              <a href="#" className="w-12 h-12 rounded-2xl bg-slate-50 border border-slate-200 flex items-center justify-center text-slate-400 hover:text-hayrok-orange hover:bg-white hover:border-hayrok-orange hover:shadow-xl transition-all">
+                <Github size={20} />
               </a>
             </div>
           </div>
 
           <div>
-            <h4 className="text-white font-semibold mb-6">Platform</h4>
-            <ul className="space-y-4">
-              <li><a href="#" className="text-slate-500 hover:text-hayrok-orange transition-colors">Genesis Pentesting</a></li>
-              <li><a href="#" className="text-slate-500 hover:text-hayrok-orange transition-colors">Security Scorecard</a></li>
-              <li><a href="#" className="text-slate-500 hover:text-hayrok-orange transition-colors">Hay AI Insights</a></li>
-              <li><a href="#" className="text-slate-500 hover:text-hayrok-orange transition-colors">Integrations</a></li>
+            <h4 className="text-slate-900 font-black text-xs uppercase tracking-widest mb-8">Capabilities</h4>
+            <ul className="space-y-5">
+              <li><button onClick={() => onNavigate('platform')} className="text-slate-500 font-bold hover:text-hayrok-orange transition-colors">Hive — Intelligence</button></li>
+              <li><button onClick={() => onNavigate('platform')} className="text-slate-500 font-bold hover:text-hayrok-orange transition-colors">Genesis — Validation</button></li>
+              <li><button onClick={() => onNavigate('roi')} className="text-slate-500 font-bold hover:text-hayrok-orange transition-colors">ROI Metrics</button></li>
+              <li><button onClick={() => onNavigate('comparison')} className="text-slate-500 font-bold hover:text-hayrok-orange transition-colors">Comparison Battlecard</button></li>
             </ul>
           </div>
 
           <div>
-            <h4 className="text-white font-semibold mb-6">Company</h4>
-            <ul className="space-y-4">
-              <li><a href="#" className="text-slate-500 hover:text-hayrok-orange transition-colors">About Us</a></li>
-              <li><a href="#" className="text-slate-500 hover:text-hayrok-orange transition-colors">Careers</a></li>
-              <li><a href="#" className="text-slate-500 hover:text-hayrok-orange transition-colors">Contact</a></li>
-              <li><a href="#" className="text-slate-500 hover:text-hayrok-orange transition-colors">Privacy Policy</a></li>
+            <h4 className="text-slate-900 font-black text-xs uppercase tracking-widest mb-8">Company</h4>
+            <ul className="space-y-5">
+              <li><button onClick={() => onNavigate('about')} className="text-slate-500 font-bold hover:text-hayrok-orange transition-colors">About Us</button></li>
+              <li><button onClick={() => onNavigate('values')} className="text-slate-500 font-bold hover:text-hayrok-orange transition-colors">Responsible AI Policy</button></li>
+              <li><button className="text-slate-500 font-bold hover:text-hayrok-orange transition-colors">Security Ethics</button></li>
+              <li><button className="text-slate-500 font-bold hover:text-hayrok-orange transition-colors">Newsroom</button></li>
             </ul>
           </div>
         </div>
 
-        <div className="border-t border-hayrok-border pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-slate-600 text-sm">
-            © {new Date().getFullYear()} Hayrok Security Inc. All rights reserved.
+        <div className="border-t border-slate-100 pt-10 flex flex-col md:flex-row justify-between items-center gap-6">
+          <p className="text-slate-400 text-sm font-medium">
+            © {new Date().getFullYear()} Hayrok Security Inc. Built with Governed Autonomy.
           </p>
-          <div className="flex items-center gap-2 text-slate-600 text-sm">
-            <Mail size={14} />
-            <span>hello@hayrok.com</span>
+          <div className="flex items-center gap-6">
+            <div className="flex items-center gap-2 text-slate-500 text-sm font-bold">
+              <Mail size={14} className="text-hayrok-orange" />
+              <span>hello@hayrok.com</span>
+            </div>
           </div>
         </div>
       </div>

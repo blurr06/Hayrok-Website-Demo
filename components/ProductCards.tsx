@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Hexagon, Globe, BarChart2, Sparkles, ArrowUpRight } from 'lucide-react';
 import { Product } from '../types';
@@ -7,7 +8,7 @@ const products: Product[] = [
     id: 'genesis',
     name: 'Genesis Platform',
     status: 'Live',
-    description: 'NextGen Pentesting platform powered by Hay AI. Continuous, automated reconnaissance and zero-false-positive reporting.',
+    description: 'NextGen Pentesting platform powered by Hay AI. Continuous, automated reconnaissance.',
     icon: Hexagon,
     features: ['Continuous Pentesting', 'Auto Recon', 'Verified Fixes']
   },
@@ -15,7 +16,7 @@ const products: Product[] = [
     id: 'scorecard',
     name: 'Security Scorecard',
     status: 'Live',
-    description: 'Benchmarking and scoring module. Compare your posture against industry peers with objective metrics.',
+    description: 'Benchmarking and scoring module. Compare your posture against industry peers.',
     icon: BarChart2,
     features: ['Industry Benchmarks', 'Risk Scoring', 'Board Reports']
   },
@@ -23,7 +24,7 @@ const products: Product[] = [
     id: 'insights',
     name: 'Hay AI Insights',
     status: 'Live',
-    description: 'AI-generated context for every finding. Understand the business impact and remediation path instantly.',
+    description: 'AI-generated context for every finding. Understand impact and remediation instantly.',
     icon: Sparkles,
     features: ['AI Remediation', 'Impact Analysis', 'Context Awareness']
   },
@@ -31,7 +32,7 @@ const products: Product[] = [
     id: 'surfaceiq',
     name: 'SurfaceIQ',
     status: 'Coming Soon',
-    description: 'Complete attack surface visibility. Identify shadow IT and exposed assets before they are exploited.',
+    description: 'Complete attack surface visibility. Identify shadow IT before it is exploited.',
     icon: Globe,
     features: ['Asset Discovery', 'Exposure Mapping', 'Shadow IT']
   }
@@ -39,56 +40,49 @@ const products: Product[] = [
 
 export const ProductCards: React.FC = () => {
   return (
-    <section id="platform" className="py-24 relative bg-hayrok-dark border-t border-hayrok-border">
+    <section id="platform" className="py-32 relative bg-slate-50 border-t border-slate-200">
       <div className="container mx-auto px-6">
         <div className="text-center max-w-3xl mx-auto mb-20">
-          <h2 className="text-3xl md:text-5xl font-bold mb-6">Unified <span className="text-hayrok-orange">Risk Intelligence</span></h2>
-          <p className="text-slate-400 text-lg">
-            Less noise, more fixes. Hayrok consolidates offensive security into a single, intelligent ecosystem.
+          <h2 className="text-sm font-bold text-hayrok-orange uppercase tracking-[0.3em] mb-4">Unified Ecosystem</h2>
+          <h3 className="text-4xl md:text-6xl font-black mb-6 text-slate-900 tracking-tight">Engineered for <br/> <span className="text-hayrok-orange">Risk Reduction</span></h3>
+          <p className="text-slate-500 text-xl font-medium">
+            Less noise, more fixes. Hayrok consolidates offensive security into a single, intelligent lifecycle.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {products.map((product) => (
             <div 
               key={product.id}
-              className="group relative bg-hayrok-panel rounded-xl p-6 border border-hayrok-border hover:border-hayrok-orange/50 transition-all duration-300 hover:-translate-y-2"
+              className="group relative bg-white rounded-[2.5rem] p-10 border border-slate-200 hover:border-hayrok-orange/50 transition-all duration-500 hover:-translate-y-2 shadow-sm hover:shadow-2xl hover:shadow-orange-500/10"
             >
-              {/* Hover Glow */}
-              <div className="absolute inset-0 bg-hayrok-orange/5 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity" />
-
               <div className="relative z-10">
-                <div className="flex justify-between items-start mb-6">
-                  <div className={`p-3 rounded-lg ${product.status === 'Live' ? 'bg-hayrok-orange text-white' : 'bg-slate-800 text-slate-300 group-hover:bg-slate-700'}`}>
-                    <product.icon size={24} />
+                <div className="flex justify-between items-start mb-8">
+                  <div className={`p-4 rounded-2xl shadow-lg transition-all duration-500 ${product.status === 'Live' ? 'bg-hayrok-dark text-white group-hover:bg-hayrok-orange group-hover:scale-110' : 'bg-slate-100 text-slate-400'}`}>
+                    <product.icon size={28} />
                   </div>
-                  {product.status === 'Coming Soon' && (
-                    <span className="text-[10px] font-bold uppercase tracking-wider bg-slate-800 text-slate-400 px-2 py-1 rounded">
-                      Coming Soon
-                    </span>
-                  )}
                 </div>
 
-                <h3 className="text-xl font-bold mb-3 text-white group-hover:text-hayrok-orange transition-colors">
+                <h3 className="text-2xl font-black mb-4 text-slate-900 group-hover:text-hayrok-orange transition-colors">
                   {product.name}
                 </h3>
                 
-                <p className="text-slate-400 text-sm leading-relaxed mb-6 min-h-[80px]">
+                <p className="text-slate-500 text-base leading-relaxed mb-8 font-medium">
                   {product.description}
                 </p>
 
-                <ul className="space-y-2 mb-6">
+                <div className="space-y-3 mb-10">
                   {product.features.map((feature, idx) => (
-                    <li key={idx} className="flex items-center text-xs text-slate-500">
-                      <div className="w-1 h-1 bg-hayrok-orange rounded-full mr-2" />
+                    <div key={idx} className="flex items-center text-xs font-bold text-slate-400">
+                      <div className="w-1.5 h-1.5 bg-hayrok-orange/30 rounded-full mr-3 group-hover:bg-hayrok-orange transition-colors" />
                       {feature}
-                    </li>
+                    </div>
                   ))}
-                </ul>
+                </div>
 
-                <a href="#" className="inline-flex items-center text-sm font-semibold text-white hover:text-hayrok-orange transition-colors">
-                  Learn more <ArrowUpRight size={14} className="ml-1" />
-                </a>
+                <button className="flex items-center gap-2 text-sm font-black text-slate-900 hover:text-hayrok-orange transition-colors uppercase tracking-widest">
+                  Explore Module <ArrowUpRight size={16} />
+                </button>
               </div>
             </div>
           ))}
