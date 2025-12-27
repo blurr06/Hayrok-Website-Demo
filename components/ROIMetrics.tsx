@@ -13,6 +13,11 @@ import {
   Info
 } from 'lucide-react';
 
+// Cast motion elements to any to bypass type sync issues in this environment
+const MotionDiv = motion.div as any;
+const MotionCircle = motion.circle as any;
+const MotionSpan = motion.span as any;
+
 const fadeInUp = {
   initial: { opacity: 0, y: 30 },
   whileInView: { opacity: 1, y: 0 },
@@ -75,7 +80,8 @@ const SignalNoisePieChart = () => {
               cumulativeOffset += (segment.value / 100) * circumference;
 
               return (
-                <motion.circle
+                /* Use MotionCircle cast to any and transform instead of rotate in style */
+                <MotionCircle
                   key={`${view}-${segment.label}`}
                   initial={{ strokeDashoffset: circumference }}
                   animate={{ strokeDashoffset: dashOffset }}
@@ -90,7 +96,7 @@ const SignalNoisePieChart = () => {
                   strokeDasharray={circumference}
                   strokeDashoffset={dashOffset}
                   strokeLinecap="round"
-                  style={{ strokeDashoffset: dashOffset, transformOrigin: 'center', rotate: `${(currentOffset / circumference) * 360}deg` }}
+                  style={{ strokeDashoffset: dashOffset, transformOrigin: 'center', transform: `rotate(${(currentOffset / circumference) * 360}deg)` } as any}
                   onMouseEnter={() => setHoveredSegment(segment.label)}
                   onMouseLeave={() => setHoveredSegment(null)}
                   className="cursor-pointer transition-all duration-300 hover:opacity-80"
@@ -102,14 +108,15 @@ const SignalNoisePieChart = () => {
 
         {/* Center Text Overlay */}
         <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-          <motion.span 
+          {/* Use MotionSpan cast to any to fix type error on initial/animate props */}
+          <MotionSpan 
             key={view}
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}
             className={`text-4xl font-black tracking-tighter ${view === 'after' ? 'text-hayrok-orange' : 'text-slate-400'}`}
           >
             {view === 'after' ? '15%' : '100%'}
-          </motion.span>
+          </MotionSpan>
           <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest">
             {view === 'after' ? 'True Signal' : 'Unfiltered'}
           </span>
@@ -118,7 +125,8 @@ const SignalNoisePieChart = () => {
         {/* Rich Tooltip */}
         <AnimatePresence>
           {hoveredSegment && (
-            <motion.div
+            /* Use MotionDiv cast to any to fix type error on initial/animate props */
+            <MotionDiv
               initial={{ opacity: 0, y: 10, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
@@ -131,7 +139,7 @@ const SignalNoisePieChart = () => {
               <p className="text-[11px] font-bold text-slate-600 leading-tight">
                 {data.find(d => d.label === hoveredSegment)?.detail}
               </p>
-            </motion.div>
+            </MotionDiv>
           )}
         </AnimatePresence>
       </div>
@@ -155,7 +163,8 @@ const SignalNoisePieChart = () => {
 };
 
 const PipelineGate = ({ icon: Icon, label, status, color, delay = 0 }: any) => (
-  <motion.div 
+  /* Use MotionDiv cast to any to fix type error on initial/whileInView props */
+  <MotionDiv 
     initial={{ opacity: 0, scale: 0.9 }}
     whileInView={{ opacity: 1, scale: 1 }}
     transition={{ delay, duration: 0.5 }}
@@ -164,7 +173,8 @@ const PipelineGate = ({ icon: Icon, label, status, color, delay = 0 }: any) => (
     <div className={`w-16 h-16 rounded-2xl bg-white border-2 flex items-center justify-center shadow-xl transition-all duration-500 relative z-10 ${status === 'active' ? `border-${color}-500 text-${color}-500 ring-4 ring-${color}-500/10` : 'border-slate-200 text-slate-400 opacity-50'}`}>
        <Icon size={24} strokeWidth={2.5} />
        {status === 'active' && (
-         <motion.div 
+         /* Use MotionDiv cast to any to fix type error on animate prop */
+         <MotionDiv 
            animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0.2, 0.5] }}
            transition={{ duration: 2, repeat: Infinity }}
            className={`absolute inset-0 bg-${color}-500 rounded-2xl -z-10`}
@@ -180,7 +190,7 @@ const PipelineGate = ({ icon: Icon, label, status, color, delay = 0 }: any) => (
           </span>
        </div>
     </div>
-  </motion.div>
+  </MotionDiv>
 );
 
 const GatedPipelineFlow = () => {
@@ -200,7 +210,8 @@ const GatedPipelineFlow = () => {
       <div className="relative py-10 px-4">
         {/* Connection Line */}
         <div className="absolute top-1/2 left-0 w-full h-1 bg-slate-100 -translate-y-[44px] -z-0">
-          <motion.div 
+          {/* Use MotionDiv cast to any to fix type error on initial/whileInView props */}
+          <MotionDiv 
             initial={{ width: 0 }}
             whileInView={{ width: '100%' }}
             transition={{ duration: 2, ease: "easeInOut" }}
@@ -211,7 +222,8 @@ const GatedPipelineFlow = () => {
         {/* Floating Particles */}
         <div className="absolute top-1/2 left-0 w-full h-1 -translate-y-[44px] overflow-hidden">
            {[...Array(5)].map((_, i) => (
-             <motion.div
+             /* Use MotionDiv cast to any to fix type error on initial/animate props */
+             <MotionDiv
                key={i}
                initial={{ x: -20 }}
                animate={{ x: '100vw' }}
@@ -292,15 +304,17 @@ const ReleaseSuccessPipeline = () => {
         
         {/* Success Flow Path */}
         <div className="absolute top-1/2 left-10 right-10 h-1 -translate-y-[28px] overflow-hidden">
-          <motion.div 
-            animate={{ x: ['-100%', '200%'] }}
+          {/* Use MotionDiv cast to any to fix type error on animate prop */}
+          <MotionDiv 
+            animate={{ x: ['-100%', '200%'] } as any}
             transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
             className="w-1/2 h-full bg-gradient-to-r from-transparent via-emerald-400 to-transparent"
           />
         </div>
 
         {stages.map((stage, i) => (
-          <motion.div 
+          /* Use MotionDiv cast to any to fix type error on initial/whileInView props */
+          <MotionDiv 
             key={i}
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -311,7 +325,7 @@ const ReleaseSuccessPipeline = () => {
                <stage.icon size={20} />
             </div>
             <span className="text-[9px] font-black text-slate-900 uppercase tracking-widest">{stage.label}</span>
-          </motion.div>
+          </MotionDiv>
         ))}
       </div>
 
@@ -365,9 +379,10 @@ const AuditEvidenceVault = () => {
           <div key={i} className="p-2 bg-white border border-slate-100 rounded-xl flex flex-col items-center">
              <span className="text-[8px] font-black text-slate-400 uppercase tracking-tighter mb-1">{f}</span>
              <div className="h-1 w-full bg-slate-100 rounded-full overflow-hidden">
-                <motion.div 
+                {/* Use MotionDiv cast to any to fix type error on initial/whileInView props */}
+                <MotionDiv 
                   initial={{ width: 0 }}
-                  whileInView={{ width: i === 0 ? '98%' : i === 1 ? '85%' : '70%' }}
+                  whileInView={{ width: i === 0 ? '98%' : i === 1 ? '85%' : '70%' } as any}
                   className={`h-full ${i === 0 ? 'bg-emerald-500' : 'bg-indigo-500'}`}
                 />
              </div>
@@ -381,25 +396,27 @@ const AuditEvidenceVault = () => {
          
          {/* Moving Evidence Particles */}
          {[...Array(6)].map((_, i) => (
-           <motion.div
+           /* Use MotionDiv cast to any to fix type error on initial/animate props */
+           <MotionDiv
              key={i}
-             initial={{ opacity: 0, x: i % 2 === 0 ? -100 : 100, y: (i - 3) * 20 }}
-             animate={{ opacity: [0, 1, 0], x: 0, y: 0 }}
+             initial={{ opacity: 0, x: i % 2 === 0 ? -100 : 100, y: (i - 3) * 20 } as any}
+             animate={{ opacity: [0, 1, 0], x: 0, y: 0 } as any}
              transition={{ duration: 2, repeat: Infinity, delay: i * 0.4 }}
              className="absolute"
            >
               <FileText size={16} className="text-indigo-400/40" />
-           </motion.div>
+           </MotionDiv>
          ))}
 
          <div className="relative z-10 flex flex-col items-center">
-            <motion.div 
+            {/* Use MotionDiv cast to any to fix type error on animate prop */}
+            <MotionDiv 
               animate={{ scale: [1, 1.05, 1] }}
               transition={{ duration: 3, repeat: Infinity }}
               className="w-20 h-20 bg-indigo-500 rounded-[1.5rem] shadow-[0_0_40px_rgba(99,102,241,0.4)] flex items-center justify-center text-white mb-4"
             >
                <HardDrive size={32} />
-            </motion.div>
+            </MotionDiv>
             <span className="text-[10px] font-black text-indigo-300 uppercase tracking-widest">Evidence Vault</span>
          </div>
       </div>
@@ -427,7 +444,8 @@ const AuditEvidenceVault = () => {
                <span className="text-emerald-500">214 / 214</span>
             </div>
             <div className="h-1.5 w-full bg-white rounded-full overflow-hidden">
-               <motion.div initial={{ width: 0 }} whileInView={{ width: '100%' }} className="h-full bg-emerald-500" />
+               {/* Use MotionDiv cast to any to fix type error on initial/whileInView props */}
+               <MotionDiv initial={{ width: 0 }} whileInView={{ width: '100%' } as any} className="h-full bg-emerald-500" />
             </div>
          </div>
       </div>
@@ -457,7 +475,7 @@ const MetricComparison = ({ label, before, after, icon: Icon, unit = "" }: any) 
 );
 
 const ROICard = ({ title, tagline, icon: Icon, metrics, outcomes, visualization, accentColor }: any) => (
-  <motion.div 
+  <MotionDiv 
     {...fadeInUp}
     className="bg-white border border-slate-200 rounded-[3rem] p-8 md:p-12 mb-12 shadow-sm hover:shadow-2xl transition-all duration-700 relative overflow-hidden group"
   >
@@ -498,7 +516,7 @@ const ROICard = ({ title, tagline, icon: Icon, metrics, outcomes, visualization,
         </div>
       </div>
     </div>
-  </motion.div>
+  </MotionDiv>
 );
 
 export const ROIMetrics: React.FC = () => {
@@ -514,13 +532,13 @@ export const ROIMetrics: React.FC = () => {
       {/* Hero Section */}
       <section className="relative pt-48 pb-24 px-6 z-10">
         <div className="container mx-auto text-center">
-          <motion.div 
+          <MotionDiv 
             {...fadeInUp}
             className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-slate-200 text-hayrok-orange text-[10px] font-black mb-8 tracking-[0.4em] uppercase shadow-sm"
           >
             <BarChart3 size={12} className="animate-pulse" />
             MEASURABLE IMPACT
-          </motion.div>
+          </MotionDiv>
           <h1 className="text-6xl md:text-8xl font-black text-slate-900 mb-8 leading-[0.95] tracking-tight max-w-5xl mx-auto">
             Proving Security Value That <br/>
             <span className="bg-gradient-to-r from-hayrok-orange to-orange-400 bg-clip-text text-transparent italic">Leadership Understands.</span>
@@ -612,7 +630,7 @@ export const ROIMetrics: React.FC = () => {
 
       {/* Executive View Bento */}
       <section className="container mx-auto px-6 py-24">
-        <div className="bg-slate-900 rounded-[4rem] p-12 md:p-20 text-white relative overflow-hidden">
+        <div className="bg-slate-900 rounded-[4rem] p-12 md:p-20 text-white relative overflow-hidden shadow-2xl">
           <div className="absolute inset-0 opacity-10">
             <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-br from-hayrok-orange to-transparent blur-[120px]" />
           </div>
@@ -664,7 +682,8 @@ export const ROIMetrics: React.FC = () => {
 
       {/* Final CTA */}
       <section className="container mx-auto px-6 text-center">
-        <motion.div {...fadeInUp} className="max-w-4xl mx-auto py-24">
+        {/* Use MotionDiv cast to any to fix type error on spread fadeInUp */}
+        <MotionDiv {...fadeInUp} className="max-w-4xl mx-auto py-24">
           <h3 className="text-4xl md:text-7xl font-black text-slate-900 mb-10 tracking-tight leading-[0.9]">
             This is ROI Security Leaders Can <br/>
             <span className="text-hayrok-orange italic">Stand Behind.</span>
@@ -679,8 +698,7 @@ export const ROIMetrics: React.FC = () => {
             <button className="w-full sm:w-auto px-12 py-6 rounded-2xl text-xl font-black text-slate-900 border border-slate-200 hover:bg-slate-50 transition-all bg-white shadow-sm flex items-center justify-center gap-3 group/btn">
               Download ROI Whitepaper <ArrowRight size={24} className="group-hover/btn:translate-x-1 transition-transform" />
             </button>
-          </div>
-        </motion.div>
+          </MotionDiv>
       </section>
     </div>
   );

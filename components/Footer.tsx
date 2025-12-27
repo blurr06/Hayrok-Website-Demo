@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Twitter, Linkedin, Github, Mail, ShieldCheck } from 'lucide-react';
 import { Logo } from './Logo';
@@ -35,8 +34,9 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           <div>
             <h4 className="text-slate-900 font-black text-xs uppercase tracking-widest mb-8">Capabilities</h4>
             <ul className="space-y-5">
-              <li><button onClick={() => onNavigate('platform')} className="text-slate-500 font-bold hover:text-hayrok-orange transition-colors">Hive — Intelligence</button></li>
-              <li><button onClick={() => onNavigate('platform')} className="text-slate-500 font-bold hover:text-hayrok-orange transition-colors">Genesis — Validation</button></li>
+              <li><button onClick={() => onNavigate('hive')} className="text-slate-500 font-bold hover:text-hayrok-orange transition-colors">Hive — Intelligence</button></li>
+              <li><button onClick={() => onNavigate('genesis')} className="text-slate-500 font-bold hover:text-hayrok-orange transition-colors">Genesis — Validation</button></li>
+              <li><button onClick={() => onNavigate('roadmap')} className="text-slate-500 font-bold hover:text-hayrok-orange transition-colors">Platform Roadmap</button></li>
               <li><button onClick={() => onNavigate('roi')} className="text-slate-500 font-bold hover:text-hayrok-orange transition-colors">ROI Metrics</button></li>
               <li><button onClick={() => onNavigate('comparison')} className="text-slate-500 font-bold hover:text-hayrok-orange transition-colors">Comparison Battlecard</button></li>
             </ul>
@@ -46,9 +46,10 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             <h4 className="text-slate-900 font-black text-xs uppercase tracking-widest mb-8">Company</h4>
             <ul className="space-y-5">
               <li><button onClick={() => onNavigate('about')} className="text-slate-500 font-bold hover:text-hayrok-orange transition-colors">About Us</button></li>
-              <li><button onClick={() => onNavigate('values')} className="text-slate-500 font-bold hover:text-hayrok-orange transition-colors">Responsible AI Policy</button></li>
-              <li><button className="text-slate-500 font-bold hover:text-hayrok-orange transition-colors">Security Ethics</button></li>
-              <li><button className="text-slate-500 font-bold hover:text-hayrok-orange transition-colors">Newsroom</button></li>
+              <li><button onClick={() => onNavigate('trust-center')} className="text-slate-500 font-bold hover:text-hayrok-orange transition-colors">Trust Center</button></li>
+              <li><button onClick={() => onNavigate('responsible-ai-policy')} className="text-slate-500 font-bold hover:text-hayrok-orange transition-colors">Responsible AI Policy</button></li>
+              <li><button onClick={() => onNavigate('values')} className="text-slate-500 font-bold hover:text-hayrok-orange transition-colors">Operating Principles</button></li>
+              <li><button onClick={() => onNavigate('newsroom')} className="text-slate-500 font-bold hover:text-hayrok-orange transition-colors">Newsroom</button></li>
             </ul>
           </div>
         </div>

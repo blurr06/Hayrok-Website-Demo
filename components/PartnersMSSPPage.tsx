@@ -14,12 +14,16 @@ const fadeInUp = {
   transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }
 };
 
-export const PartnersMSSPPage: React.FC = () => {
+interface PartnersMSSPPageProps {
+  onNavigate?: (page: string) => void;
+}
+
+export const PartnersMSSPPage: React.FC<PartnersMSSPPageProps> = ({ onNavigate }) => {
   return (
     <div className="bg-white min-h-screen text-slate-900 selection:bg-hayrok-orange/10 selection:text-hayrok-orange overflow-hidden font-sans relative">
       
       <div className="fixed inset-0 pointer-events-none z-0">
-        <div className="absolute top-[-5%] right-[-5%] w-[80%] h-[80%] bg-[radial-gradient(circle_at_center,rgba(255,95,0,0.02)_0%,transparent_70%)] blur-[100px]" />
+        <div className="absolute top-[-5%] left-[-5%] w-[80%] h-[80%] bg-[radial-gradient(circle_at_center,rgba(255,95,0,0.02)_0%,transparent_70%)] blur-[100px]" />
         <div className="absolute inset-0 bg-grid-white opacity-[0.03]" />
       </div>
 
@@ -115,9 +119,17 @@ export const PartnersMSSPPage: React.FC = () => {
            <p className="text-xl text-slate-600 font-medium mb-12">
              If you’re delivering managed security services and want to scale responsibly with AI, Hayrok is built for your model.
            </p>
-           <a href="mailto:partners@hayrok.com" className="inline-flex items-center gap-3 bg-hayrok-orange text-white px-12 py-6 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-orange-600 transition-all shadow-xl shadow-orange-500/20">
-             partners@hayrok.com <ArrowRight size={16} />
-           </a>
+           <div className="flex flex-col sm:flex-row justify-center items-center gap-6">
+              <button 
+                onClick={() => onNavigate && onNavigate('become-partner')}
+                className="inline-flex items-center gap-3 bg-hayrok-orange text-white px-12 py-6 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-orange-600 transition-all shadow-xl shadow-orange-500/20"
+              >
+                Become a Partner <ArrowRight size={16} />
+              </button>
+              <a href="mailto:partners@hayrok.com" className="inline-flex items-center gap-3 bg-white border border-slate-200 text-slate-900 px-12 py-6 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-slate-50 transition-all">
+                Contact via Email
+              </a>
+           </div>
         </motion.div>
       </section>
 

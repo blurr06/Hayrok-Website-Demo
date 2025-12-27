@@ -8,6 +8,9 @@ import {
   BarChart3, Share2, Network, Box, Layout
 } from 'lucide-react';
 
+// Cast motion elements to any to bypass type sync issues in this environment
+const MotionDiv = motion.div as any;
+
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
   whileInView: { opacity: 1, y: 0 },
@@ -15,14 +18,11 @@ const fadeInUp = {
   transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }
 };
 
-const categoryIcons: Record<string, any> = {
-  "Cloud & Infrastructure": Cloud,
-  "DevOps & CI/CD": Code,
-  "Security Tooling": ShieldCheck,
-  "Identity & Workflow": Lock
-};
+interface PartnersIntegrationsPageProps {
+  onNavigate?: (page: string) => void;
+}
 
-export const PartnersIntegrationsPage: React.FC = () => {
+export const PartnersIntegrationsPage: React.FC<PartnersIntegrationsPageProps> = ({ onNavigate }) => {
   return (
     <div className="bg-white min-h-screen text-slate-900 selection:bg-hayrok-orange/10 selection:text-hayrok-orange overflow-hidden font-sans relative">
       
@@ -37,10 +37,11 @@ export const PartnersIntegrationsPage: React.FC = () => {
       {/* Hero Section */}
       <section className="container mx-auto px-6 mb-24 relative z-10">
         <div className="max-w-7xl mx-auto text-center">
-          <motion.div {...fadeInUp} className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-slate-200 text-hayrok-orange text-[10px] font-black mb-10 tracking-[0.4em] uppercase shadow-sm">
+          {/* Use MotionDiv cast to any to fix type error on spread fadeInUp */}
+          <MotionDiv {...fadeInUp} className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-slate-200 text-hayrok-orange text-[10px] font-black mb-10 tracking-[0.4em] uppercase shadow-sm">
             <Layers size={12} className="animate-pulse" />
             Integration Partners
-          </motion.div>
+          </MotionDiv>
           <h1 className="text-5xl md:text-8xl font-black mb-10 leading-[0.95] tracking-tight text-slate-900">
             Integrate Intelligence. <br/>
             <span className="bg-gradient-to-r from-hayrok-orange to-orange-400 bg-clip-text text-transparent italic tracking-tighter">Preserve Governance.</span>
@@ -140,9 +141,10 @@ export const PartnersIntegrationsPage: React.FC = () => {
               accent: "bg-indigo-600"
             }
           ].map((cat, i) => (
-            <motion.div 
+            /* Use MotionDiv cast to any to fix type error on variants prop */
+            <MotionDiv 
               key={i}
-              variants={fadeInUp}
+              variants={fadeInUp as any}
               className="p-10 bg-slate-50 border border-slate-200 rounded-[2.5rem] hover:bg-white hover:shadow-2xl transition-all duration-500"
             >
               <div className={`w-12 h-12 ${cat.accent} rounded-xl flex items-center justify-center text-white mb-8 shadow-lg`}>
@@ -157,7 +159,7 @@ export const PartnersIntegrationsPage: React.FC = () => {
                   </li>
                 ))}
               </ul>
-            </motion.div>
+            </MotionDiv>
           ))}
         </div>
       </section>
@@ -169,9 +171,17 @@ export const PartnersIntegrationsPage: React.FC = () => {
            <p className="text-xl text-slate-600 font-medium mb-12">
              Turn security data into security intelligence. If you’re building platforms for enterprise or regulated customers, let's strengthen the ecosystem together.
            </p>
-           <a href="mailto:partners@hayrok.com" className="inline-flex items-center gap-3 bg-hayrok-orange text-white px-12 py-6 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-orange-600 transition-all shadow-xl shadow-orange-500/20">
-             partners@hayrok.com <ArrowRight size={16} />
-           </a>
+           <div className="flex flex-col sm:flex-row justify-center items-center gap-6">
+              <button 
+                onClick={() => onNavigate && onNavigate('become-partner')}
+                className="inline-flex items-center gap-3 bg-hayrok-orange text-white px-12 py-6 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-orange-600 transition-all shadow-xl shadow-orange-500/20"
+              >
+                Become a Partner <ArrowRight size={16} />
+              </button>
+              <a href="mailto:partners@hayrok.com" className="inline-flex items-center gap-3 bg-white border border-slate-200 text-slate-900 px-12 py-6 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-slate-50 transition-all">
+                Contact via Email
+              </a>
+           </div>
         </div>
       </section>
 

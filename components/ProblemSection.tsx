@@ -1,6 +1,7 @@
 
 import React from 'react';
-import { XCircle, ShieldAlert, AlertTriangle, Search, Activity, Terminal } from 'lucide-react';
+import { ShieldAlert, Terminal, Clock, Shield } from 'lucide-react';
+import { IntelligenceFabric } from './IntelligenceFabric';
 
 export const ProblemSection: React.FC = () => {
   return (
@@ -10,26 +11,26 @@ export const ProblemSection: React.FC = () => {
           <div>
             <h2 className="text-sm font-bold text-hayrok-orange uppercase tracking-widest mb-6">The Hard Truths</h2>
             <h3 className="text-4xl md:text-6xl font-black mb-8 text-slate-900 leading-[1.1]">
-              Security Tools Create Activity. <br/>
-              <span className="text-hayrok-orange">Not Confidence.</span>
+              Security Risk Is Continuous. <br/>
+              <span className="text-hayrok-orange">Management Should Be Too.</span>
             </h3>
             
             <div className="space-y-8 mb-12">
                {[
                  { 
-                   title: "The Alert Treadmill", 
-                   desc: "Alerts keep increasing — but breaches still happen. Most tools optimize for finding more issues, not fewer.", 
-                   icon: Activity 
+                   title: "Point-in-Time Assessments", 
+                   desc: "Many programs still rely on disconnected tools or episodic scans that provide visibility without continuous validation.", 
+                   icon: Clock 
+                 },
+                 { 
+                   title: "Theoretical Exposure Overload", 
+                   desc: "Increasing volumes of findings make it difficult to determine which issues represent practical, exploitable risk.", 
+                   icon: ShieldAlert 
                  },
                  { 
                    title: "The Governance Gap", 
-                   desc: "“AI security” tools act fast but can’t be explained or governed. They create black boxes instead of defensible evidence.", 
+                   desc: "Modern organizations face expanding surfaces that require governed, auditable automation—not black-box scripts.", 
                    icon: Terminal 
-                 },
-                 { 
-                   title: "The Auditor Disconnect", 
-                   desc: "Boards and auditors ask questions tools can’t answer. They want to know 'Are we safer?', not 'How many vulnerabilities do we have?'", 
-                   icon: Search 
                  }
                ].map((truth, i) => (
                  <div key={i} className="flex gap-6 items-start p-6 bg-slate-50 rounded-3xl border border-slate-100 transition-all hover:bg-white hover:shadow-xl">
@@ -49,41 +50,44 @@ export const ProblemSection: React.FC = () => {
                   <ShieldAlert size={120} />
                </div>
                <p className="text-2xl font-bold leading-tight relative z-10">
-                  Most platforms optimize for finding more issues. <br/>
-                  <span className="text-hayrok-orange italic font-black">Attackers optimize for exploitable paths.</span>
+                  Hayrok helps teams distinguish <br/>
+                  <span className="text-hayrok-orange italic font-black">Practical Risk from Theoretical Exposure.</span>
                </p>
-               <p className="mt-4 text-slate-400 font-bold uppercase tracking-widest text-[10px] relative z-10">That gap is where risk lives.</p>
+               <p className="mt-4 text-slate-400 font-bold uppercase tracking-widest text-[10px] relative z-10">Continuous Evidence Over Disconnected Signals.</p>
             </div>
           </div>
 
           <div className="relative">
              <div className="bg-slate-900 rounded-[4rem] p-12 shadow-[0_50px_100px_-20px_rgba(0,0,0,0.15)] relative overflow-hidden text-white h-[600px] flex flex-col items-center justify-center border border-slate-800">
+                {/* Advanced Generative Background for the "Shift" Visual */}
+                <IntelligenceFabric density={1.5} isDark={true} />
+                
                 <div className="absolute top-0 right-0 p-8 opacity-10">
-                   <Shield size={320} className="text-hayrok-orange" />
+                   <ShieldIcon size={320} className="text-hayrok-orange" />
                 </div>
                 
                 <div className="relative z-10 text-center space-y-12">
                    <div className="inline-block p-4 bg-white/5 rounded-2xl backdrop-blur-md border border-white/5 shadow-xl">
-                      <p className="text-xs font-black uppercase tracking-widest text-hayrok-orange">The Shift</p>
+                      <p className="text-xs font-black uppercase tracking-widest text-hayrok-orange">The CTEM Shift</p>
                    </div>
                    
                    <h4 className="text-4xl md:text-5xl font-black tracking-tight leading-tight">
-                      Hive connects the dots <br/> <span className="text-slate-500">automatically.</span>
+                      Visibility is step one. <br/> <span className="text-slate-500 italic">Validation is the goal.</span>
                    </h4>
                    
                    <p className="text-slate-400 max-w-sm mx-auto font-medium text-lg leading-relaxed">
-                      We shift your team from reactive manual triage to autonomous security validation.
+                      Aggregate exposure data across cloud, app, and supply chains into a single auditable workflow.
                    </p>
 
                    <div className="flex items-center justify-center gap-10">
                       <div className="text-center">
-                         <div className="text-2xl md:text-4xl font-black">200k</div>
-                         <div className="text-[10px] font-bold uppercase text-slate-500 tracking-widest">Activity (Lists)</div>
+                         <div className="text-2xl md:text-4xl font-black text-slate-500">Visibility</div>
+                         <div className="text-[10px] font-bold uppercase text-slate-500 tracking-widest">Findings</div>
                       </div>
                       <div className="h-16 w-px bg-slate-800"></div>
                       <div className="text-center">
-                         <div className="text-2xl md:text-4xl font-black text-hayrok-orange">1</div>
-                         <div className="text-[10px] font-bold uppercase text-slate-500 tracking-widest">Confidence (Exploit Path)</div>
+                         <div className="text-2xl md:text-4xl font-black text-hayrok-orange">Outcome</div>
+                         <div className="text-[10px] font-bold uppercase text-slate-500 tracking-widest">Risk Reduction</div>
                       </div>
                    </div>
                 </div>
@@ -95,7 +99,7 @@ export const ProblemSection: React.FC = () => {
   );
 };
 
-const Shield = ({ size, className }: { size: number, className: string }) => (
+const ShieldIcon = ({ size, className }: { size: number, className: string }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className={className}>
     <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
   </svg>

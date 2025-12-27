@@ -3,6 +3,9 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Bot, Zap, Network, Lock, ChevronRight, Sparkles, Cpu, ShieldCheck } from 'lucide-react';
 
+// Cast motion elements to any to bypass type sync issues in this environment
+const MotionDiv = motion.div as any;
+
 // Fix transition ease type error by casting to tuple to satisfy Framer Motion types
 const fadeInUp = {
   initial: { opacity: 0, y: 40 },
@@ -16,7 +19,8 @@ export const HayAiSection: React.FC = () => {
     <section className="py-24 bg-[#05070A] relative overflow-hidden">
       {/* Dynamic Luminous Background */}
       <div className="absolute inset-0 pointer-events-none">
-        <motion.div 
+        {/* Use MotionDiv cast to any to fix type error on animate prop */}
+        <MotionDiv 
           animate={{ 
             opacity: [0.1, 0.2, 0.1],
             scale: [1, 1.2, 1],
@@ -25,7 +29,8 @@ export const HayAiSection: React.FC = () => {
           transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
           className="absolute top-1/4 -left-1/4 w-[80%] h-[80%] bg-[radial-gradient(circle_at_center,rgba(255,95,0,0.15)_0%,transparent_70%)] blur-[120px] rounded-full"
         />
-        <motion.div 
+        {/* Use MotionDiv cast to any to fix type error on animate prop */}
+        <MotionDiv 
           animate={{ 
             opacity: [0.05, 0.15, 0.05],
             scale: [1.2, 1, 1.2],
@@ -39,7 +44,7 @@ export const HayAiSection: React.FC = () => {
       <div className="container mx-auto px-6 relative z-10">
         {/* Header Block */}
         <div className="flex flex-col md:flex-row items-end justify-between mb-16 gap-10">
-          <motion.div {...fadeInUp} className="max-w-3xl">
+          <MotionDiv {...fadeInUp} className="max-w-3xl">
             <div className="flex items-center gap-2 text-hayrok-orange mb-4">
               <div className="w-5 h-5 bg-hayrok-orange/10 rounded-md flex items-center justify-center">
                 <Bot size={14} strokeWidth={3} />
@@ -56,9 +61,10 @@ export const HayAiSection: React.FC = () => {
               Hay-AI isn't just a script. It's an adaptive reasoning engine trained on millions of 
               attack vectors, capable of thinking outside the box to find logic flaws.
             </p>
-          </motion.div>
+          </MotionDiv>
 
-          <motion.div 
+          {/* Use MotionDiv cast to any to fix type error on initial/whileInView props */}
+          <MotionDiv 
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             className="shrink-0 mb-2"
@@ -67,7 +73,7 @@ export const HayAiSection: React.FC = () => {
               Read the Technical Paper
               <ChevronRight size={16} className="text-hayrok-orange group-hover:translate-x-1 transition-transform" />
             </button>
-          </motion.div>
+          </MotionDiv>
         </div>
 
         {/* Dynamic Cards Grid - REDUCED HEIGHT */}
@@ -92,7 +98,8 @@ export const HayAiSection: React.FC = () => {
               gradient: "from-emerald-500/10"
             }
           ].map((feature, i) => (
-            <motion.div 
+            /* Use MotionDiv cast to any to fix type error on initial/whileInView props */
+            <MotionDiv 
               key={i}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -120,12 +127,13 @@ export const HayAiSection: React.FC = () => {
                   Engine Spec <ChevronRight size={10} />
                 </div>
               </div>
-            </motion.div>
+            </MotionDiv>
           ))}
         </div>
         
         {/* Bottom Terminal Status Strip - MORE COMPACT */}
-        <motion.div 
+        {/* Use MotionDiv cast to any to fix type error on initial/whileInView props */}
+        <MotionDiv 
           initial={{ opacity: 0, scale: 0.98 }}
           whileInView={{ opacity: 1, scale: 1 }}
           className="mt-16 relative group"
@@ -136,7 +144,8 @@ export const HayAiSection: React.FC = () => {
             {/* Background Scanning Grid */}
             <div className="absolute inset-0 opacity-10 flex items-center justify-around">
               {[...Array(30)].map((_, i) => (
-                <motion.div 
+                /* Use MotionDiv cast to any to fix type error on animate prop */
+                <MotionDiv 
                   key={i} 
                   animate={{ 
                     opacity: [0.1, 0.4, 0.1],
@@ -173,7 +182,7 @@ export const HayAiSection: React.FC = () => {
               </div>
             </div>
           </div>
-        </motion.div>
+        </MotionDiv>
       </div>
     </section>
   );

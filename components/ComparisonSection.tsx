@@ -4,10 +4,13 @@ import { motion } from 'framer-motion';
 import { 
   Check, X, ArrowRight, Shield, ShieldAlert, Zap, Search, 
   Bot, Scale, FileText, Activity, ChevronRight, Target, 
-  Cpu, History, ShieldCheck, TrendingDown, Sparkles,
-  Lock, CheckCircle2, BarChart3, TrendingUp, Layers, MousePointer2,
+  Cpu, History, ShieldCheck, TrendingUp, Sparkles,
+  Lock, CheckCircle2, BarChart3, TrendingUp as TrendingUpIcon, Layers, MousePointer2,
   Info, ShieldX
 } from 'lucide-react';
+
+// Cast motion elements to any to bypass type sync issues in this environment
+const MotionDiv = motion.div as any;
 
 const fadeInUp = {
   initial: { opacity: 0, y: 30 },
@@ -19,14 +22,15 @@ const fadeInUp = {
 const PerformancePulse = ({ percent, color, labelColor }: { percent: number; color: string; labelColor?: string }) => (
   <div className="flex items-center gap-3 w-full">
     <div className="flex-1 h-2.5 bg-slate-200 rounded-full overflow-hidden relative border border-slate-300/30">
-      <motion.div 
+      {/* Use MotionDiv cast to any to fix type error on initial/whileInView props */}
+      <MotionDiv 
         initial={{ width: 0 }}
         whileInView={{ width: `${percent}%` }}
         className={`h-full ${color} rounded-full relative`}
         transition={{ duration: 1.5, delay: 0.2, ease: "easeOut" }}
       >
         <div className="absolute inset-0 bg-white/20 animate-pulse" />
-      </motion.div>
+      </MotionDiv>
     </div>
     <span className={`text-[10px] font-black tabular-nums ${labelColor || (percent > 70 ? 'text-hayrok-orange' : 'text-slate-700')}`}>
       {percent}%
@@ -35,7 +39,7 @@ const PerformancePulse = ({ percent, color, labelColor }: { percent: number; col
 );
 
 const ComparisonTableChart = ({ title, subtitle, columns, rows }: any) => (
-  <motion.div 
+  <MotionDiv 
     {...fadeInUp}
     className="w-full mb-24 relative group"
   >
@@ -77,7 +81,8 @@ const ComparisonTableChart = ({ title, subtitle, columns, rows }: any) => (
       {/* Chart Rows */}
       <div className="divide-y divide-slate-50">
         {rows.map((row: any, i: number) => (
-          <motion.div 
+          /* Use MotionDiv cast to any to fix type error on whileHover prop */
+          <MotionDiv 
             key={i}
             whileHover={{ backgroundColor: "rgba(248, 250, 252, 0.95)" }}
             className="grid grid-cols-12 divide-x divide-slate-100 transition-colors"
@@ -122,7 +127,7 @@ const ComparisonTableChart = ({ title, subtitle, columns, rows }: any) => (
                 />
               </div>
             </div>
-          </motion.div>
+          </MotionDiv>
         ))}
       </div>
 
@@ -144,7 +149,7 @@ const ComparisonTableChart = ({ title, subtitle, columns, rows }: any) => (
         </div>
       </div>
     </div>
-  </motion.div>
+  </MotionDiv>
 );
 
 export const ComparisonSection: React.FC = () => {
@@ -160,13 +165,14 @@ export const ComparisonSection: React.FC = () => {
       {/* Hero Header */}
       <section className="relative pt-48 pb-24 px-6 z-10 text-center">
         <div className="container mx-auto max-w-5xl">
-          <motion.div 
+          {/* Use MotionDiv cast to any to fix type error on initial prop */}
+          <MotionDiv 
             {...fadeInUp}
             className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-slate-200 text-hayrok-orange text-[10px] font-black mb-10 tracking-[0.4em] uppercase shadow-sm"
           >
             <ShieldAlert size={12} className="animate-pulse" />
             METRIC ANALYSIS: THE HIVE ADVANTAGE
-          </motion.div>
+          </MotionDiv>
           <h1 className="text-6xl md:text-8xl font-black text-slate-900 mb-8 leading-[0.95] tracking-tight">
             Structure Your <br/>
             <span className="bg-gradient-to-r from-hayrok-orange to-orange-400 bg-clip-text text-transparent italic tracking-tighter">Security Choice.</span>
@@ -179,10 +185,11 @@ export const ComparisonSection: React.FC = () => {
 
       {/* Dynamic Comparison Tables */}
       <section className="container mx-auto px-6 relative z-10">
-        <motion.div {...fadeInUp} className="flex items-center gap-6 mb-16">
+        {/* Use MotionDiv cast to any to fix type error on spread fadeInUp */}
+        <MotionDiv {...fadeInUp} className="flex items-center gap-6 mb-16">
           <span className="text-[11px] font-black text-slate-900 uppercase tracking-[0.5em] shrink-0">Performance Benchmarks</span>
           <div className="h-px w-full bg-slate-100" />
-        </motion.div>
+        </MotionDiv>
 
         <ComparisonTableChart 
           title="Legacy Stacks vs. Hayrok Hive"
@@ -247,7 +254,8 @@ export const ComparisonSection: React.FC = () => {
 
         {/* Strategic Impact Bento */}
         <div className="grid lg:grid-cols-2 gap-8 mb-32">
-           <motion.div {...fadeInUp} className="bg-slate-50 border border-slate-200 rounded-[3rem] p-12 md:p-16 flex flex-col justify-between group hover:bg-white hover:shadow-2xl transition-all duration-500">
+           {/* Use MotionDiv cast to any to fix type error on spread fadeInUp */}
+           <MotionDiv {...fadeInUp} className="bg-slate-50 border border-slate-200 rounded-[3rem] p-12 md:p-16 flex flex-col justify-between group hover:bg-white hover:shadow-2xl transition-all duration-500">
               <div>
                 <div className="w-14 h-14 bg-white rounded-2xl flex items-center justify-center text-slate-400 mb-8 shadow-sm group-hover:text-hayrok-orange transition-colors">
                   <ShieldX size={32} strokeWidth={2.5} />
@@ -264,13 +272,14 @@ export const ComparisonSection: React.FC = () => {
                     </div>
                  ))}
               </div>
-           </motion.div>
+           </MotionDiv>
 
-           <motion.div {...fadeInUp} className="bg-hayrok-dark text-white rounded-[3rem] p-12 md:p-16 flex flex-col justify-between relative overflow-hidden group shadow-2xl">
+           {/* Use MotionDiv cast to any to fix type error on spread fadeInUp */}
+           <MotionDiv {...fadeInUp} className="bg-hayrok-dark text-white rounded-[3rem] p-12 md:p-16 flex flex-col justify-between relative overflow-hidden group shadow-2xl">
               <div className="absolute -top-20 -right-20 w-80 h-80 bg-hayrok-orange/10 blur-[100px] rounded-full group-hover:bg-hayrok-orange/20 transition-all duration-700" />
               <div className="relative z-10">
                 <div className="w-14 h-14 bg-white/5 border border-white/10 rounded-2xl flex items-center justify-center text-hayrok-orange mb-8 shadow-sm group-hover:scale-110 transition-transform">
-                  <TrendingUp size={32} strokeWidth={2.5} />
+                  <TrendingUpIcon size={32} strokeWidth={2.5} />
                 </div>
                 <h3 className="text-4xl font-black mb-6 tracking-tight">The Power of <br/> <span className="text-hayrok-orange italic">Unified Hive.</span></h3>
                 <p className="text-xl text-slate-400 font-medium leading-relaxed mb-8">
@@ -284,12 +293,13 @@ export const ComparisonSection: React.FC = () => {
                     </div>
                  ))}
               </div>
-           </motion.div>
+           </MotionDiv>
         </div>
 
         {/* Final CTA Strip */}
         <section className="bg-slate-50 border border-slate-200 rounded-[4rem] p-12 md:p-24 text-center">
-           <motion.div {...fadeInUp} className="max-w-4xl mx-auto">
+           {/* Use MotionDiv cast to any to fix type error on spread fadeInUp */}
+           <MotionDiv {...fadeInUp} className="max-w-4xl mx-auto">
               <h3 className="text-4xl md:text-7xl font-black text-slate-900 mb-10 tracking-tight leading-[0.9]">
                 Measure the Gap <br/>
                 <span className="text-hayrok-orange italic">for Yourself.</span>
@@ -306,7 +316,7 @@ export const ComparisonSection: React.FC = () => {
                 </button>
               </div>
               <p className="mt-20 text-[10px] font-black text-slate-400 uppercase tracking-[0.8em]">Built on Trusted Hive Intelligence</p>
-           </motion.div>
+           </MotionDiv>
         </section>
       </section>
     </div>

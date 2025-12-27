@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { motion } from 'framer-motion';
 import { 
@@ -9,6 +10,11 @@ import {
   Search, BarChart3, Code, UserCheck, MousePointer2, History,
   Activity, CheckCircle2, Rocket, Scale, Quote, Lightbulb, User, Award
 } from 'lucide-react';
+
+// Cast motion elements to any to bypass type sync issues in this environment
+const MotionH1 = motion.h1 as any;
+const MotionP = motion.p as any;
+const MotionDiv = motion.div as any;
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
@@ -38,15 +44,17 @@ export const AboutUs: React.FC = () => {
         </div>
 
         <div className="container mx-auto max-w-6xl relative z-10 text-center">
-          <motion.div 
+          {/* Use MotionDiv cast to any to fix type error on spread fadeInUp */}
+          <MotionDiv 
             {...fadeInUp}
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-50 border border-slate-200 text-slate-800 text-[10px] font-black backdrop-blur-md mb-8 tracking-[0.3em] uppercase"
           >
             <Sparkles size={14} className="text-hayrok-orange" />
             <span>Defensible Autonomy</span>
-          </motion.div>
+          </MotionDiv>
           
-          <motion.h1 
+          {/* Use MotionH1 cast to any to fix type error on initial/whileInView props */}
+          <MotionH1 
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             className="text-6xl md:text-9xl font-black mb-10 tracking-tight leading-[0.85]"
@@ -54,28 +62,31 @@ export const AboutUs: React.FC = () => {
             Building the <br/>
             <span className="text-hayrok-orange">Reasoning Engine</span> <br/>
             for Security.
-          </motion.h1>
+          </MotionH1>
 
-          <motion.p 
+          {/* Use MotionP cast to any to fix type error on initial/whileInView props */}
+          <MotionP 
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             className="text-xl md:text-3xl text-slate-500 leading-relaxed max-w-4xl mx-auto font-medium"
           >
             In a world where threats adapt in milliseconds, security must be as dynamic as the attacks. We bridge the gap between detection and proof.
-          </motion.p>
+          </MotionP>
         </div>
       </section>
 
       {/* Luminous Mission Grid */}
       <section className="container mx-auto px-6 py-24">
-        <motion.div 
-          variants={staggerContainer}
+        {/* Use MotionDiv cast to any to fix type error on variants/initial/whileInView props */}
+        <MotionDiv 
+          variants={staggerContainer as any}
           initial="initial"
           whileInView="whileInView"
           className="grid grid-cols-1 md:grid-cols-12 gap-10"
         >
-          <motion.div 
-            variants={fadeInUp}
+          {/* Use MotionDiv cast to any to fix type error on variants prop */}
+          <MotionDiv 
+            variants={fadeInUp as any}
             className="md:col-span-7 bg-slate-50 border border-slate-200 p-16 rounded-[4rem] relative overflow-hidden group hover:shadow-2xl transition-all duration-700"
           >
             <h2 className="text-4xl font-black mb-8 text-slate-900 tracking-tight">
@@ -89,10 +100,11 @@ export const AboutUs: React.FC = () => {
                 Human teams are fighting a machine-scale war with manual-scale tools. Hayrok provides the intelligence to automate the offensive lifecycle, safely.
               </p>
             </div>
-          </motion.div>
+          </MotionDiv>
 
-          <motion.div 
-            variants={fadeInUp}
+          {/* Use MotionDiv cast to any to fix type error on variants prop */}
+          <MotionDiv 
+            variants={fadeInUp as any}
             className="md:col-span-5 bg-hayrok-dark p-16 rounded-[4rem] flex flex-col justify-between text-white shadow-2xl relative overflow-hidden"
           >
             <div className="absolute -top-10 -right-10 w-40 h-40 bg-hayrok-orange/20 blur-3xl"></div>
@@ -101,14 +113,15 @@ export const AboutUs: React.FC = () => {
               <p className="text-7xl font-black mb-6 tracking-tighter">0%</p>
               <p className="text-2xl font-bold leading-tight opacity-80">Room for False Positives. Accountability is our code.</p>
             </div>
-          </motion.div>
-        </motion.div>
+          </MotionDiv>
+        </MotionDiv>
       </section>
 
       {/* Team/Brand Footer Signature */}
       <section className="py-40 text-center relative z-10 bg-slate-50 border-t border-slate-200">
         <div className="container mx-auto px-6">
-          <motion.div 
+          {/* Use MotionDiv cast to any to fix type error on initial/whileInView props */}
+          <MotionDiv 
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             className="max-w-4xl mx-auto"
@@ -123,7 +136,7 @@ export const AboutUs: React.FC = () => {
                 Join the Mission
               </button>
             </div>
-          </motion.div>
+          </MotionDiv>
         </div>
       </section>
     </div>

@@ -7,9 +7,11 @@ import {
   ArrowRight, Handshake, Cpu, Lock,
   CheckCircle2, Share2, Terminal, MessageSquare,
   BarChart3, ShieldAlert, Sparkles, Network,
-  // Fix: Added missing FileText import
   FileText
 } from 'lucide-react';
+
+// Cast motion elements to any to bypass type sync issues in this environment
+const MotionDiv = motion.div as any;
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
@@ -28,8 +30,9 @@ const staggerContainer = {
 };
 
 const PartnerTypeCard = ({ icon: Icon, title, tag, desc, items, accent }: any) => (
-  <motion.div 
-    variants={fadeInUp}
+  /* Use MotionDiv cast to any to fix type error on variants prop */
+  <MotionDiv 
+    variants={fadeInUp as any}
     className="bg-white border border-slate-200 rounded-[3rem] p-10 flex flex-col h-full hover:shadow-2xl hover:border-hayrok-orange/30 transition-all duration-500 group"
   >
     <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-8 shadow-sm transition-all group-hover:scale-110 ${accent}`}>
@@ -47,10 +50,14 @@ const PartnerTypeCard = ({ icon: Icon, title, tag, desc, items, accent }: any) =
         </div>
       ))}
     </div>
-  </motion.div>
+  </MotionDiv>
 );
 
-export const PartnersPage: React.FC = () => {
+interface PartnersPageProps {
+  onNavigate?: (page: string) => void;
+}
+
+export const PartnersPage: React.FC<PartnersPageProps> = ({ onNavigate }) => {
   return (
     <div className="bg-white min-h-screen text-slate-900 selection:bg-hayrok-orange/10 selection:text-hayrok-orange overflow-hidden font-sans relative">
       
@@ -65,13 +72,15 @@ export const PartnersPage: React.FC = () => {
       {/* Hero Section */}
       <section className="container mx-auto px-6 mb-24 relative z-10">
         <div className="max-w-7xl mx-auto">
-          <motion.div {...fadeInUp} className="flex items-center gap-3 mb-8">
+          {/* Use MotionDiv cast to any to fix type error on spread fadeInUp */}
+          <MotionDiv {...fadeInUp} className="flex items-center gap-3 mb-8">
             <div className="h-[2px] w-8 bg-hayrok-orange"></div>
             <span className="text-[10px] font-black text-hayrok-orange uppercase tracking-[0.5em]">The Strategic Network</span>
-          </motion.div>
+          </MotionDiv>
           
           <div className="grid lg:grid-cols-12 gap-12 items-end">
-            <motion.div 
+            {/* Use MotionDiv cast to any to fix type error on initial/whileInView props */}
+            <MotionDiv 
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               className="lg:col-span-9"
@@ -80,10 +89,16 @@ export const PartnersPage: React.FC = () => {
                 Building the Trusted <br/>
                 <span className="bg-gradient-to-r from-hayrok-orange to-indigo-600 bg-clip-text text-transparent italic tracking-tighter">Security Ecosystem.</span>
               </h1>
-              <p className="text-xl md:text-2xl text-slate-600 leading-relaxed font-medium max-w-4xl">
+              <p className="text-xl md:text-2xl text-slate-600 leading-relaxed font-medium max-w-4xl mb-10">
                 Hayrok believes the future of security is not built in isolation. It is built through strong partnerships aligned around measurable risk reduction and responsible AI.
               </p>
-            </motion.div>
+              <button 
+                onClick={() => onNavigate && onNavigate('become-partner')}
+                className="bg-hayrok-orange text-white px-10 py-5 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-orange-600 transition-all shadow-xl shadow-orange-500/20 flex items-center gap-3 w-full sm:w-auto justify-center"
+              >
+                Become a Partner <ArrowRight size={16} />
+              </button>
+            </MotionDiv>
           </div>
         </div>
       </section>
@@ -92,7 +107,7 @@ export const PartnersPage: React.FC = () => {
       <section className="container mx-auto px-6 mb-40 relative z-10">
         <div className="bg-slate-900 rounded-[4rem] p-10 md:p-20 text-white relative overflow-hidden shadow-2xl">
           <div className="absolute inset-0 bg-grid-white opacity-[0.05]" />
-          <div className="absolute top-0 right-0 w-[50%] h-full bg-hayrok-orange/10 blur-[120px]" />
+          <div className="absolute top-0 right-0 w-[50%] h-full bg-hayrok-orange/10 blur-[120px] rounded-full" />
           
           <div className="relative z-10 grid lg:grid-cols-2 gap-20 items-center">
             <div>
@@ -138,7 +153,10 @@ export const PartnersPage: React.FC = () => {
                     </div>
                   ))}
                </div>
-               <button className="mt-12 w-full py-5 bg-hayrok-orange rounded-2xl text-white font-black uppercase tracking-widest text-xs hover:bg-orange-600 transition-all shadow-xl shadow-orange-500/20">
+               <button 
+                 onClick={() => onNavigate && onNavigate('become-partner')}
+                 className="mt-12 w-full py-5 bg-hayrok-orange rounded-2xl text-white font-black uppercase tracking-widest text-xs hover:bg-orange-600 transition-all shadow-xl shadow-orange-500/20"
+               >
                   Join the Ecosystem
                </button>
             </div>
@@ -154,8 +172,9 @@ export const PartnersPage: React.FC = () => {
           <p className="text-lg text-slate-500 font-medium">Four distinct ways to collaborate and deliver the future of agentic security.</p>
         </div>
 
-        <motion.div 
-          variants={staggerContainer}
+        {/* Use MotionDiv cast to any to fix type error on variants/initial/whileInView props */}
+        <MotionDiv 
+          variants={staggerContainer as any}
           initial="initial"
           whileInView="whileInView"
           className="grid md:grid-cols-2 gap-8"
@@ -189,10 +208,10 @@ export const PartnersPage: React.FC = () => {
             tag="Evidence-Driven Assessment"
             icon={Briefcase}
             accent="bg-indigo-600"
-            desc="Deliverassessments with proof. Validate findings autonomously and track risk reduction over time for your clients."
+            desc="Deliver assessments with proof. Validate findings autonomously and track risk reduction over time for your clients."
             items={["Proof-based Audit", "Exploitability Validation", "Risk Reduction Tracking", "Digital Transformation"]}
           />
-        </motion.div>
+        </MotionDiv>
       </section>
 
       {/* Integrations Highlight */}
@@ -248,8 +267,11 @@ export const PartnersPage: React.FC = () => {
               </h3>
            </div>
            <div className="shrink-0 pb-2">
-              <button className="flex items-center gap-3 px-8 py-4 border border-slate-200 rounded-2xl font-black text-[10px] uppercase tracking-widest hover:bg-slate-50 transition-all group">
-                Download Partner Guide <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+              <button 
+                onClick={() => onNavigate && onNavigate('become-partner')}
+                className="flex items-center gap-3 px-8 py-4 bg-hayrok-orange text-white rounded-2xl font-black text-[10px] uppercase tracking-widest hover:bg-orange-600 transition-all group shadow-lg"
+              >
+                Register as a Partner <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
               </button>
            </div>
         </div>
@@ -273,7 +295,8 @@ export const PartnersPage: React.FC = () => {
 
       {/* Final CTA */}
       <section className="container mx-auto px-6 mb-48 relative z-10">
-        <motion.div 
+        {/* Use MotionDiv cast to any to fix type error on spread fadeInUp */}
+        <MotionDiv 
           {...fadeInUp}
           className="max-w-6xl mx-auto p-12 md:p-32 bg-slate-900 border border-white/5 rounded-[4rem] shadow-2xl relative overflow-hidden text-center"
         >
@@ -292,17 +315,23 @@ export const PartnersPage: React.FC = () => {
               </p>
               
               <div className="flex flex-col sm:flex-row gap-5">
-                <a href="mailto:partners@hayrok.com" className="flex items-center gap-3 bg-hayrok-orange text-white px-10 py-5 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-orange-600 transition-all group shadow-xl shadow-orange-500/20">
-                  partners@hayrok.com
+                <button 
+                  onClick={() => onNavigate && onNavigate('become-partner')}
+                  className="flex items-center gap-3 bg-hayrok-orange text-white px-10 py-5 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-orange-600 transition-all group shadow-xl shadow-orange-500/20"
+                >
+                  Become a Partner
                   <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-                </a>
-                <button className="bg-white/5 border border-white/10 text-white px-10 py-5 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-white/10 transition-all">
-                  Contact Us Page
+                </button>
+                <button 
+                  onClick={() => onNavigate && onNavigate('contact')}
+                  className="bg-white/5 border border-white/10 text-white px-10 py-5 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-white/10 transition-all"
+                >
+                  Contact Us
                 </button>
               </div>
             </div>
           </div>
-        </motion.div>
+        </MotionDiv>
         <p className="mt-12 text-center text-slate-400 font-black text-[10px] uppercase tracking-[0.5em]">Hayrok Partnerships — Built Together, with Trust at the Core.</p>
       </section>
 

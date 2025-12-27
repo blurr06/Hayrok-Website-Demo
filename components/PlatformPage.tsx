@@ -8,7 +8,7 @@ import {
   Layout, Cpu, Network, CheckCircle2, AlertCircle,
   FileText, TrendingUp, History, ClipboardCheck,
   Users, Sparkles, Globe, Rocket, Info, FileSearch,
-  ExternalLink, MousePointer2
+  ExternalLink, MousePointer2, MessageSquare
 } from 'lucide-react';
 
 // Fix transition ease type error by casting to tuple to satisfy Framer Motion types
@@ -139,9 +139,9 @@ const PersonaItem = ({ title, desc }: { title: string, desc: string }) => (
   </div>
 );
 
-export const PlatformPage: React.FC = () => {
+export const PlatformPage: React.FC<{ onNavigate?: (page: string) => void }> = ({ onNavigate }) => {
   return (
-    <div className="bg-white min-h-screen text-slate-900 font-sans selection:bg-hayrok-orange/10 selection:text-hayrok-orange pb-32 overflow-hidden">
+    <div className="bg-white min-h-screen text-slate-900 font-sans selection:bg-hayrok-orange/10 selection:text-hayrok-orange pb-12 overflow-hidden">
       {/* Dynamic Background */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
         <div className="absolute top-[-10%] left-[-10%] w-[60%] h-[60%] bg-[radial-gradient(circle_at_center,rgba(255,95,0,0.06)_0%,transparent_70%)] blur-[100px]" />
@@ -289,7 +289,7 @@ export const PlatformPage: React.FC = () => {
              <h2 className="text-5xl md:text-7xl font-black text-slate-900 mb-10 tracking-tight leading-none">Expanding the <br/> Intelligence <span className="bg-gradient-to-r from-hayrok-orange to-orange-400 bg-clip-text text-transparent">Ecosystem.</span></h2>
              <p className="text-2xl text-slate-700 font-semibold leading-relaxed mb-12">We are continuously training new agents to handle the breadth of modern attack surfaces, from behavior-driven detection to unknown asset discovery.</p>
              <div className="flex items-center gap-6">
-                <button className="flex items-center gap-3 bg-hayrok-orange text-white px-8 py-4 rounded-2xl font-black text-sm uppercase tracking-widest hover:bg-orange-600 transition-all shadow-xl shadow-orange-500/20">
+                <button onClick={() => onNavigate?.('early-adopter')} className="flex items-center gap-3 bg-hayrok-orange text-white px-8 py-4 rounded-2xl font-black text-sm uppercase tracking-widest hover:bg-orange-600 transition-all shadow-xl shadow-orange-500/20">
                   Request Early Access <ExternalLink size={16} />
                 </button>
              </div>
@@ -365,18 +365,25 @@ export const PlatformPage: React.FC = () => {
         </div>
       </section>
 
-      {/* Final Summary Block */}
+      {/* Final Outcome-Focused Summary Block */}
       <section className="container mx-auto px-6 pb-24 relative z-10">
          <div className="bg-slate-50 rounded-[4rem] p-16 md:p-32 border border-slate-200 flex flex-col lg:flex-row items-center justify-between gap-24">
             <div className="max-w-2xl">
                <div className="inline-flex items-center gap-3 text-hayrok-orange font-black text-xs uppercase tracking-[0.4em] mb-8">
-                  <Activity size={18} /> The Bottom Line
+                  <Activity size={18} /> Get Started
                </div>
-               <h3 className="text-5xl md:text-7xl font-black text-slate-900 mb-10 tracking-tight leading-none">Designed for the <br/> <span className="bg-gradient-to-r from-hayrok-orange to-orange-400 bg-clip-text text-transparent italic">Agentic Future.</span></h3>
-               <p className="text-2xl text-slate-700 font-semibold mb-12 leading-relaxed">Hayrok is not a collection of tools. It is a security intelligence platform — built for a future where autonomy is necessary, but trust is mandatory.</p>
+               <h3 className="text-5xl md:text-7xl font-black text-slate-900 mb-10 tracking-tight leading-none">Outcome‑Focused <br/> <span className="bg-gradient-to-r from-hayrok-orange to-orange-400 bg-clip-text text-transparent italic">Risk Management.</span></h3>
+               <p className="text-2xl text-slate-700 font-semibold mb-12 leading-relaxed">
+                  Hayrok is designed to help organizations move beyond alert volume and tool sprawl by enabling:
+               </p>
                <div className="space-y-6">
-                  {["Governed agentic AI.", "Real risk reduction.", "Defensible security outcomes."].map((text, i) => (
-                    <div key={i} className="flex items-center gap-5 text-slate-900 font-black text-3xl tracking-tight">
+                  {[
+                    "Clear understanding of practical risk",
+                    "Prioritized remediation based on validation",
+                    "Measurement of risk reduction over time",
+                    "Business‑relevant communication of security posture"
+                  ].map((text, i) => (
+                    <div key={i} className="flex items-center gap-5 text-slate-900 font-black text-2xl md:text-3xl tracking-tight">
                        <CheckCircle2 className="text-hayrok-orange" size={32} strokeWidth={3} />
                        {text}
                     </div>
@@ -385,15 +392,24 @@ export const PlatformPage: React.FC = () => {
             </div>
             
             <div className="flex flex-col gap-6 w-full lg:w-auto">
+               <p className="text-slate-500 font-bold text-sm uppercase tracking-widest mb-2 lg:text-right">Learn how Hayrok supports CTEM and security validation through governed, AI‑driven automation.</p>
                <button className="bg-hayrok-orange text-white px-16 py-8 rounded-[2rem] font-black text-2xl hover:bg-orange-600 transition-all transform hover:scale-105 shadow-2xl shadow-orange-500/30">
                   Request a Demo
                </button>
-               <button className="bg-white text-slate-900 px-16 py-8 rounded-[2rem] font-black text-2xl hover:bg-slate-50 transition-all border border-slate-200 shadow-xl">
-                  Talk to Security Team
+               <button onClick={() => onNavigate?.('industries')} className="bg-white text-hayrok-dark px-16 py-8 rounded-[2rem] font-black text-2xl hover:bg-slate-50 transition-all border border-slate-200 shadow-xl">
+                  Explore Use Cases
+               </button>
+               <button onClick={() => onNavigate?.('contact')} className="bg-hayrok-dark text-white px-16 py-8 rounded-[2rem] font-black text-2xl hover:bg-slate-800 transition-all shadow-xl">
+                  Contact Us
                </button>
             </div>
          </div>
       </section>
+
+      {/* Analyst-Safe Footer Line */}
+      <div className="h-20 text-center container mx-auto px-6 text-slate-400 text-[10px] font-black uppercase tracking-[0.5em]">
+         The Hayrok platform supports Continuous Threat Exposure Management (CTEM) and security validation through AI‑assisted capabilities designed for governance, transparency, and accountable risk management.
+      </div>
     </div>
   );
 };

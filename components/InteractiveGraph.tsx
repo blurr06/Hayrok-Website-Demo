@@ -1,5 +1,11 @@
+
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
+
+// Cast motion elements to any to bypass type sync issues in this environment
+const MotionLine = motion.line as any;
+const MotionCircle = motion.circle as any;
+const MotionDiv = motion.div as any;
 
 // Simulating a network of assets
 const nodes = [
@@ -70,7 +76,8 @@ export const InteractiveGraph: React.FC = () => {
               const isActive = activeNode === start || activeNode === end;
 
               return (
-                <motion.line
+                /* Use MotionLine cast to any to fix type error on initial/animate props */
+                <MotionLine
                   key={`link-${i}`}
                   x1={`${startNode.x}%`}
                   y1={`${startNode.y}%`}
@@ -92,7 +99,8 @@ export const InteractiveGraph: React.FC = () => {
               return (
                 <g key={node.id}>
                   {isActive && (
-                    <motion.circle
+                    /* Use MotionCircle cast to any to fix type error on initial/animate props */
+                    <MotionCircle
                       cx={`${node.x}%`}
                       cy={`${node.y}%`}
                       r="20"
@@ -105,7 +113,8 @@ export const InteractiveGraph: React.FC = () => {
                     />
                   )}
                   
-                  <motion.circle
+                  {/* Use MotionCircle cast to any to fix type error on whileHover prop */}
+                  <MotionCircle
                     cx={`${node.x}%`}
                     cy={`${node.y}%`}
                     r={isActive ? 8 : 6}
@@ -148,20 +157,22 @@ export const InteractiveGraph: React.FC = () => {
         
         {/* Dynamic Progress Bar */}
         <div className="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden">
-           <motion.div 
+           {/* Use MotionDiv cast to any to fix type error on initial/animate props */}
+           <MotionDiv 
              className="h-full bg-hayrok-orange rounded-full relative"
              initial={{ width: 0 }}
              animate={{ width: `${progress}%` }}
              transition={{ type: "tween", ease: "linear", duration: 0.1 }}
            >
               <div className="absolute inset-0 bg-white/30 animate-pulse"></div>
-           </motion.div>
+           </MotionDiv>
         </div>
         
         {/* Blinking Dots Sequence */}
         <div className="flex gap-1.5 mt-1 pl-1 items-center">
            {[0, 1, 2].map((i) => (
-             <motion.div
+             /* Use MotionDiv cast to any to fix type error on animate prop */
+             <MotionDiv
                key={i}
                className="w-1.5 h-1.5 rounded-full bg-slate-500"
                animate={{ 

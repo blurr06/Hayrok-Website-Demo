@@ -3,6 +3,9 @@ import React from 'react';
 import { CheckCircle2, Shield } from 'lucide-react';
 import { motion } from 'framer-motion';
 
+// Cast motion elements to any to bypass type sync issues in this environment
+const MotionDiv = motion.div as any;
+
 const BrandIcons: Record<string, React.ReactNode> = {
   Okta: (
     <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full text-blue-400">
@@ -75,7 +78,8 @@ export const IntegrationsSection: React.FC<{ condensed?: boolean }> = ({ condens
        {/* Vibrant Orange Glow Background Elements */}
        <div className="absolute inset-0 pointer-events-none">
           {/* Main central glow */}
-          <motion.div 
+          {/* Use MotionDiv cast to any to fix type error on animate prop */}
+          <MotionDiv 
             animate={{ opacity: [0.1, 0.2, 0.1], scale: [1, 1.2, 1] }}
             transition={{ duration: 10, repeat: Infinity }}
             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-hayrok-orange/10 blur-[160px] rounded-full" 
@@ -87,14 +91,15 @@ export const IntegrationsSection: React.FC<{ condensed?: boolean }> = ({ condens
 
        <div className="container mx-auto px-6 text-center relative z-10">
           <div className="max-w-4xl mx-auto mb-16">
-             <motion.div 
+             {/* Use MotionDiv cast to any to fix type error on initial/whileInView props */}
+             <MotionDiv 
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-hayrok-orange text-[10px] font-black mb-10 tracking-[0.4em] uppercase"
              >
                 <Shield size={12} className="text-hayrok-orange" strokeWidth={3} />
                 ENTERPRISE ECOSYSTEM
-             </motion.div>
+             </MotionDiv>
              <h2 className="text-4xl md:text-7xl font-black mb-8 text-white tracking-tight leading-[0.9]">
                 Seamlessly Integrated into your <br/>
                 <span className="bg-gradient-to-r from-hayrok-orange to-orange-400 bg-clip-text text-transparent">Security Stack</span>
@@ -109,7 +114,8 @@ export const IntegrationsSection: React.FC<{ condensed?: boolean }> = ({ condens
           {/* Logo Grid - COMPACT VERSION */}
           <div className="flex flex-wrap justify-center gap-3 md:gap-4 items-center max-w-6xl mx-auto">
              {integrations.map((item, i) => (
-                <motion.div 
+                /* Use MotionDiv cast to any to fix type error on initial/whileInView props */
+                <MotionDiv 
                   key={i}
                   initial={{ opacity: 0, scale: 0.9 }}
                   whileInView={{ opacity: 1, scale: 1 }}
@@ -125,7 +131,7 @@ export const IntegrationsSection: React.FC<{ condensed?: boolean }> = ({ condens
                    <span className="text-[9px] font-black uppercase tracking-[0.2em] text-slate-500 group-hover:text-hayrok-orange transition-colors duration-300 relative z-10">
                       {item.name}
                    </span>
-                </motion.div>
+                </MotionDiv>
              ))}
           </div>
 
