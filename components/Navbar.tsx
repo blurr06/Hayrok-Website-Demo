@@ -3,7 +3,7 @@ import {
   Menu, X, ChevronRight, ChevronDown, BookOpen, Rss, FileText, FileCode, 
   Video, Users, Compass, GraduationCap, Award, ShieldCheck, Gavel, 
   Rocket, Mail, Newspaper, Layout, BarChart3, Zap, Code, Bot, 
-  Search, Globe, Sparkles, MousePointer2, Briefcase
+  Search, Globe, Sparkles, MousePointer2, Briefcase, Handshake
 } from 'lucide-react';
 import { Logo } from './Logo';
 
@@ -32,6 +32,7 @@ const navItems = [
       { label: 'Integrations', id: 'partners-integrations', icon: Compass },
       { label: 'Cloud (CSPs)', id: 'partners-csps', icon: Globe },
       { label: 'MSSPs', id: 'partners-mssps', icon: Users },
+      { label: 'Resellers', id: 'resellers', icon: Handshake },
       { label: 'Become a Partner', id: 'become-partner', icon: HandshakeIcon }
     ]
   },

@@ -42,6 +42,8 @@ import { TrustCenter } from './components/TrustCenter';
 import { ResponsibleAiPolicy } from './components/ResponsibleAiPolicy';
 import { ResourcesPage } from './components/ResourcesPage';
 import { CareersPage } from './components/CareersPage';
+import { ResellerPage } from './components/ResellerPage';
+import { WhitepapersPage } from './components/WhitepapersPage';
 
 const RocketIcon = ({ size, className }: { size: number, className?: string }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className={className}>
@@ -168,7 +170,9 @@ function App() {
       case 'trust-center': return <TrustCenter onNavigate={setCurrentPage} />;
       case 'responsible-ai-policy': return <ResponsibleAiPolicy onNavigate={setCurrentPage} />;
       case 'resources': return <ResourcesPage onNavigate={setCurrentPage} />;
+      case 'whitepapers': return <WhitepapersPage onNavigate={setCurrentPage} />;
       case 'careers': return <CareersPage onNavigate={setCurrentPage} />;
+      case 'resellers': return <ResellerPage onNavigate={setCurrentPage} />;
       case 'about': return <AboutUs />;
       case 'leadership': return <LeadershipPage onNavigate={setCurrentPage} />;
       case 'partners': return <PartnersPage onNavigate={setCurrentPage} />;
