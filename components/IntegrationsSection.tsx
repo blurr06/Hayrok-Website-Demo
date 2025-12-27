@@ -8,19 +8,13 @@ const MotionDiv = motion.div as any;
 
 const BrandIcons: Record<string, React.ReactNode> = {
   Okta: (
-    <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full text-blue-400">
-      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 15c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z"/>
-    </svg>
+    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/okta/okta-original.svg" alt="Okta" className="w-full h-full object-contain" />
   ),
   Jira: (
-    <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full text-blue-500">
-       <path d="M11.55 11.55H.27L11.55.27v11.28zM12.45 12.45h11.28L12.45 23.73V12.45zM.27 12.45h11.28L.27 23.73V12.45z"/>
-    </svg>
+    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/jira/jira-original.svg" alt="Jira" className="w-full h-full object-contain" />
   ),
   AzureAD: (
-    <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full text-blue-400">
-      <path d="M11.64 2.59L.16 21.41h5.36l8.03-13.14 1.33 3.03 3.3-2.07-4.14-6.64h-2.4zM14.93 11.02L23.84 21.41h5.36L16.27 6.47l-1.34 4.55z"/>
-    </svg>
+    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/azure/azure-original.svg" alt="Azure AD" className="w-full h-full object-contain" />
   ),
   GitHub: (
     <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full text-white">
@@ -28,34 +22,22 @@ const BrandIcons: Record<string, React.ReactNode> = {
     </svg>
   ),
   GitLab: (
-    <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full text-orange-500">
-      <path d="M23.955 13.587l-1.342-4.135-2.664-8.189c-.135-.417-.724-.417-.859 0l-2.664 8.189H7.574l-2.664 8.189c-.135-.417-.724-.417-.859 0L1.387 9.452.045 13.587c-.121.374.014.786.333 1.017l11.622 8.447 11.622-8.447c.319-.231.454-.643.333-1.017z"/>
-    </svg>
+    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/gitlab/gitlab-original.svg" alt="GitLab" className="w-full h-full object-contain" />
   ),
   Slack: (
-    <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full text-white/90">
-      <path d="M5.042 15.165a2.528 2.528 0 0 1-2.52 2.523A2.528 2.528 0 0 1 0 15.165a2.527 2.527 0 0 1 2.522-2.52h2.52v2.52zM6.313 15.165a2.527 2.527 0 0 1 2.521-2.52 2.527 2.527 0 0 1 2.521 2.52v6.313A2.528 2.528 0 0 1 8.834 24a2.528 2.528 0 0 1-2.521-2.52v-6.315zM8.834 5.042a2.528 2.528 0 0 1-2.521-2.52A2.528 2.528 0 0 1 8.834 0a2.528 2.528 0 0 1 2.521 2.522v2.52h-2.52zM8.834 6.313a2.528 2.528 0 0 1 2.521 2.521 2.528 2.528 0 0 1-2.521 2.521H2.522A2.528 2.528 0 0 1 0 8.834a2.528 2.528 0 0 1 2.522-2.521h6.312zM18.956 8.834a2.528 2.528 0 0 1 2.522-2.521A2.528 2.528 0 0 1 24 8.834a2.528 2.528 0 0 1-2.522 2.521h-2.52V8.834zM17.688 8.834a2.528 2.528 0 0 1-2.522 2.521 2.527 2.527 0 0 1-2.522-2.521V2.522A2.527 2.527 0 0 1 15.165 0a2.528 2.528 0 0 1 2.522 2.522v6.312zM15.165 18.956a2.528 2.528 0 0 1 2.522 2.521A2.528 2.528 0 0 1 15.165 24a2.527 2.527 0 0 1-2.522-2.522v-2.52h2.52zM15.165 17.688a2.527 2.527 0 0 1-2.522-2.522 2.527 2.527 0 0 1 2.522-2.522h6.312A2.527 2.527 0 0 1 24 15.165a2.528 2.528 0 0 1-2.522 2.522h-6.313z"/>
-    </svg>
+    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/slack/slack-original.svg" alt="Slack" className="w-full h-full object-contain" />
   ),
   ServiceNow: (
-    <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full text-green-500">
-      <path d="M17.5 14.5c-1.5 0-2.8 1.1-2.8 2.5s1.3 2.5 2.8 2.5 2.8-1.1 2.8-2.5-1.3-2.5-2.8-2.5zm-8.8-3.3c-1.8 0-3.3 1.5-3.3 3.3s1.5 3.3 3.3 3.3 3.3-1.5 3.3-3.3-1.5-3.3-3.3-3.3zm0-8C6.9 3.2 5.4 4.7 5.4 6.5s1.5 3.3 3.3 3.3 3.3-1.5 3.3-3.3S10.5 3.2 8.7 3.2z"/>
-    </svg>
+    <img src="https://www.vectorlogo.zone/logos/servicenow/servicenow-icon.svg" alt="ServiceNow" className="w-full h-full object-contain" />
   ),
   AWS: (
-    <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full text-slate-300">
-      <path d="M12.016 4.3c-4.321 0-7.79 3.51-7.79 7.85 0 2.22 0.941 4.22 2.441 5.64 0.16.16 0.16 0.4 0 0.56l-0.81 0.81c-0.16.16-0.41.16-0.57 0-1.99-1.92-3.111-4.52-3.111-7.01 0-5.46 4.43-9.91 9.84-9.91 3.52 0 6.661 1.87 8.431 4.67 0.12.17 0.08 0.43-0.09 0.54l-0.95 0.65c-0.17.12-0.42.08-0.54-0.09-1.4-2.22-3.95-3.71-6.85-3.71z"/>
-    </svg>
+    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" alt="AWS" className="w-full h-full object-contain transform scale-125" />
   ),
   GCP: (
-    <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full text-blue-400">
-      <path d="M12.5 0C10.7 0 8.9.5 7.4 1.5L20.8 15l3.2-1.9L12.5 0zM5.5 2.7C4.1 3.8 3 5.3 2.3 7L12.5 24l3.2-1.9L5.5 2.7zM0 12.5c0 1.8.5 3.6 1.5 5.1L15 4.2 11.8 1 0 12.5z"/>
-    </svg>
+    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/googlecloud/googlecloud-original.svg" alt="GCP" className="w-full h-full object-contain" />
   ),
   Jenkins: (
-    <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full text-red-500">
-      <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.05-.015-2.07-3.33.72-4.035-1.605-4.035-1.605-.54-1.38-1.335-1.755-1.335-1.755"/>
-    </svg>
+    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/jenkins/jenkins-original.svg" alt="Jenkins" className="w-full h-full object-contain" />
   )
 };
 
@@ -125,7 +107,7 @@ export const IntegrationsSection: React.FC<{ condensed?: boolean }> = ({ condens
                    {/* Card inner glow */}
                    <div className="absolute inset-0 bg-gradient-to-br from-hayrok-orange/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                    
-                   <div className="w-10 h-10 flex items-center justify-center opacity-70 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500 relative z-10">
+                   <div className="w-10 h-10 flex items-center justify-center opacity-90 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500 relative z-10">
                       {BrandIcons[item.id] || <Shield className="text-slate-500" />}
                    </div>
                    <span className="text-[9px] font-black uppercase tracking-[0.2em] text-slate-500 group-hover:text-hayrok-orange transition-colors duration-300 relative z-10">
@@ -156,3 +138,4 @@ export const IntegrationsSection: React.FC<{ condensed?: boolean }> = ({ condens
     </section>
   );
 };
+    
