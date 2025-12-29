@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-/* Added Mail to imports */
+// Add missing icons Cloud, Layout, and FileText to the imports from lucide-react
 import { 
   FileCode, Sparkles, ShieldCheck, BarChart3, Bot, 
-  ArrowLeft, ArrowRight, Download, Share2, Eye, History, 
-  CheckCircle2, Info, Layers, Network, Gavel, 
+  ArrowLeft, ArrowRight, Download, Share2, History, 
+  CheckCircle2, Layers, Network, Gavel, 
   Workflow, Database, Target, Zap, ChevronRight, 
   BookOpen, Terminal, Scale, Activity, Rocket,
   Users, FileSearch, Code, Globe, Search,
-  Calendar, Clock, ExternalLink, Mail
+  Calendar, Clock, Mail, Cpu, Server, Shield,
+  Cloud, Layout, FileText
 } from 'lucide-react';
 import { IntelligenceFabric } from './IntelligenceFabric';
 
@@ -19,17 +20,102 @@ const fadeInUp = {
   transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] }
 };
 
+// --- Architecture Diagram Component ---
+const ArchitectureDiagram = () => {
+  return (
+    <div className="w-full py-12 px-4 md:px-8 bg-slate-900 rounded-[3rem] border border-white/5 shadow-2xl relative overflow-hidden my-16">
+      <div className="absolute inset-0 bg-grid-white opacity-5 pointer-events-none" />
+      <div className="relative z-10">
+        <div className="text-center mb-12">
+          <p className="text-[10px] font-black text-hayrok-orange uppercase tracking-[0.5em] mb-2">Technical Schematic</p>
+          <h4 className="text-2xl font-black text-white uppercase tracking-tight">The Hive & Hay‑AI Orchestration Stack</h4>
+        </div>
+
+        <div className="grid lg:grid-cols-3 gap-8 items-center max-w-5xl mx-auto">
+          {/* Layer 1: Ingestion */}
+          <div className="space-y-4">
+            <div className="p-1 text-[9px] font-black text-slate-500 uppercase tracking-widest text-center border-b border-white/10 mb-4">Telemetry Ingestion Layer</div>
+            {[
+              { icon: Cloud, label: "Cloud Infra (AWS/GCP)", color: "text-blue-400" },
+              { icon: Code, label: "SDLC & Supply Chain", color: "text-emerald-400" },
+              { icon: Shield, label: "Security Tooling", color: "text-indigo-400" }
+            ].map((item, i) => (
+              <motion.div 
+                key={i}
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ delay: i * 0.1 }}
+                className="flex items-center gap-4 p-4 bg-white/5 border border-white/10 rounded-2xl"
+              >
+                <item.icon size={18} className={item.color} />
+                <span className="text-xs font-bold text-slate-300 uppercase">{item.label}</span>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Layer 2: Core Architecture */}
+          <div className="relative flex flex-col items-center justify-center gap-12">
+            <motion.div 
+              animate={{ y: [0, -10, 0] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+              className="w-full p-8 bg-hayrok-orange rounded-[2.5rem] shadow-[0_0_50px_rgba(255,95,0,0.3)] border-2 border-white/20 relative z-20 text-center"
+            >
+              <Database size={32} className="text-white mx-auto mb-4" />
+              <h5 className="text-lg font-black text-white uppercase leading-none">Hive Core</h5>
+              <p className="text-[8px] font-black text-white/70 uppercase tracking-widest mt-2">Multi-Domain System of Record</p>
+            </motion.div>
+
+            <motion.div 
+              animate={{ y: [0, 10, 0] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+              className="w-full p-8 bg-slate-800 rounded-[2.5rem] shadow-2xl border border-white/10 relative z-20 text-center"
+            >
+              <Cpu size={32} className="text-hayrok-orange mx-auto mb-4" />
+              <h5 className="text-lg font-black text-white uppercase leading-none">Hay‑AI Logic</h5>
+              <p className="text-[8px] font-black text-slate-400 uppercase tracking-widest mt-2">Recursive Graph Reasoning</p>
+            </motion.div>
+
+            {/* Connecting lines visualized as CSS pulses */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-px h-full bg-gradient-to-b from-transparent via-hayrok-orange to-transparent opacity-20" />
+          </div>
+
+          {/* Layer 3: Outcomes */}
+          <div className="space-y-4">
+            <div className="p-1 text-[9px] font-black text-slate-500 uppercase tracking-widest text-center border-b border-white/10 mb-4">Execution & Governance</div>
+            {[
+              { icon: Zap, label: "Genesis Validation", color: "text-hayrok-orange" },
+              { icon: Gavel, label: "Policy Enforcement", color: "text-slate-200" },
+              { icon: Layout, label: "Audit-Ready Logs", color: "text-slate-400" }
+            ].map((item, i) => (
+              <motion.div 
+                key={i}
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ delay: i * 0.1 }}
+                className="flex items-center gap-4 p-4 bg-white/5 border border-white/10 rounded-2xl"
+              >
+                <item.icon size={18} className={item.color} />
+                <span className="text-xs font-bold text-slate-300 uppercase">{item.label}</span>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 // Data structure for whitepapers
 const WHITEPAPERS = [
   {
     id: 'unified-architecture',
     title: "A Unified Architecture for Continuous Threat Exposure Management",
-    subtitle: "How Hayrok Unifies Exposure, Validation, and Governance Through Hive and Hay‑AI",
+    subtitle: "A Technical Specification for Hive and the Hay‑AI Reasoning Engine",
     author: "Hayrok Research & Strategy",
     date: "Oct 2024",
-    readTime: "12 min read",
-    snippet: "As organizations adopt Continuous Threat Exposure Management (CTEM), they encounter a fundamental challenge: while security tools generate vast amounts of data, few organizations have an architecture capable of turning those signals into governed, defensible risk decisions.",
-    tags: ["Architecture", "Governance", "CTEM"]
+    readTime: "15 min read",
+    snippet: "Technical exploration of Hayrok’s system of record and recursive reasoning layer, designed to translate multi-domain telemetry into governed, evidence-based security decisions.",
+    tags: ["Architecture", "Logic", "CTEM"]
   },
   {
     id: 'agentic-reasoning-security',
@@ -104,9 +190,9 @@ export const WhitepapersPage: React.FC<{ onNavigate?: (page: string) => void }> 
             
             <motion.p 
               {...fadeInUp}
-              className="text-xl md:text-2xl text-slate-500 leading-relaxed font-medium max-w-3xl mx-auto mb-20"
+              className="text-xl md:text-2xl text-slate-500 leading-relaxed max-w-3xl mx-auto mb-20"
             >
-              Strategic guidance and technical specifications for Continuous Threat Exposure Management and Governed AI.
+              Technical specifications and strategic frameworks for Continuous Threat Exposure Management and Governed AI.
             </motion.p>
           </div>
         </section>
@@ -186,7 +272,7 @@ export const WhitepapersPage: React.FC<{ onNavigate?: (page: string) => void }> 
               <div className="relative z-10">
                  <h4 className="text-2xl font-black mb-4">Request Custom Analysis</h4>
                  <p className="text-slate-400 font-medium mb-10 leading-relaxed">
-                   Need a deep dive into a specific technology or regulatory framework? Our research team collaborates with enterprise partners on custom technical briefings.
+                   Need a technical deep dive into a specific technology or framework? Our research team collaborates with enterprise partners on custom strategy briefings.
                  </p>
                  <button onClick={() => onNavigate?.('contact')} className="px-10 py-5 bg-hayrok-orange text-white rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-orange-600 transition-all shadow-xl">
                    Connect with Research
@@ -274,19 +360,17 @@ export const WhitepapersPage: React.FC<{ onNavigate?: (page: string) => void }> 
           {/* Sidebar Detail Nav */}
           <aside className="hidden lg:block lg:col-span-3 sticky top-32 h-fit">
             <div className="space-y-1">
-              <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-6 px-4">Sections</p>
+              <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-6 px-4">Technical Specs</p>
               {[
-                { id: "exec-summary", label: "Executive Summary" },
-                { id: "challenge", label: "The Challenge" },
-                { id: "hive-system", label: "Hive: System of Record" },
-                { id: "architectural-principles", label: "Core Principles" },
-                { id: "hay-ai-intelligence", label: "Hay-AI Intelligence" },
-                { id: "graph-reasoning", label: "Graph-Based Reasoning" },
-                { id: "zero-day", label: "Zero-Day Emulation" },
-                { id: "bee-colony", label: "The Bee Colony Model" },
-                { id: "unified-capabilities", label: "Platform Capabilities" },
-                { id: "ctem-lifecycle", label: "CTEM Lifecycle" },
-                { id: "business-value", label: "Business Value" },
+                { id: "abstract", label: "Abstract" },
+                { id: "fragmentation", label: "The Telemetry Gap" },
+                { id: "architecture", label: "System Architecture" },
+                { id: "hive-sor", label: "Hive: System of Record" },
+                { id: "hay-ai-recursive", label: "Hay‑AI Reasoning" },
+                { id: "graph-logic", label: "Graph-Based Logic" },
+                { id: "agentic-orchestration", label: "Agentic Orchestration" },
+                { id: "ctem-alignment", label: "Lifecycle Alignment" },
+                { id: "governance", label: "Decision Governance" },
                 { id: "conclusion", label: "Conclusion" }
               ].map(item => (
                 <a 
@@ -304,192 +388,204 @@ export const WhitepapersPage: React.FC<{ onNavigate?: (page: string) => void }> 
           <main className="lg:col-span-9 max-w-4xl">
             {selectedPaperId === 'unified-architecture' && (
               <>
-                <WhitepaperSection id="exec-summary" title="Executive Summary">
-                  <div className="bg-slate-900 text-white rounded-[3rem] p-10 md:p-16 mb-12 shadow-2xl relative overflow-hidden">
-                      <div className="absolute top-0 right-0 p-12 opacity-10">
-                        <Target size={200} className="text-hayrok-orange" />
-                      </div>
-                      <div className="relative z-10">
-                        <p className="text-xl md:text-2xl font-medium leading-relaxed italic opacity-90">
-                            "As organizations adopt Continuous Threat Exposure Management (CTEM), they encounter a fundamental challenge: while security tools generate vast amounts of data, few organizations have an architecture capable of turning those signals into governed, defensible risk decisions."
-                        </p>
-                        <div className="mt-12 grid sm:grid-cols-2 gap-6">
-                            {[
-                              "Correlate signals across domains",
-                              "Reason through relationships",
-                              "Prioritize based on evidence",
-                              "Govern through auditable workflows"
-                            ].map((item, i) => (
-                              <div key={i} className="flex items-center gap-3">
-                                  <div className="w-1.5 h-1.5 rounded-full bg-hayrok-orange" />
-                                  <span className="text-sm font-black uppercase tracking-widest text-slate-300">{item}</span>
-                              </div>
-                            ))}
-                        </div>
-                      </div>
-                  </div>
-                  <p>
-                    Hayrok addresses this challenge through Hive, a unifying architecture that serves as the system of record and governance layer for CTEM, supported by Hay‑AI, a governed intelligence and orchestration layer that applies reasoning across complex security relationships.
+                <WhitepaperSection id="abstract" title="Abstract">
+                  <p className="text-xl font-medium text-slate-700 leading-relaxed mb-8">
+                    Continuous Threat Exposure Management (CTEM) requires more than broad telemetry; it necessitates an architectural framework capable of correlating disparate signals into defensible risk decisions. This paper details the Hayrok architecture—a dual-layer stack comprising <strong>Hive</strong>, a multi-domain system of record, and <strong>Hay‑AI</strong>, a governed recursive reasoning engine. Together, these components establish a closed-loop system for exposure discovery, autonomous validation, and policy-bound mobilization.
                   </p>
                 </WhitepaperSection>
 
-                <WhitepaperSection id="challenge" title="The Challenge: Fragmented Security Decision‑Making">
-                  <p className="mb-8">
-                    Modern security programs depend on a growing ecosystem of tools covering attack surface visibility, application security, validation, and detection. While these tools generate valuable signals, organizations struggle to:
+                <WhitepaperSection id="fragmentation" title="The Telemetry Gap: Fragmented Decisioning">
+                  <p>
+                    Modern enterprise security stacks are characterized by high-volume, low-context telemetry. Traditional models fail to resolve the "Exploitability Gap"—the delta between what a tool flags as a vulnerability and what an attacker can practically execute.
                   </p>
-                  <div className="grid sm:grid-cols-2 gap-6 mb-8">
-                      {[
-                        { label: "Determining Exploitability", desc: "Hard to prove if exposure represents material risk." },
-                        { label: "Environment Correlation", desc: "Findings remain isolated across clouds and apps." },
-                        { label: "Coordinated Triage", desc: "Prioritization is manual and disconnected." },
-                        { label: "Board Communication", desc: "Explaining risk decisions to non-technical stakeholders." }
-                      ].map((item, i) => (
-                        <div key={i} className="p-8 bg-white border border-slate-100 rounded-[2rem] shadow-sm">
-                          <h5 className="font-black text-slate-900 mb-2 uppercase tracking-tight text-sm">{item.label}</h5>
-                          <p className="text-sm text-slate-500 font-medium leading-relaxed">{item.desc}</p>
-                        </div>
-                      ))}
+                  <div className="grid sm:grid-cols-2 gap-6 my-10">
+                    {[
+                      { l: "Isolated Signals", d: "SCA, SAST, and CSPM data remain siloed, preventing path correlation." },
+                      { l: "Static Prioritization", d: "Severity scores (CVSS) ignore environment-specific reachability." },
+                      { l: "Manual Validation", d: "Human teams cannot scale to validate exposure at the speed of cloud change." },
+                      { l: "Governance Deficit", d: "Automation lacks the auditability required for regulated sector adoption." }
+                    ].map((item, i) => (
+                      <div key={i} className="p-6 bg-slate-50 rounded-2xl border border-slate-100">
+                        <span className="text-xs font-black text-hayrok-orange uppercase block mb-1">{item.l}</span>
+                        <p className="text-sm font-bold text-slate-500 leading-tight">{item.d}</p>
+                      </div>
+                    ))}
                   </div>
-                  <p className="font-bold text-slate-700 italic">
-                    As a result, CTEM initiatives often stall at visibility, rather than maturing into validated, governed programs.
+                </WhitepaperSection>
+
+                <WhitepaperSection id="architecture" title="System Architecture">
+                  <p>
+                    The Hayrok stack is designed as a modular, governed orchestration layer that sits on top of existing security and infrastructure telemetry.
+                  </p>
+                  <ArchitectureDiagram />
+                  <p className="text-sm text-slate-400 font-medium italic text-center">
+                    Fig 1.0: Logic flow from telemetry ingestion to governed risk reduction.
                   </p>
                 </WhitepaperSection>
 
-                <WhitepaperSection id="hive-system" title="Hive: The System of Record for CTEM">
+                <WhitepaperSection id="hive-sor" title="Hive: The Multi-Domain System of Record">
                   <p>
-                    Hive is the architectural foundation of the Hayrok platform. It functions as the system of record and governance layer that unifies exposure, validation, and remediation activity into a coherent CTEM program.
+                    Hive is the architectural foundation of the Hayrok platform. Unlike temporary scanning caches, Hive is a persistent <strong>System of Record (SoR)</strong> that preserves the state of risk across code, cloud, and identity domains.
                   </p>
-                  <div className="my-12 p-8 md:p-12 bg-[#F8F9F5] border border-slate-200 rounded-[3.5rem] relative overflow-hidden">
-                      <div className="flex flex-col md:flex-row items-center gap-12">
-                        <div className="w-32 h-32 bg-white rounded-[2rem] shadow-xl flex items-center justify-center text-hayrok-orange shrink-0">
-                            <BarChart3 size={56} strokeWidth={2.5} />
-                        </div>
+                  <div className="bg-[#F8F9F5] rounded-[2.5rem] p-10 my-10 border border-slate-200">
+                    <h5 className="font-black text-slate-900 mb-6 uppercase text-sm tracking-widest">Key Architectural Functions:</h5>
+                    <ul className="space-y-6">
+                      <li className="flex gap-4">
+                        <div className="w-6 h-6 rounded-full bg-hayrok-orange text-white flex items-center justify-center text-[10px] font-black shrink-0">1</div>
                         <div>
-                            <h4 className="text-2xl font-black text-slate-900 mb-4 uppercase tracking-tighter">System of Record</h4>
-                            <p className="text-lg font-medium text-slate-600 mb-6">Hive serves as the framework for preserving rationale, evidence, and outcomes over time.</p>
-                            <p className="text-sm text-slate-400 font-bold italic">“Hive does not replace specialized security tools. Instead, it governs and records the outcomes produced by them.”</p>
+                          <p className="font-black text-slate-900">Telemetry Normalization</p>
+                          <p className="text-sm text-slate-500">Normalizing schemas from 50+ integrations into a unified risk-intent data model.</p>
                         </div>
-                      </div>
+                      </li>
+                      <li className="flex gap-4">
+                        <div className="w-6 h-6 rounded-full bg-hayrok-orange text-white flex items-center justify-center text-[10px] font-black shrink-0">2</div>
+                        <div>
+                          <p className="font-black text-slate-900">Decision State Persistence</p>
+                          <p className="text-sm text-slate-500">Recording the "Why" behind every prioritization change, not just the "What".</p>
+                        </div>
+                      </li>
+                      <li className="flex gap-4">
+                        <div className="w-6 h-6 rounded-full bg-hayrok-orange text-white flex items-center justify-center text-[10px] font-black shrink-0">3</div>
+                        <div>
+                          <p className="font-black text-slate-900">Audit-ready History</p>
+                          <p className="text-sm text-slate-500">Maintaining immutable logs of remediation progress and risk movement over time.</p>
+                        </div>
+                      </li>
+                    </ul>
                   </div>
                 </WhitepaperSection>
 
-                <WhitepaperSection id="architectural-principles" title="Architectural Principles">
-                  <div className="grid gap-6">
-                      {[
-                        { title: "Separation of Concerns", desc: "Discovery, validation, reasoning, and governance are distinct activities and must remain decoupled to scale effectively.", icon: Layers },
-                        { title: "Evidence Over Assumptions", desc: "Risk decisions should be informed by validation evidence and context, not severity scores alone.", icon: FileSearch },
-                        { title: "Governance by Design", desc: "All decisions must be reviewable, explainable, and auditable.", icon: Gavel },
-                        { title: "Program Orientation", desc: "CTEM is an ongoing program. Hive tracks risk movement and progress over time, not point‑in‑time results.", icon: History }
-                      ].map((p, i) => (
-                        <div key={i} className="flex gap-8 p-10 bg-white border border-slate-100 rounded-[2.5rem] group hover:border-hayrok-orange/30 transition-all">
-                          <div className="w-14 h-14 bg-slate-50 rounded-2xl flex items-center justify-center text-hayrok-orange shrink-0 shadow-sm group-hover:scale-110 group-hover:rotate-3 transition-transform">
-                              <p.icon size={28} />
-                          </div>
-                          <div>
-                              <h5 className="text-xl font-black text-slate-900 mb-2 uppercase tracking-tight">{i+1}. {p.title}</h5>
-                              <p className="text-lg text-slate-500 font-medium leading-relaxed">{p.desc}</p>
-                          </div>
-                        </div>
-                      ))}
-                  </div>
-                </WhitepaperSection>
-
-                <WhitepaperSection id="hay-ai-intelligence" title="Hay‑AI: The Intelligence and Orchestration Layer">
+                <WhitepaperSection id="hay-ai-recursive" title="Hay‑AI: Recursive Reasoning & Orchestration">
                   <p>
-                    Hay‑AI functions as the brain behind the platform’s workflows, enabling Hayrok to move from isolated signals to coordinated, evidence‑based outcomes.
+                    Hay‑AI is the intelligence engine that interacts with Hive. It moves beyond linear rules to recursive logic, building complex attack graphs that simulate how transitive trust and misconfiguration compound.
                   </p>
-                  <div className="my-10 p-1 bg-gradient-to-br from-hayrok-orange to-indigo-600 rounded-[3rem] shadow-2xl">
-                      <div className="bg-slate-900 rounded-[2.9rem] p-12 text-white text-center">
-                        <p className="text-[10px] font-black text-hayrok-orange uppercase tracking-[0.5em] mb-8">Canonical Definition</p>
-                        <p className="text-2xl md:text-4xl font-black tracking-tight leading-tight mb-8">
-                            “Hay‑AI is a governed intelligence and orchestration layer that supports CTEM decision‑making through graph‑based reasoning.”
-                        </p>
-                        <div className="flex justify-center items-center gap-6">
-                            <div className="w-1.5 h-1.5 rounded-full bg-hayrok-orange animate-pulse" />
-                            <span className="text-xs font-black text-slate-500 uppercase tracking-widest">Governed, Not Autonomous</span>
+                  <div className="p-8 bg-slate-900 text-white rounded-[3rem] shadow-2xl relative overflow-hidden my-12">
+                    <div className="absolute top-0 right-0 p-8 opacity-10">
+                      <Bot size={120} className="text-hayrok-orange" />
+                    </div>
+                    <div className="relative z-10">
+                      <div className="flex items-center gap-3 text-hayrok-orange font-black text-[10px] uppercase tracking-[0.5em] mb-6">
+                         <Cpu size={16} /> Reasoning Logic
+                      </div>
+                      <h4 className="text-2xl font-black mb-6 uppercase tracking-tight">Agentic Reasoning vs. Scripting</h4>
+                      <p className="text-slate-400 font-medium leading-relaxed mb-8">
+                        Traditional automation executes a predefined script. Hay‑AI applies <strong>Recursive Logical Inference</strong>: evaluating a finding, identifying secondary dependencies, and autonomously deciding which validation agent to trigger next.
+                      </p>
+                      <div className="grid sm:grid-cols-2 gap-4">
+                        <div className="p-4 bg-white/5 rounded-xl border border-white/10">
+                          <span className="text-[10px] font-black text-hayrok-orange uppercase tracking-widest block mb-1">Traditional</span>
+                          <p className="text-xs font-bold text-slate-300 italic">"If vuln A exists, alert."</p>
+                        </div>
+                        <div className="p-4 bg-hayrok-orange/10 rounded-xl border border-hayrok-orange/20">
+                          <span className="text-[10px] font-black text-hayrok-orange uppercase tracking-widest block mb-1">Hay-AI</span>
+                          <p className="text-xs font-bold text-white italic">"Vuln A exists; check identity B reachability; validate path C."</p>
                         </div>
                       </div>
+                    </div>
                   </div>
                 </WhitepaperSection>
 
-                <WhitepaperSection id="graph-reasoning" title="Graph‑Based Reasoning">
+                <WhitepaperSection id="graph-logic" title="Graph‑Based Relationship Intelligence">
                   <p>
-                    Security risk rarely exists in isolation. Hay‑AI applies graph‑based reasoning to understand relationships across assets, applications, identities, and dependencies.
+                    Security risk rarely exists in isolation. Hay‑AI maps relationships across four primary dimensions to identify <strong>Viable Attack Paths</strong>:
+                  </p>
+                  <div className="grid md:grid-cols-2 gap-4 my-10">
+                    {[
+                      { t: "Asset Topology", d: "Network adjacency, subnet boundary, and ingress/egress points.", i: Globe },
+                      { t: "Identity Mesh", d: "Transitive trust, IAM role assumption, and credential reuse.", i: Users },
+                      { t: "Code Provenance", d: "SBOM inheritance, build pipeline integrity, and commit lineage.", i: Code },
+                      { t: "Logic Constraints", d: "Runtime policies, WAF rules, and compensating controls.", i: ShieldCheck }
+                    ].map((item, i) => (
+                      <div className="flex gap-6 p-8 bg-white border border-slate-100 rounded-[2.5rem] group hover:border-hayrok-orange/30 transition-all" key={i}>
+                        <item.i className="text-hayrok-orange shrink-0" size={24} />
+                        <div>
+                          <h6 className="font-black text-slate-900 uppercase text-xs mb-1 tracking-tight">{item.t}</h6>
+                          <p className="text-sm font-bold text-slate-400 leading-tight uppercase">{item.d}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </WhitepaperSection>
+
+                <WhitepaperSection id="agentic-orchestration" title="The Bee Colony Model: Agentic Orchestration">
+                  <p>
+                    To operate at scale without creating unmanageable complex codebases, Hayrok uses the <strong>Bee Colony Model</strong>. In this framework, Hay‑AI acts as the central orchestrator for specialized, narrow-scope agents ("Bees").
                   </p>
                   <div className="grid md:grid-cols-3 gap-6 my-10">
-                      {[
-                        { label: "Viable Paths", d: "Identify the actual routes an attacker could traverse." },
-                        { label: "Compounding Risk", d: "Understand how multiple low risks create a critical path." },
-                        { label: "Adaptive Priority", d: "Update risk relevance as environment changes happen." }
-                      ].map((item, i) => (
-                        <div key={i} className="p-8 bg-white border border-slate-200 rounded-[2.5rem]">
-                          <Network className="text-hayrok-orange mb-6" size={24} />
-                          <h5 className="font-black text-slate-900 mb-2 uppercase text-sm tracking-tight">{item.label}</h5>
-                          <p className="text-xs text-slate-500 font-bold leading-relaxed uppercase">{item.d}</p>
+                    <div className="p-8 bg-slate-50 border border-slate-200 rounded-[2.5rem]">
+                      <Search size={24} className="text-slate-400 mb-6" />
+                      <h5 className="font-black text-slate-900 text-sm uppercase mb-2">Discovery Bees</h5>
+                      <p className="text-xs font-bold text-slate-500 uppercase leading-relaxed">Narrow-scope tasks: Scan port, check IAM policy, map SBOM.</p>
+                    </div>
+                    <div className="p-8 bg-slate-50 border border-slate-200 rounded-[2.5rem]">
+                      <Zap size={24} className="text-hayrok-orange mb-6" />
+                      <h5 className="font-black text-slate-900 text-sm uppercase mb-2">Validation Bees</h5>
+                      <p className="text-xs font-bold text-slate-500 uppercase leading-relaxed">Safe payload execution: Verify SSRF, test credential leak.</p>
+                    </div>
+                    <div className="p-8 bg-slate-50 border border-slate-200 rounded-[2.5rem]">
+                      <FileText size={24} className="text-slate-400 mb-6" />
+                      <h5 className="font-black text-slate-900 text-sm uppercase mb-2">Evidence Bees</h5>
+                      <p className="text-xs font-bold text-slate-500 uppercase leading-relaxed">Proof capture: screenshot UI, log network trace.</p>
+                    </div>
+                  </div>
+                  <p className="font-bold text-slate-700 italic text-center">
+                    "Agents perform the analysis. Hay‑AI sequences the flow. Hive records the result."
+                  </p>
+                </WhitepaperSection>
+
+                <WhitepaperSection id="ctem-alignment" title="Supporting the CTEM Lifecycle">
+                  <p>
+                    Hayrok’s architecture maps natively to the Gartner CTEM framework, enabling a repeatable operational model:
+                  </p>
+                  <div className="space-y-4 my-10">
+                    {[
+                      { s: "Scope", d: "Hive aggregates multi-domain assets into a unified assessment boundary." },
+                      { s: "Discover", d: "Continuous agents identify exposure signals across telemetry feeds." },
+                      { s: "Prioritize", d: "Hay‑AI applies graph reasoning to rank risk by exploitability." },
+                      { s: "Validate", d: "Genesis executes controlled simulations to generate hard proof." },
+                      { s: "Mobilize", d: "Hive records remediation tasks and tracks residual risk movement." }
+                    ].map((step, i) => (
+                      <div key={i} className="flex items-center gap-6 p-6 bg-white border border-slate-200 rounded-[2rem] shadow-sm">
+                        <div className="text-3xl font-black text-hayrok-orange/20 w-12">{i+1}</div>
+                        <div className="flex-1">
+                          <span className="font-black text-slate-900 uppercase tracking-widest text-sm mr-4">{step.s}</span>
+                          <span className="text-sm text-slate-500 font-bold uppercase">{step.d}</span>
                         </div>
-                      ))}
+                      </div>
+                    ))}
                   </div>
                 </WhitepaperSection>
 
-                <WhitepaperSection id="bee-colony" title="The Bee Colony Model">
-                  <p className="mb-12">
-                    To operate at scale, Hayrok uses a bee‑inspired agent model as a conceptual framework where specialized analytical functions are orchestrated safely.
+                <WhitepaperSection id="governance" title="Governance by Design: The AI TRiSM Standard">
+                  <p>
+                    In regulated and enterprise environments, AI cannot be a "black box." Hayrok’s architecture enforces transparency through <strong>Decision Lineage</strong>.
                   </p>
-                  <div className="grid md:grid-cols-2 gap-10">
-                      <div className="p-10 bg-slate-50 rounded-[3rem] border border-slate-100">
-                        <h4 className="text-hayrok-orange font-black text-[10px] uppercase tracking-[0.4em] mb-6">The Agents</h4>
-                        <ul className="space-y-4">
-                            {[
-                              "Specialized analytical functions",
-                              "Narrow task focus (correlation, enrichment)",
-                              "No independent action authority"
-                            ].map((txt, i) => (
-                              <li key={i} className="flex gap-3 text-sm font-bold text-slate-700">
-                                <div className="w-1.5 h-1.5 rounded-full bg-hayrok-orange mt-1.5 shrink-0" />
-                                {txt}
-                              </li>
-                            ))}
-                        </ul>
-                      </div>
-                      <div className="p-10 bg-slate-900 text-white rounded-[3rem] relative overflow-hidden shadow-xl">
-                        <div className="absolute inset-0 bg-grid-white opacity-5" />
-                        <h4 className="text-hayrok-orange font-black text-[10px] uppercase tracking-[0.4em] mb-6 relative z-10">The Orchestrator</h4>
-                        <ul className="space-y-4 relative z-10">
-                            {[
-                              "Sequences validation workflows",
-                              "Applies policy constraints",
-                              "Produces explainable outputs"
-                            ].map((txt, i) => (
-                              <li key={i} className="flex gap-3 text-sm font-bold text-slate-300">
-                                <div className="w-1.5 h-1.5 rounded-full bg-hayrok-orange mt-1.5 shrink-0" />
-                                {txt}
-                              </li>
-                            ))}
-                        </ul>
-                      </div>
-                  </div>
-                  <div className="mt-12 text-center">
-                      <p className="text-2xl font-black italic text-slate-900 tracking-tight">
-                        “Hay‑AI reasons and orchestrates. <span className="text-hayrok-orange">Hive governs and records.</span> Humans decide.”
+                  <div className="flex gap-8 items-start p-10 bg-indigo-50 border border-indigo-100 rounded-[3rem] my-10">
+                    <Gavel className="text-indigo-600 shrink-0 mt-1" size={32} />
+                    <div>
+                      <h5 className="text-lg font-black text-indigo-900 mb-2 uppercase">Auditable Decision Replay</h5>
+                      <p className="text-slate-600 font-medium leading-relaxed">
+                        Every risk score adjustment or validation run generated by Hay‑AI includes a "Lineage Artifact." This allows human analysts to trace the exact chain of logic used by the AI—from the initial telemetry signal to the final prioritization output—making every step reviewable and defensible.
                       </p>
+                    </div>
                   </div>
                 </WhitepaperSection>
 
                 <WhitepaperSection id="conclusion" title="Conclusion">
                   <div className="prose prose-slate max-w-none prose-p:text-lg">
-                      <p>
-                        Hive and Hay‑AI together form the architectural foundation of the Hayrok platform. By combining a central system of record with governed intelligence, evidence‑based validation, and human‑centered oversight, Hayrok provides an enterprise‑ready approach to operating CTEM at scale—without sacrificing governance, trust, or accountability.
-                      </p>
+                    <p>
+                      Traditional security models are failing to keep pace with the velocity and interconnected nature of modern cloud environments. By unifying exposure data in Hive and applying recursive reasoning through Hay‑AI, Hayrok provides an enterprise-ready architecture for Continuous Threat Exposure Management. This approach reduces organizational noise, eliminates the exploitability gap, and ensures that the move toward autonomous security remains governed and accountable.
+                    </p>
                   </div>
                   
-                  <div className="mt-20 p-12 md:p-20 bg-slate-900 rounded-[4rem] text-white text-center relative overflow-hidden group">
+                  <div className="mt-20 p-12 md:p-24 bg-slate-900 rounded-[4rem] text-white text-center relative overflow-hidden group">
                       <div className="absolute inset-0 bg-grid-white opacity-5" />
                       <div className="relative z-10">
-                        <h4 className="text-4xl font-black mb-8 tracking-tight uppercase">Ready to learn more?</h4>
-                        <p className="text-xl text-slate-400 font-medium mb-12 max-w-2xl mx-auto">Discuss this architecture and our CTEM roadmap with a Hayrok security specialist.</p>
+                        <h4 className="text-4xl font-black mb-8 tracking-tight uppercase leading-none">Ready for a Technical <br/> Strategy Briefing?</h4>
+                        <p className="text-xl text-slate-400 font-medium mb-12 max-w-2xl mx-auto leading-relaxed">Discuss this architecture and our CTEM roadmap with a Hayrok security architect.</p>
                         <div className="flex flex-col sm:flex-row justify-center items-center gap-6">
                             <button onClick={() => onNavigate?.('contact')} className="w-full sm:w-auto bg-hayrok-orange text-white px-12 py-6 rounded-2xl font-black text-xl hover:bg-orange-600 transition-all transform hover:scale-105 shadow-2xl shadow-orange-500/30">
-                              Schedule a Strategy Briefing
+                              Schedule Technical Deep-Dive
                             </button>
                             <button onClick={() => setSelectedPaperId(null)} className="w-full sm:w-auto bg-white/5 border border-white/10 text-white px-12 py-6 rounded-2xl font-black text-xl hover:bg-white/10 transition-all">
                               Return to Library
@@ -507,7 +603,7 @@ export const WhitepapersPage: React.FC<{ onNavigate?: (page: string) => void }> 
       {/* Signature Footer */}
       <div className="h-32 flex items-center justify-center border-t border-slate-100 bg-[#FCFCFA] mt-24">
          <p className="text-[11px] font-bold text-slate-300 uppercase tracking-[0.8em] text-center px-6 leading-relaxed max-w-5xl">
-            This library is curated by Hayrok Security Research to support technical and strategic alignment for modern security operations.
+            Technical Research Paper #2024-01-ARCH. Published by Hayrok Security Research and Strategy. All rights reserved.
          </p>
       </div>
     </div>

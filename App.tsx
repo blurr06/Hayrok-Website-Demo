@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { 
   CheckCircle2, ChevronRight, TrendingDown, Target, Zap, Clock, 
-  Users, BarChart3, Lock, ShieldCheck, MessageSquare, Quote
+  Users, BarChart3, Lock, ShieldCheck, MessageSquare, Quote,
+  ArrowDown, ShieldAlert, Cpu, Gavel, XCircle, Search, Sparkles
 } from 'lucide-react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
@@ -45,87 +46,100 @@ import { CareersPage } from './components/CareersPage';
 import { ResellerPage } from './components/ResellerPage';
 import { WhitepapersPage } from './components/WhitepapersPage';
 
-const RocketIcon = ({ size, className }: { size: number, className?: string }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className={className}>
-    <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"></path>
-    <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"></path>
-    <path d="M9 12H4s.55-3.03 2-5c1.62-2.2 5-3 5-3"></path>
-    <path d="M12 15v5s3.03-.55 5-2c2.2-1.62 3-5 3-5"></path>
-  </svg>
-);
-
-const ROISection = () => (
-  <section className="py-32 bg-white relative overflow-hidden border-t border-slate-100">
-     <div className="container mx-auto px-6 relative z-10">
-        <div className="text-center max-w-3xl mx-auto mb-20">
-           <h2 className="text-sm font-bold text-hayrok-orange uppercase tracking-[0.4em] mb-4">Outcome-Focused Security</h2>
-           <h3 className="text-4xl md:text-6xl font-black text-slate-900 mb-6">Measurable <span className="text-hayrok-orange italic">Risk Reduction</span></h3>
-           <p className="text-slate-500 text-lg font-medium">Communicate security posture in business‑relevant terms to technical and executive stakeholders.</p>
-        </div>
-        
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-           {[
-             { label: "Reduction in exploitable risk", val: "35–50%", icon: TrendingDown },
-             { label: "Reduction in manual triage", val: "40–60%", icon: Zap },
-             { label: "Increase in secure release rate", val: "25–35%", icon: RocketIcon },
-             { label: "Reduction in audit effort", val: "50–70%", icon: ShieldCheck }
-           ].map((stat, i) => (
-             <div key={i} className="bg-slate-50 p-10 rounded-[2.5rem] border border-slate-200 shadow-sm hover:bg-white hover:shadow-xl transition-all group">
-                <div className="p-3 bg-orange-50 rounded-2xl inline-flex text-hayrok-orange mb-6 group-hover:bg-hayrok-orange group-hover:text-white transition-all">
-                   <stat.icon size={24} />
-                </div>
-                <div className="text-4xl font-black text-slate-900 mb-2">{stat.val}</div>
-                <p className="text-slate-400 font-bold text-sm uppercase tracking-tight leading-tight">{stat.label}</p>
-             </div>
-           ))}
-        </div>
-     </div>
-  </section>
-);
-
-const WhoItIsFor = () => (
-  <section className="py-32 bg-slate-50 border-t border-slate-100">
-     <div className="container mx-auto px-6">
-        <div className="text-center mb-20">
-           <h2 className="text-sm font-bold text-hayrok-orange uppercase tracking-[0.4em] mb-4">Adoption Verticals</h2>
-           <h3 className="text-4xl md:text-6xl font-black text-slate-900">Built for <span className="text-slate-400 italic">High-Stakes Teams</span></h3>
-        </div>
-        
-        <div className="grid md:grid-cols-3 gap-8">
-           {[
-             { title: "Enterprise SecOps", icon: BarChart3, desc: "Distinguish practical risk from theoretical noise at scale." },
-             { title: "Regulated Orgs", icon: Lock, desc: "Auditable, evidence-backed security decisions by default." },
-             { title: "Managed Services (MSSPs)", icon: Zap, desc: "Deliver higher-value security outcomes through automated validation." }
-           ].map((p, i) => (
-             <div key={i} className="p-8 border border-slate-200 rounded-[2.5rem] bg-white hover:shadow-xl transition-all group">
-                <div className="w-12 h-12 bg-orange-50 rounded-2xl flex items-center justify-center text-hayrok-orange mb-6 group-hover:bg-hayrok-orange group-hover:text-white transition-all">
-                   <p.icon size={24} />
-                </div>
-                <h4 className="text-xl font-bold text-slate-900 mb-2">{p.title}</h4>
-                <p className="text-slate-400 font-medium leading-relaxed">{p.desc}</p>
-             </div>
-           ))}
-        </div>
-     </div>
-  </section>
-);
-
-const CustomerVoice = () => (
+const VisibilityToValidation = () => (
   <section className="py-32 bg-slate-900 text-white relative overflow-hidden">
+     <div className="absolute inset-0 bg-grid-white opacity-5" />
      <div className="container mx-auto px-6 relative z-10">
-        <div className="max-w-4xl mx-auto">
-           <Quote size={80} className="text-hayrok-orange opacity-20 mb-8" />
-           <div className="space-y-16">
-              <div>
-                 <p className="text-3xl md:text-5xl font-black italic mb-8 leading-tight">“Hayrok enables us to adopt AI‑driven security responsibly, with controls that support oversight, review, and accountability.”</p>
-                 <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 bg-slate-800 rounded-full flex items-center justify-center font-black">CS</div>
-                    <div>
-                       <div className="font-bold text-white">VP of Security</div>
-                       <div className="text-slate-400 text-sm">Financial Services Sector</div>
-                    </div>
+        <div className="grid lg:grid-cols-2 gap-20 items-center">
+           <div>
+              <h3 className="text-sm font-bold text-hayrok-orange uppercase tracking-[0.5em] mb-10">What Is Hayrok?</h3>
+              <p className="text-3xl md:text-5xl font-black mb-8 leading-tight">
+                 From Visibility to <br/><span className="text-hayrok-orange italic">Validated Risk Reduction.</span>
+              </p>
+              <p className="text-xl text-slate-400 font-medium leading-relaxed mb-10">
+                 Hayrok is a governed, AI-driven Security Risk Intelligence platform that helps organizations continuously identify, validate, and manage security exposure using transparent, auditable automation.
+              </p>
+              <div className="space-y-6">
+                 <div className="p-8 bg-white/5 border border-white/10 rounded-3xl">
+                    <p className="text-lg font-bold text-white italic mb-2">"Hayrok does not replace your existing security tools."</p>
+                    <p className="text-sm text-slate-400">It connects them, validates their findings, and governs the decisions that follow.</p>
                  </div>
               </div>
+           </div>
+           <div className="grid gap-6">
+              {[
+                { q: "What did we find?", a: "Most security platforms stop here.", color: "text-slate-500" },
+                { q: "What is actually exploitable?", a: "Hayrok provides technical proof through validation.", color: "text-hayrok-orange" },
+                { q: "How is our risk changing over time?", a: "Continuous tracking driven by proof, not assumptions.", color: "text-hayrok-orange" }
+              ].map((item, i) => (
+                <div key={i} className="p-8 bg-white/5 border border-white/10 rounded-[2.5rem] group hover:bg-white/10 transition-all">
+                   <p className={`text-xl font-black mb-1 ${item.color}`}>{item.q}</p>
+                   <p className="text-slate-400 font-medium">{item.a}</p>
+                </div>
+              ))}
+           </div>
+        </div>
+     </div>
+  </section>
+);
+
+const OutcomesAndAudience = () => (
+  <section className="py-32 bg-white">
+     <div className="container mx-auto px-6">
+        <div className="grid lg:grid-cols-2 gap-16 mb-32">
+           <div className="p-12 bg-slate-50 border border-slate-100 rounded-[4rem]">
+              <h4 className="text-sm font-bold text-hayrok-orange uppercase tracking-[0.4em] mb-10">Who Uses Hayrok</h4>
+              <div className="grid gap-4">
+                 {[
+                   "Security operations and engineering",
+                   "Threat exposure and risk management",
+                   "Application and product security",
+                   "GRC and compliance",
+                   "Managed security service providers"
+                 ].map((p, i) => (
+                    <div key={i} className="flex items-center gap-4 py-4 border-b border-slate-200 last:border-0">
+                       <CheckCircle2 size={18} className="text-hayrok-orange" />
+                       <span className="text-lg font-black text-slate-900 tracking-tight uppercase text-sm">{p}</span>
+                    </div>
+                 ))}
+              </div>
+           </div>
+           <div className="p-12 bg-slate-900 text-white rounded-[4rem] relative overflow-hidden">
+              <div className="absolute top-0 right-0 p-12 opacity-5">
+                 <ShieldCheck size={240} className="text-hayrok-orange" />
+              </div>
+              <h4 className="text-sm font-bold text-hayrok-orange uppercase tracking-[0.4em] mb-10 relative z-10">Outcome-Focused Security</h4>
+              <div className="space-y-8 relative z-10">
+                 {[
+                   { t: "Practical vs Theoretical", d: "Distinguish practical risk from theoretical exposure." },
+                   { t: "Validated Remediation", d: "Prioritize remediation using validation and context." },
+                   { t: "Measurable Change", d: "Track risk reduction over time." },
+                   { t: "Executive Oversight", d: "Communicate posture in clear, business-relevant terms." }
+                 ].map((o, i) => (
+                    <div key={i}>
+                       <p className="text-hayrok-orange font-black uppercase text-xs tracking-widest mb-1">{o.t}</p>
+                       <p className="text-xl font-bold text-white">{o.d}</p>
+                    </div>
+                 ))}
+              </div>
+           </div>
+        </div>
+
+        <div className="max-w-4xl mx-auto p-12 md:p-24 bg-[#F8F9F5] border border-slate-200 rounded-[5rem] text-center">
+           <div className="flex justify-center mb-10">
+              <div className="px-6 py-2 bg-white rounded-full border border-slate-200 shadow-sm flex items-center gap-3">
+                 <span className="text-[10px] font-black uppercase tracking-widest">Gartner-Aligned. Enterprise-Ready.</span>
+              </div>
+           </div>
+           <p className="text-3xl md:text-5xl font-black text-slate-900 mb-12 leading-[1.1] italic">
+              “Hayrok supports Continuous Threat Exposure Management and Breach and Attack Simulation by converting continuous exposure and exploitability data into <span className="text-hayrok-orange">governed, auditable security risk intelligence.</span>”
+           </p>
+           <div className="flex flex-wrap justify-center gap-10">
+              {["CTEM", "BAS", "Decision Intelligence", "Governed AI"].map(tag => (
+                 <span key={tag} className="text-xs font-black text-slate-400 uppercase tracking-widest flex items-center gap-2">
+                    <div className="w-1 h-1 rounded-full bg-hayrok-orange" /> {tag}
+                 </span>
+              ))}
            </div>
         </div>
      </div>
@@ -135,21 +149,25 @@ const CustomerVoice = () => (
 const FinalCTA = ({ onNavigate }: { onNavigate: (page: string) => void }) => (
   <section className="py-40 relative overflow-hidden bg-white text-center border-t border-slate-100">
      <div className="container mx-auto px-6 relative z-10">
-        <h2 className="text-5xl md:text-8xl font-black mb-10 tracking-tight leading-[0.9] text-slate-900">
-          Learn how Hayrok supports <br/>
-          <span className="text-hayrok-orange italic">CTEM and Security Validation.</span>
+        <h2 className="text-5xl md:text-8xl font-black mb-10 tracking-tight leading-[0.9] text-slate-900 uppercase">
+          Ready to <br/>
+          <span className="text-hayrok-orange italic">Get Started?</span>
         </h2>
-        <p className="text-xl md:text-2xl text-slate-500 mb-12 max-w-3xl mx-auto font-medium leading-relaxed">
-           Adopt AI‑driven security deliberately and responsibly with configured, monitored automation aligned to your risk tolerance.
+        <p className="text-xl md:text-2xl text-slate-500 mb-16 max-w-3xl mx-auto font-medium leading-relaxed">
+           Learn how Hayrok supports CTEM and security validation through governed, AI-driven automation.
         </p>
         <div className="flex flex-col sm:flex-row justify-center items-center gap-6">
-           <button onClick={() => onNavigate('demo')} className="w-full sm:w-auto bg-hayrok-orange text-white px-12 py-6 rounded-2xl font-black text-xl hover:bg-orange-600 transition-all transform hover:scale-105 shadow-2xl shadow-orange-500/20">
+           <button onClick={() => onNavigate('demo')} className="w-full sm:w-auto bg-hayrok-orange text-white px-16 py-8 rounded-[2rem] font-black text-2xl hover:bg-orange-600 transition-all transform hover:scale-105 shadow-2xl shadow-orange-500/20">
               Request a Demo
            </button>
-           <button onClick={() => onNavigate('contact')} className="w-full sm:w-auto px-12 py-6 rounded-2xl font-black text-slate-900 border border-slate-200 hover:bg-slate-50 transition-all bg-white shadow-sm">
-              Talk to a Security Architect
+           <button onClick={() => onNavigate('platform')} className="w-full sm:w-auto px-16 py-8 rounded-[2rem] font-black text-2xl text-slate-900 border border-slate-200 hover:bg-slate-50 transition-all bg-white shadow-xl">
+              Explore the Platform
+           </button>
+           <button onClick={() => onNavigate('contact')} className="w-full sm:w-auto px-16 py-8 rounded-[2rem] font-black text-2xl text-white bg-slate-900 hover:bg-slate-800 transition-all shadow-xl">
+              Contact Us
            </button>
         </div>
+        <p className="mt-20 text-hayrok-orange font-black text-2xl tracking-tighter italic">One Line to Remember: Hayrok turns exposure visibility into validated, defensible security risk decisions.</p>
      </div>
   </section>
 );
@@ -196,13 +214,12 @@ function App() {
             <Hero onNavigate={setCurrentPage} />
             <IntegrationsSection condensed={true} />
             <ProblemSection />
+            <VisibilityToValidation />
             <CTEMLifecycle />
-            <HayAiSection />
-            <WhoItIsFor />
             <PlatformOverview onNavigate={setCurrentPage} />
-            <ROISection />
-            <HowItWorks />
-            <CustomerVoice />
+            <HayAiSection />
+            <ROIMetrics />
+            <OutcomesAndAudience />
             <FinalCTA onNavigate={setCurrentPage} />
           </>
         );
