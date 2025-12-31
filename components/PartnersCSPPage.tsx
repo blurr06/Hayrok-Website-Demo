@@ -58,7 +58,7 @@ export const PartnersCSPPage: React.FC<PartnersCSPPageProps> = ({ onNavigate }) 
             {...fadeInUp}
             className="text-xl md:text-2xl text-slate-500 leading-relaxed max-w-4xl mx-auto font-medium mb-16"
           >
-            Built to work with leading cloud platforms. Hayrok partners with CSPs to help organizations operate Continuous Threat Exposure Management (CTEM) across modern cloud environments—without disrupting native controls.
+            Built to work with leading cloud platforms. Hayrok partners with CSPs to help organizations operate Continuous Threat Exposure Management (CTEM) across modern cloud environments - without disrupting native controls.
           </motion.p>
 
           <motion.div {...fadeInUp} className="flex flex-col sm:flex-row items-center justify-center gap-8">

@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
 import { 
@@ -42,7 +41,7 @@ export const PartnersMSSPPage: React.FC<PartnersMSSPPageProps> = ({ onNavigate }
             <span className="bg-gradient-to-r from-hayrok-orange to-orange-400 bg-clip-text text-transparent italic tracking-tighter">Outcomes at Scale.</span>
           </h1>
           <p className="text-xl md:text-2xl text-slate-600 leading-relaxed font-medium max-w-4xl">
-            Hayrok was built to augment MSSPs — not replace them. Deliver higher‑value services by combining agentic AI automation with human expertise, accountability, and governance.
+            Hayrok was built to augment MSSPs - not replace them. Deliver higher‑value services by combining agentic AI automation with human expertise, accountability, and governance.
           </p>
         </div>
       </section>

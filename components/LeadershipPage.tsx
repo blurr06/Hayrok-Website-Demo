@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
 import { 
@@ -237,7 +236,7 @@ export const LeadershipPage: React.FC<LeadershipPageProps> = ({ onNavigate }) =>
               </div>
 
               <div className="mt-12 flex items-center gap-6">
-                 <span className="text-[10px] font-black text-slate-500 uppercase tracking-[0.4em]">Herberth Oshiemele — CEO</span>
+                 <span className="text-[10px] font-black text-slate-500 uppercase tracking-[0.4em]">Herberth Oshiemele - CEO</span>
                  <div className="h-px flex-1 bg-gradient-to-r from-white/10 to-transparent"></div>
               </div>
             </div>

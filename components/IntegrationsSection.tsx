@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { CheckCircle2, Shield } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -38,6 +37,42 @@ const BrandIcons: Record<string, React.ReactNode> = {
   ),
   Jenkins: (
     <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/jenkins/jenkins-original.svg" alt="Jenkins" className="w-full h-full object-contain" />
+  ),
+  Splunk: (
+    <img src="https://www.vectorlogo.zone/logos/splunk/splunk-icon.svg" alt="Splunk" className="w-full h-full object-contain" />
+  ),
+  Elastic: (
+    <img src="https://www.vectorlogo.zone/logos/elastic/elastic-icon.svg" alt="Elastic" className="w-full h-full object-contain" />
+  ),
+  Vanta: (
+    <img src="https://www.vectorlogo.zone/logos/vanta/vanta-icon.svg" alt="Vanta" className="w-full h-full object-contain" />
+  ),
+  AuditBoard: (
+    <img src="https://www.auditboard.com/favicon.ico" alt="AuditBoard" className="w-full h-full object-contain" />
+  ),
+  Drata: (
+    <img src="https://drata.com/favicon.ico" alt="Drata" className="w-full h-full object-contain" />
+  ),
+  Datadog: (
+    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/datadog/datadog-original.svg" alt="Datadog" className="w-full h-full object-contain" />
+  ),
+  Sentinel: (
+    <img src="https://www.vectorlogo.zone/logos/microsoft_azure/microsoft_azure-icon.svg" alt="Microsoft Sentinel" className="w-full h-full object-contain" />
+  ),
+  Docker: (
+    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/docker/docker-original.svg" alt="Docker" className="w-full h-full object-contain" />
+  ),
+  Kubernetes: (
+    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/kubernetes/kubernetes-plain.svg" alt="Kubernetes" className="w-full h-full object-contain" />
+  ),
+  Bitbucket: (
+    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/bitbucket/bitbucket-original.svg" alt="Bitbucket" className="w-full h-full object-contain" />
+  ),
+  ArgoCD: (
+    <img src="https://raw.githubusercontent.com/argoproj/argo-cd/master/assets/logo.png" alt="ArgoCD" className="w-full h-full object-contain" />
+  ),
+  Harness: (
+    <img src="https://www.vectorlogo.zone/logos/harnessio/harnessio-icon.svg" alt="Harness" className="w-full h-full object-contain" />
   )
 };
 
@@ -51,7 +86,19 @@ const integrations = [
   { name: "ServiceNow", id: "ServiceNow" },
   { name: "AWS", id: "AWS" },
   { name: "GCP", id: "GCP" },
-  { name: "Jenkins", id: "Jenkins" }
+  { name: "Jenkins", id: "Jenkins" },
+  { name: "Splunk", id: "Splunk" },
+  { name: "Elastic", id: "Elastic" },
+  { name: "Vanta", id: "Vanta" },
+  { name: "AuditBoard", id: "AuditBoard" },
+  { name: "Drata", id: "Drata" },
+  { name: "Datadog", id: "Datadog" },
+  { name: "Sentinel", id: "Sentinel" },
+  { name: "Docker", id: "Docker" },
+  { name: "Kubernetes", id: "Kubernetes" },
+  { name: "Bitbucket", id: "Bitbucket" },
+  { name: "ArgoCD", id: "ArgoCD" },
+  { name: "Harness", id: "Harness" }
 ];
 
 export const IntegrationsSection: React.FC<{ condensed?: boolean }> = ({ condensed = false }) => {
@@ -94,23 +141,23 @@ export const IntegrationsSection: React.FC<{ condensed?: boolean }> = ({ condens
           </div>
 
           {/* Logo Grid - COMPACT VERSION */}
-          <div className="flex flex-wrap justify-center gap-3 md:gap-4 items-center max-w-6xl mx-auto">
+          <div className="flex flex-wrap justify-center gap-3 md:gap-4 items-center max-w-7xl mx-auto">
              {integrations.map((item, i) => (
                 /* Use MotionDiv cast to any to fix type error on initial/whileInView props */
                 <MotionDiv 
                   key={i}
                   initial={{ opacity: 0, scale: 0.9 }}
                   whileInView={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: i * 0.05 }}
-                  className="flex flex-col items-center gap-2 px-6 py-5 rounded-[1.5rem] border border-white/5 bg-white/[0.03] hover:bg-white/[0.08] hover:border-hayrok-orange/30 transition-all duration-500 group cursor-default hover:-translate-y-2 backdrop-blur-xl min-w-[130px] shadow-2xl shadow-black/60 relative overflow-hidden"
+                  transition={{ delay: i * 0.03 }}
+                  className="flex flex-col items-center gap-2 px-5 py-4 rounded-[1.25rem] border border-white/5 bg-white/[0.03] hover:bg-white/[0.08] hover:border-hayrok-orange/30 transition-all duration-500 group cursor-default hover:-translate-y-2 backdrop-blur-xl min-w-[120px] shadow-2xl shadow-black/60 relative overflow-hidden"
                 >
                    {/* Card inner glow */}
                    <div className="absolute inset-0 bg-gradient-to-br from-hayrok-orange/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                    
-                   <div className="w-10 h-10 flex items-center justify-center opacity-90 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500 relative z-10">
+                   <div className="w-10 h-10 flex items-center justify-center opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500 relative z-10">
                       {BrandIcons[item.id] || <Shield className="text-slate-500" />}
                    </div>
-                   <span className="text-[9px] font-black uppercase tracking-[0.2em] text-slate-500 group-hover:text-hayrok-orange transition-colors duration-300 relative z-10">
+                   <span className="text-[8px] font-black uppercase tracking-[0.2em] text-slate-500 group-hover:text-hayrok-orange transition-colors duration-300 relative z-10">
                       {item.name}
                    </span>
                 </MotionDiv>
@@ -138,4 +185,3 @@ export const IntegrationsSection: React.FC<{ condensed?: boolean }> = ({ condens
     </section>
   );
 };
-    

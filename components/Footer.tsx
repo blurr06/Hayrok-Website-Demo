@@ -16,7 +16,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                <Logo color="dark" />
             </div>
             <p className="text-slate-500 max-w-sm mb-10 text-lg font-medium leading-relaxed">
-              Hayrok — Agentic AI for Security, Built With Accountability.
+              Hayrok - Agentic AI for Security, Built With Accountability.
             </p>
             <div className="flex gap-4">
               <a href="#" className="w-12 h-12 rounded-2xl bg-slate-50 border border-slate-200 flex items-center justify-center text-slate-400 hover:text-hayrok-orange hover:bg-white hover:border-hayrok-orange hover:shadow-xl transition-all">
@@ -34,8 +34,8 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           <div>
             <h4 className="text-slate-900 font-black text-xs uppercase tracking-widest mb-8">Capabilities</h4>
             <ul className="space-y-5">
-              <li><button onClick={() => onNavigate('hive')} className="text-slate-500 font-bold hover:text-hayrok-orange transition-colors">Hive — Intelligence</button></li>
-              <li><button onClick={() => onNavigate('genesis')} className="text-slate-500 font-bold hover:text-hayrok-orange transition-colors">Genesis — Validation</button></li>
+              <li><button onClick={() => onNavigate('hive')} className="text-slate-500 font-bold hover:text-hayrok-orange transition-colors">Hive - Intelligence</button></li>
+              <li><button onClick={() => onNavigate('genesis')} className="text-slate-500 font-bold hover:text-hayrok-orange transition-colors">Genesis - Validation</button></li>
               <li><button onClick={() => onNavigate('roadmap')} className="text-slate-500 font-bold hover:text-hayrok-orange transition-colors">Platform Roadmap</button></li>
               <li><button onClick={() => onNavigate('roi')} className="text-slate-500 font-bold hover:text-hayrok-orange transition-colors">ROI Metrics</button></li>
               <li><button onClick={() => onNavigate('comparison')} className="text-slate-500 font-bold hover:text-hayrok-orange transition-colors">Comparison Battlecard</button></li>

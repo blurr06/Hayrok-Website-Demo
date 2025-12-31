@@ -105,7 +105,7 @@ export const ResponsibleAiPolicy: React.FC<{ onNavigate?: (page: string) => void
             <motion.div {...fadeInUp}>
               <SectionHeader title="Scope" id="scope" />
               <p className="text-lg text-slate-600 font-medium leading-relaxed mb-8">
-                This policy outlines how AI technologies—specifically <strong>Hay‑AI</strong>—are designed, deployed, and operated to support customer trust, regulatory expectations, and enterprise governance requirements.
+                This policy outlines how AI technologies - specifically <strong>Hay‑AI</strong> - are designed, deployed, and operated to support customer trust, regulatory expectations, and enterprise governance requirements.
               </p>
               <div className="bg-white border border-slate-200 rounded-[2.5rem] p-10 shadow-sm">
                 <p className="text-xs font-black text-slate-400 uppercase tracking-widest mb-8">This policy applies to:</p>
@@ -185,7 +185,7 @@ export const ResponsibleAiPolicy: React.FC<{ onNavigate?: (page: string) => void
                     icon: Eye,
                     desc: "Hayrok prioritizes AI outputs that are understandable and reviewable.",
                     points: [
-                      "Produces summaries and reasoning context—not opaque decisions.",
+                      "Produces summaries and reasoning context - not opaque decisions.",
                       "Outputs are designed to explain why a recommendation exists.",
                       "Customers can review insights before acting."
                     ]
@@ -258,7 +258,7 @@ export const ResponsibleAiPolicy: React.FC<{ onNavigate?: (page: string) => void
                          "Assisting prioritization, correlation, and decision context"
                        ].map((feat, i) => (
                          <div key={i} className="flex gap-4">
-                            <CheckCircle2 className="text-hayrok-orange shrink-0" size={20} />
+                            <CheckCircle2 size={20} className="text-hayrok-orange shrink-0" />
                             <span className="text-sm font-bold text-white leading-snug">{feat}</span>
                          </div>
                        ))}
@@ -308,108 +308,4 @@ export const ResponsibleAiPolicy: React.FC<{ onNavigate?: (page: string) => void
                       <h5 className="font-black text-slate-900 mb-4 uppercase tracking-tight">Access & Ownership</h5>
                       <p className="text-sm leading-relaxed text-slate-500">AI‑assisted processing does not grant Hayrok ownership of customer data. Data usage is strictly limited to supporting platform functionality and customer workflows.</p>
                    </div>
-                   <div className="p-8 bg-white border border-slate-200 rounded-[2.5rem]">
-                      <Database className="text-hayrok-orange mb-6" size={32} />
-                      <h5 className="font-black text-slate-900 mb-4 uppercase tracking-tight">No Generalized Training</h5>
-                      <p className="text-sm leading-relaxed text-slate-500">Hayrok does not use customer data to train generalized AI models without explicit agreement. Every reasoning environment is logically isolated.</p>
-                   </div>
-                </div>
-              </div>
-            </motion.div>
-
-            <motion.div {...fadeInUp}>
-              <SectionHeader title="Model & Capability Evolution" id="evolution" />
-              <p className="text-lg text-slate-600 font-medium leading-relaxed mb-10">
-                Hayrok continuously evaluates AI capabilities to ensure they remain:
-              </p>
-              <div className="flex flex-wrap gap-4 mb-10">
-                 {["Aligned with regulatory guidance", "Consistent with customer expectations", "Transparent and controllable"].map((txt, i) => (
-                    <div key={i} className="px-6 py-3 bg-slate-50 border border-slate-200 rounded-xl text-xs font-black text-slate-900 uppercase tracking-widest">
-                       {txt}
-                    </div>
-                 ))}
-              </div>
-              <p className="text-sm text-slate-400 font-medium">
-                Any material changes to AI functionality are subject to internal review and customer communication.
-              </p>
-            </motion.div>
-
-            <motion.div {...fadeInUp}>
-              <SectionHeader title="Alignment With Industry Guidance" id="alignment" />
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                 {[
-                   { label: "Gartner AI Governance", icon: Layers },
-                   { label: "Gartner AI TRiSM", icon: Target },
-                   { label: "HITL System Design", icon: Users },
-                   { label: "AI Assurance & Oversight", icon: ShieldCheck }
-                 ].map((item, i) => (
-                    <div key={i} className="p-6 bg-white border border-slate-200 rounded-3xl text-center flex flex-col justify-center items-center">
-                       <item.icon className="mb-4 text-hayrok-orange" size={24} />
-                       <p className="text-[10px] font-black text-slate-900 uppercase tracking-widest leading-relaxed">{item.label}</p>
-                    </div>
-                 ))}
-              </div>
-            </motion.div>
-
-            <motion.div {...fadeInUp}>
-              <SectionHeader title="Customer Responsibilities" id="responsibilities" />
-              <p className="text-lg text-slate-600 font-medium leading-relaxed mb-10">
-                Customers are responsible for defining internal policies for AI‑assisted decision‑making and reviewing outputs to ensure alignment with their requirements.
-              </p>
-              <div className="grid sm:grid-cols-3 gap-6">
-                {[
-                  { title: "Define Policies", desc: "Setting the boundaries for AI-assisted decision workflows." },
-                  { title: "Review & Approve", desc: "Verifying and approving AI-assisted insights and outputs." },
-                  { title: "Compliance", desc: "Ensuring platform use aligns with regulatory obligations." }
-                ].map((item, i) => (
-                   <div key={i} className="p-8 bg-[#FBFBF9] border border-slate-200 rounded-[2rem] text-center">
-                      <div className="w-10 h-10 bg-white rounded-xl shadow-sm flex items-center justify-center text-hayrok-orange mx-auto mb-6">
-                         {i === 0 ? <Gavel size={20} /> : i === 1 ? <Eye size={20} /> : <ShieldCheck size={20} />}
-                      </div>
-                      <h5 className="font-black text-slate-900 mb-3 text-sm uppercase tracking-tight">{item.title}</h5>
-                      <p className="text-[10px] text-slate-500 font-bold leading-relaxed uppercase">{item.desc}</p>
-                   </div>
-                ))}
-              </div>
-              <p className="mt-10 text-xs text-slate-400 font-medium italic text-center">
-                Hayrok provides tools to support governance but does not assume customer decision authority.
-              </p>
-            </motion.div>
-
-            <motion.div {...fadeInUp}>
-              <SectionHeader title="Policy Updates & Contact" id="contact" />
-              <div className="bg-slate-50 border border-slate-200 rounded-[3rem] p-12 md:p-20 text-center">
-                 <div className="max-w-2xl mx-auto">
-                    <p className="text-lg text-slate-500 font-medium mb-12">
-                      This Responsible AI Use Policy may be updated as technologies, regulations, and best practices evolve. Material changes will be communicated through appropriate customer channels.
-                    </p>
-                    <div className="h-px w-20 bg-slate-200 mx-auto mb-12" />
-                    <h4 className="text-xl font-black text-slate-900 mb-6 uppercase tracking-tight">Contact Governance Team</h4>
-                    <p className="text-sm text-slate-500 font-bold mb-10 uppercase tracking-widest">trust@hayrok.com</p>
-                    <a href="mailto:trust@hayrok.com?subject=Responsible%20AI%20Use%20Policy" className="inline-flex items-center gap-3 bg-hayrok-orange text-white px-10 py-5 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-orange-600 transition-all shadow-xl shadow-orange-500/20">
-                       <Mail size={16} /> Email Trust Team
-                    </a>
-                 </div>
-              </div>
-            </motion.div>
-
-          </main>
-        </div>
-      </section>
-
-      {/* Signature Footer */}
-      <div className="h-32 flex items-center justify-center border-t border-slate-100 bg-white">
-         <p className="text-[11px] font-bold text-slate-300 uppercase tracking-[0.8em] text-center px-6 leading-relaxed max-w-5xl">
-            This Responsible AI Use Policy reflects Hayrok's commitment to accountable innovation and governed autonomy in enterprise security.
-         </p>
-      </div>
-    </div>
-  );
-};
-
-const Lock = ({ size, className }: { size: number, className?: string }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className={className}>
-    <rect width="18" height="11" x="3" y="11" rx="2" ry="2" />
-    <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-  </svg>
-);
+                   <div className="p-8 bg-white border border-slate-20

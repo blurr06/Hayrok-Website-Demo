@@ -1,5 +1,5 @@
 {
   "name": "Hayrok - Next Gen Pentesting",
-  "description": "Hayrok is a next-generation cybersecurity risk management platform featuring Hay-AI for automated pentesting and threat detection.",
+  "description": "Hayrok is a governed, AI-enabled security risk intelligence platform that helps organizations continuously identify, validate, and manage security exposure, turning fragmented security signals into auditable, decision-ready risk insights.",
   "requestFramePermissions": []
 }

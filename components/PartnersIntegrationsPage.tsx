@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
 import { 
@@ -47,7 +46,7 @@ export const PartnersIntegrationsPage: React.FC<PartnersIntegrationsPageProps> =
             <span className="bg-gradient-to-r from-hayrok-orange to-orange-400 bg-clip-text text-transparent italic tracking-tighter">Preserve Governance.</span>
           </h1>
           <p className="text-xl md:text-2xl text-slate-600 leading-relaxed font-medium max-w-4xl mx-auto">
-            Hayrok integrates with leading cloud, DevOps, and security platforms to ensure security intelligence flows end‑to‑end — without breaking governance, accountability, or auditability.
+            Hayrok integrates with leading cloud, DevOps, and security platforms to ensure security intelligence flows end-to-end - without breaking governance, accountability, or auditability.
           </p>
         </div>
       </section>
@@ -59,7 +58,7 @@ export const PartnersIntegrationsPage: React.FC<PartnersIntegrationsPageProps> =
           <div className="grid lg:grid-cols-2 gap-20 items-center relative z-10">
             <div>
               <h3 className="text-[10px] font-black text-hayrok-orange uppercase tracking-[0.5em] mb-8">The Integration Philosophy</h3>
-              <h4 className="text-4xl md:text-5xl font-black mb-8 tracking-tight">Signals to Decisions. <br/> <span className="text-hayrok-orange italic">Decisions to Outcomes.</span></h4>
+              <h4 className="text-4xl font-black mb-10 tracking-tight">Signals to Decisions. <br/> <span className="text-hayrok-orange italic">Decisions to Outcomes.</span></h4>
               <p className="text-lg text-slate-400 font-medium leading-relaxed mb-10">
                 Unlike traditional integrations that simply move data, Hayrok integrations connect signals to decisions, and decisions to outcomes. 
               </p>

@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
 import { 
@@ -69,7 +68,7 @@ const NewsCard = ({ category, title, desc, items, quote, icon: Icon, accent }: a
         <p className="text-xl font-black text-slate-900 italic leading-tight mb-4">
           “{quote.text}”
         </p>
-        <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">— {quote.author}</p>
+        <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">- {quote.author}</p>
       </div>
     )}
   </motion.div>
@@ -196,7 +195,7 @@ export const NewsroomPage: React.FC = () => {
           <NewsCard 
             category="Company Announcement"
             title="Hayrok Introduces Governed Agentic AI for Security"
-            desc="Hayrok announced the launch of its agentic AI security platform designed to be governed, accountable, and auditable by default — addressing a growing gap in enterprise and regulated environments."
+            desc="Hayrok announced the launch of its agentic AI security platform designed to be governed, accountable, and auditable by default - addressing a growing gap in enterprise and regulated environments."
             items={[
               "Continuous Threat Exposure Management (Hive)",
               "Autonomous security validation (Genesis)",
@@ -301,7 +300,7 @@ export const NewsroomPage: React.FC = () => {
       <section className="container mx-auto px-6 mb-48 relative z-10">
         <div className="max-w-4xl mx-auto text-center mb-24">
           <h2 className="text-[10px] font-black text-hayrok-orange uppercase tracking-[0.5em] mb-8">Breach Intelligence</h2>
-          <h3 className="text-4xl md:text-7xl font-black text-slate-900 mb-8 tracking-tight">Major Incidents — <br/><span className="text-hayrok-orange italic">Through a Risk Lens.</span></h3>
+          <h3 className="text-4xl md:text-7xl font-black text-slate-900 mb-8 tracking-tight">Major Incidents - <br/><span className="text-hayrok-orange italic">Through a Risk Lens.</span></h3>
           <p className="text-xl text-slate-600 font-medium leading-relaxed">
             We curate important disclosures not to sensationalize, but to highlight what actually failed, why it mattered, and how risk could have been reduced.
           </p>
@@ -313,7 +312,7 @@ export const NewsroomPage: React.FC = () => {
             category="Industry News"
             findings={["Exposed credentials", "Misconfigured cloud resources", "Inadequate validation of attack paths"]}
             impact="Exposure existed long before exploitation. Alerts were present, but exploitability was unclear. Risk was not validated end‑to‑end."
-            perspective="Security tools flagged issues — but no system validated the real attack path or tracked risk reduction over time."
+            perspective="Security tools flagged issues - but no system validated the real attack path or tracked risk reduction over time."
           />
           
           <BreachInsight 
@@ -328,7 +327,7 @@ export const NewsroomPage: React.FC = () => {
             title="Identity & Access Misuse Peaks"
             category="Industry Insight"
             findings={["Credential abuse", "Identity misconfiguration", "Privilege sprawl"]}
-            impact="Identity is often the bridge between exposure and impact — and yet remains poorly validated across traditional security tools."
+            impact="Identity is often the bridge between exposure and impact - and yet remains poorly validated across traditional security tools."
             perspective="Hay-AI maps the transitive trust of identities, proving exactly how a compromised key translates into business impact."
           />
         </div>
@@ -384,7 +383,7 @@ export const NewsroomPage: React.FC = () => {
         </motion.div>
         
         <div className="mt-20 space-y-4">
-          <p className="text-slate-400 font-black text-[11px] uppercase tracking-[0.8em]">Security news should inform better decisions — not just report failures.</p>
+          <p className="text-slate-400 font-black text-[11px] uppercase tracking-[0.8em]">Security news should inform better decisions - not just report failures.</p>
           <p className="text-hayrok-orange font-black text-lg italic tracking-tight">Hayrok exists to change the outcome of the next headline.</p>
         </div>
       </section>

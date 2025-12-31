@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
 import { 
@@ -224,7 +223,7 @@ export const PartnersPage: React.FC<PartnersPageProps> = ({ onNavigate }) => {
                     Integrations that connect <br/> <span className="text-hayrok-orange italic">decisions to outcomes.</span>
                   </h4>
                   <p className="text-xl text-slate-600 font-medium leading-relaxed mb-12">
-                    Integrations in Hayrok don’t just connect tools — they ensure risk intelligence flows across your stack while remaining governed and auditable.
+                    Integrations in Hayrok don't just connect tools - they ensure risk intelligence flows across your stack while remaining governed and auditable.
                   </p>
                   
                   <div className="flex flex-wrap gap-4">
@@ -332,7 +331,7 @@ export const PartnersPage: React.FC<PartnersPageProps> = ({ onNavigate }) => {
             </div>
           </div>
         </MotionDiv>
-        <p className="mt-12 text-center text-slate-400 font-black text-[10px] uppercase tracking-[0.5em]">Hayrok Partnerships — Built Together, with Trust at the Core.</p>
+        <p className="mt-12 text-center text-slate-400 font-black text-[10px] uppercase tracking-[0.5em]">Hayrok Partnerships - Built Together, with Trust at the Core.</p>
       </section>
 
       <div className="h-32"></div>
