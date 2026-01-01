@@ -350,7 +350,7 @@ function App() {
       case 'values': return <ValuesPrinciples />;
       case 'platform': return <PlatformPage onNavigate={setCurrentPage} />;
       case 'pricing': return <div className="pt-20"><PricingSection /><FinalCTA onNavigate={setCurrentPage} /></div>;
-      case 'industries': return <div className="pt-20"><IndustriesSection /><FinalCTA onNavigate={setCurrentPage} /></div>;
+      case 'industries': return <div className="pt-20"><IndustriesSection onNavigate={setCurrentPage} /><FinalCTA onNavigate={setCurrentPage} /></div>;
       case 'comparison': return <div className="pt-20"><ComparisonSection /><FinalCTA onNavigate={setCurrentPage} /></div>;
       case 'roi': return <div className="pt-20"><ROIMetrics /><FinalCTA onNavigate={setCurrentPage} /></div>;
       case 'home':

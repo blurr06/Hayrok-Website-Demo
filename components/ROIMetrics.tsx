@@ -9,13 +9,14 @@ import {
   Cpu, Lock, SearchCode as SearchCodeLucide, GitBranch, Layers,
   Terminal, Server, Globe, ShieldX,
   FileSearch, ClipboardCheck, History, HardDrive, Download,
-  Info
+  Info, Gavel, UserCheck, Scale, GitMerge, Package, RefreshCw
 } from 'lucide-react';
 
 // Cast motion elements to any to bypass type sync issues in this environment
 const MotionDiv = motion.div as any;
 const MotionCircle = motion.circle as any;
 const MotionSpan = motion.span as any;
+const MotionRect = motion.rect as any;
 
 const fadeInUp = {
   initial: { opacity: 0, y: 30 },
@@ -140,7 +141,7 @@ const SignalNoisePieChart = () => {
   );
 };
 
-const PipelineGate = ({ icon: Icon, label, status, color, delay = 0 }: any) => (
+const PipelineGate = ({ icon: Icon, label, status, delay = 0 }: any) => (
   <MotionDiv 
     initial={{ opacity: 0, scale: 0.9 }}
     whileInView={{ opacity: 1, scale: 1 }}
@@ -184,15 +185,202 @@ const GatedPipelineFlow = () => {
         </div>
 
         <div className="grid grid-cols-4 gap-4 relative z-10">
-          <PipelineGate icon={GitBranch} label="Ingest" status="active" color="orange" delay={0.1} />
-          <PipelineGate icon={SearchCodeIcon} label="Analyze" status="active" color="orange" delay={0.3} />
-          <PipelineGate icon={Target} label="Validate" status="active" color="orange" delay={0.5} />
-          <PipelineGate icon={ShieldCheck} label="Secure" status="active" color="orange" delay={0.7} />
+          <PipelineGate icon={GitBranch} label="Ingest" status="active" delay={0.1} />
+          <PipelineGate icon={SearchCodeIcon} label="Analyze" status="active" delay={0.3} />
+          <PipelineGate icon={Target} label="Validate" status="active" delay={0.5} />
+          <PipelineGate icon={ShieldCheck} label="Secure" status="active" delay={0.7} />
         </div>
       </div>
     </div>
   );
 };
+
+const AuditReadinessMeter = () => {
+  const [level, setLevel] = useState(85);
+  
+  return (
+    <div className="w-full flex flex-col items-center">
+      <div className="w-full flex items-center justify-between mb-12">
+        <div>
+          <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.3em] mb-1">Compliance Health</p>
+          <h4 className="text-xl font-black text-slate-900 tracking-tight">Audit Readiness</h4>
+        </div>
+        <div className="px-4 py-2 bg-emerald-50 border border-emerald-100 rounded-xl">
+          <span className="text-[10px] font-black text-emerald-600 uppercase tracking-widest">Continuous Compliance</span>
+        </div>
+      </div>
+
+      <div className="relative w-full max-w-[280px] aspect-[2/1] overflow-hidden mb-8">
+        <svg viewBox="0 0 100 50" className="w-full h-full">
+          <path d="M10,45 A40,40 0 0,1 90,45" fill="none" stroke="#E2E8F0" strokeWidth="8" strokeLinecap="round" />
+          <MotionDiv
+            as="path"
+            d="M10,45 A40,40 0 0,1 90,45"
+            fill="none"
+            stroke="#FF5F00"
+            strokeWidth="8"
+            strokeLinecap="round"
+            strokeDasharray="125.6"
+            initial={{ strokeDashoffset: 125.6 }}
+            whileInView={{ strokeDashoffset: 125.6 * (1 - level / 100) }}
+            transition={{ duration: 2, ease: "easeOut" }}
+          />
+        </svg>
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 text-center">
+          <span className="text-5xl font-black text-slate-900 tabular-nums leading-none">{level}%</span>
+          <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mt-2">Governance Score</p>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-2 gap-4 w-full">
+         <div className="p-4 bg-white border border-slate-100 rounded-2xl flex flex-col items-center">
+            <span className="text-[9px] font-black text-slate-400 uppercase mb-1">Pre-Hayrok</span>
+            <span className="text-lg font-black text-slate-400">22%</span>
+         </div>
+         <div className="p-4 bg-white border border-hayrok-orange/20 rounded-2xl flex flex-col items-center shadow-lg shadow-orange-500/5">
+            <span className="text-[9px] font-black text-hayrok-orange uppercase mb-1">With Hive</span>
+            <span className="text-lg font-black text-hayrok-orange">85%</span>
+         </div>
+      </div>
+    </div>
+  );
+};
+
+const DecisionAuditTimeline = () => {
+  return (
+    <div className="w-full h-full flex flex-col">
+      <div className="flex items-center justify-between mb-10">
+        <div>
+          <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.3em] mb-1">Traceability Hub</p>
+          <h4 className="text-xl font-black text-slate-900 tracking-tight">Decision Audit Lineage</h4>
+        </div>
+      </div>
+
+      <div className="space-y-4 relative">
+        <div className="absolute left-[27px] top-4 bottom-4 w-px bg-slate-100" />
+        
+        {[
+          { label: "Finding Ingested", icon: Database, color: "text-slate-400", time: "T+0m", detail: "Telemetry from CloudSentry normalized" },
+          { label: "Recursive Reasoning", icon: Cpu, color: "text-indigo-500", time: "T+2m", detail: "Hay-AI builds attack graph paths" },
+          { label: "Genesis Validation", icon: Zap, color: "text-hayrok-orange", time: "T+8m", detail: "Controlled exploit probe proves risk" },
+          { label: "Policy Decision", icon: Gavel, color: "text-emerald-500", time: "T+10m", detail: "OPA Gate 'Reject-Insecure-Build' applied" }
+        ].map((step, i) => (
+          <MotionDiv 
+            key={i}
+            initial={{ opacity: 0, x: -10 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ delay: i * 0.15 }}
+            className="flex items-start gap-5 relative z-10"
+          >
+            <div className={`w-14 h-14 rounded-2xl bg-white border border-slate-100 flex items-center justify-center shadow-sm group hover:border-hayrok-orange transition-all shrink-0`}>
+               <step.icon size={20} className={step.color} />
+            </div>
+            <div className="flex-1 pt-1 pb-4 border-b border-slate-50 last:border-0">
+               <div className="flex justify-between items-center mb-1">
+                  <h5 className="text-[11px] font-black text-slate-900 uppercase tracking-tight">{step.label}</h5>
+                  <span className="text-[9px] font-black text-slate-400">{step.time}</span>
+               </div>
+               <p className="text-[10px] font-medium text-slate-500">{step.detail}</p>
+            </div>
+          </MotionDiv>
+        ))}
+      </div>
+      
+      <button className="mt-8 w-full py-4 bg-slate-900 rounded-2xl text-white font-black text-[10px] uppercase tracking-widest flex items-center justify-center gap-3 hover:bg-hayrok-orange transition-all">
+         <History size={14} /> Export Audit Replay (PDF)
+      </button>
+    </div>
+  );
+};
+
+// --- New Software Lifecycle ROI Visualizations ---
+
+const ReleaseGateImpactChart = () => {
+  const categories = ['Discovery', 'Prioritization', 'Validation', 'Mobilization'];
+  const before = [120, 80, 240, 300]; // Minutes
+  const after = [5, 2, 8, 15]; // Minutes
+
+  return (
+    <div className="w-full flex flex-col">
+      <div className="flex items-center justify-between mb-10">
+        <div>
+          <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.3em] mb-1">Velocity Metrics</p>
+          <h4 className="text-xl font-black text-slate-900 tracking-tight">Cycle Time (Min)</h4>
+        </div>
+      </div>
+
+      <div className="space-y-6">
+        {categories.map((cat, i) => (
+          <div key={i} className="space-y-2">
+            <div className="flex justify-between text-[10px] font-black uppercase tracking-widest text-slate-400">
+               <span>{cat}</span>
+               <span className="text-hayrok-orange">95% faster</span>
+            </div>
+            <div className="relative h-6 bg-slate-100 rounded-lg overflow-hidden flex items-center">
+               <MotionDiv 
+                 initial={{ width: 0 }}
+                 whileInView={{ width: '85%' }}
+                 transition={{ duration: 1, delay: i * 0.1 }}
+                 className="absolute inset-y-0 left-0 bg-slate-300 opacity-40"
+               />
+               <MotionDiv 
+                 initial={{ width: 0 }}
+                 whileInView={{ width: '4%' }}
+                 transition={{ duration: 1, delay: 0.5 + i * 0.1 }}
+                 className="absolute inset-y-1 left-1 bg-hayrok-orange rounded shadow-lg shadow-orange-500/20"
+               />
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+const ShiftLeftVulnerabilityChart = () => {
+  return (
+    <div className="w-full flex flex-col h-full">
+      <div className="flex items-center justify-between mb-12">
+        <div>
+          <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.3em] mb-1">Shift-Left ROI</p>
+          <h4 className="text-xl font-black text-slate-900 tracking-tight">Risk Detection Distribution</h4>
+        </div>
+      </div>
+
+      <div className="flex-1 flex items-end justify-between gap-4 px-4 h-[180px]">
+        {[
+          { label: "IDE/Code", val: 40, color: "bg-orange-400" },
+          { label: "CI Pipeline", val: 35, color: "bg-hayrok-orange" },
+          { label: "Pre-Prod", val: 20, color: "bg-orange-700" },
+          { label: "Production", val: 5, color: "bg-slate-900" }
+        ].map((bar, i) => (
+          <div key={i} className="flex-1 flex flex-col items-center gap-4 group cursor-help">
+            <div className="relative w-full flex flex-col items-center justify-end">
+              <MotionDiv 
+                initial={{ height: 0 }}
+                whileInView={{ height: `${bar.val * 2}px` }}
+                transition={{ duration: 1, delay: i * 0.15 }}
+                className={`w-full max-w-[40px] ${bar.color} rounded-t-xl group-hover:brightness-110 transition-all shadow-xl`}
+              />
+              <div className="absolute -top-8 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                 <span className="text-xs font-black text-slate-900">{bar.val}% Detected</span>
+              </div>
+            </div>
+            <span className="text-[9px] font-black text-slate-400 uppercase text-center leading-none">{bar.label}</span>
+          </div>
+        ))}
+      </div>
+      <div className="mt-10 p-4 bg-orange-50 border border-orange-100 rounded-2xl flex items-center gap-3">
+         <Sparkles size={16} className="text-hayrok-orange" />
+         <p className="text-[10px] font-bold text-slate-600">
+           Automated gates catch 95% of exploitable paths before deployment.
+         </p>
+      </div>
+    </div>
+  );
+};
+
+// --- Standard UI Components ---
 
 const MetricComparison = ({ label, before, after, icon: Icon, unit = "" }: any) => (
   <div className="flex flex-col gap-4 p-6 bg-slate-50 border border-slate-200 rounded-3xl group hover:bg-white hover:shadow-xl transition-all duration-500">
@@ -283,6 +471,7 @@ export const ROIMetrics: React.FC = () => {
       </section>
 
       <section className="container mx-auto px-6 relative z-10">
+        {/* Risk Reduction ROI */}
         <ROICard 
           title="Risk Reduction ROI"
           tagline="The Genesis Flow"
@@ -293,13 +482,14 @@ export const ROIMetrics: React.FC = () => {
             { label: "Fix Time", before: "Weeks", after: "Days", icon: Clock }
           ]}
           outcomes={[
-            "35–50% reduction in critical risk in 90 days",
-            "2–3x faster risk containment",
+            "35-50% reduction in critical risk in 90 days",
+            "2-3x faster risk containment",
             "Eliminating noise from static scan results"
           ]}
           visualization={<GatedPipelineFlow />}
         />
 
+        {/* Operational ROI */}
         <ROICard 
           title="Operational ROI"
           tagline="Team Productivity"
@@ -310,11 +500,59 @@ export const ROIMetrics: React.FC = () => {
             { label: "Tracking", before: "Static", after: "Continuous", icon: History }
           ]}
           outcomes={[
-            "40–60% reduction in manual triage time",
+            "40-60% reduction in manual triage time",
             "Evidence-backed findings for teams",
             "Autonomous retesting of fix effectiveness"
           ]}
           visualization={<SignalNoisePieChart />}
+        />
+
+        {/* Software Lifecycle ROI - NEW SECTION */}
+        <ROICard 
+          title="Software Lifecycle ROI"
+          tagline="Secure Velocity"
+          icon={Rocket}
+          metrics={[
+            { label: "Security Gates", before: "Manual", after: "Automated", icon: GitMerge },
+            { label: "Gate Bypass", before: "Frequent", after: "Zero", icon: ShieldX },
+            { label: "Release Delay", before: "Days", after: "Seconds", icon: RefreshCw }
+          ]}
+          outcomes={[
+            "90% reduction in security-related release delays",
+            "Zero insecure builds reaching production targets",
+            "10x improvement in remediation cost by shifting left"
+          ]}
+          visualization={
+            <div className="w-full space-y-12">
+               <ReleaseGateImpactChart />
+               <div className="h-px w-full bg-slate-200" />
+               <ShiftLeftVulnerabilityChart />
+            </div>
+          }
+        />
+
+        {/* Audit & Compliance ROI */}
+        <ROICard 
+          title="Audit & Compliance ROI"
+          tagline="Governed Evidence"
+          icon={Gavel}
+          metrics={[
+            { label: "Audit Prep", before: "Months", after: "Minutes", icon: ClipboardCheck },
+            { label: "Evidence Quality", before: "Static", after: "Traceable", icon: FileCheck },
+            { label: "Compliance Risk", before: "Hidden", after: "Mapped", icon: Scale }
+          ]}
+          outcomes={[
+            "70% reduction in compliance review preparation time",
+            "Real-time lineage for every risk decision",
+            "Machine-readable evidence artifacts for regulators"
+          ]}
+          visualization={
+            <div className="w-full space-y-12">
+               <AuditReadinessMeter />
+               <div className="h-px w-full bg-slate-200" />
+               <DecisionAuditTimeline />
+            </div>
+          }
         />
       </section>
 

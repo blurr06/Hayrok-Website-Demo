@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
 import { 
@@ -69,7 +68,11 @@ const IndustryCard = ({ icon: Icon, title, tagline, challenges, helps, accent }:
   </MotionDiv>
 );
 
-export const IndustriesSection: React.FC = () => {
+interface IndustriesSectionProps {
+  onNavigate?: (page: string) => void;
+}
+
+export const IndustriesSection: React.FC<IndustriesSectionProps> = ({ onNavigate }) => {
   return (
     <div className="bg-white min-h-screen pb-32 overflow-x-hidden">
       {/* Blended Background Mesh */}
@@ -97,7 +100,10 @@ export const IndustriesSection: React.FC = () => {
                 Hayrok supports organizations where trust is non-negotiable — providing accurate, explainable, and defensible security decisions.
               </p>
               <div className="flex gap-4">
-                <button className="bg-hayrok-orange text-white px-8 py-4 rounded-2xl font-black text-sm uppercase tracking-widest shadow-xl shadow-orange-500/20 hover:scale-105 transition-transform">
+                <button 
+                  onClick={() => onNavigate?.('contact')}
+                  className="bg-hayrok-orange text-white px-8 py-4 rounded-2xl font-black text-sm uppercase tracking-widest shadow-xl shadow-orange-500/20 hover:scale-105 transition-transform"
+                >
                   Get Started
                 </button>
                 <button className="bg-white text-slate-900 border border-slate-200 px-8 py-4 rounded-2xl font-black text-sm uppercase tracking-widest hover:bg-slate-50 transition-colors">
@@ -239,7 +245,10 @@ export const IndustriesSection: React.FC = () => {
                   </div>
                 ))}
               </div>
-              <button className="bg-white text-hayrok-dark px-10 py-5 rounded-2xl font-black text-sm uppercase tracking-widest hover:bg-hayrok-orange hover:text-white transition-all">
+              <button 
+                onClick={() => onNavigate?.('demo')}
+                className="bg-white text-hayrok-dark px-10 py-5 rounded-2xl font-black text-sm uppercase tracking-widest hover:bg-hayrok-orange hover:text-white transition-all"
+              >
                 Explore Use Cases
               </button>
             </div>
@@ -259,10 +268,16 @@ export const IndustriesSection: React.FC = () => {
             Whether you operate in financial services, healthcare, or SaaS, Hayrok adapts to your specific constraints — responsibly.
           </p>
           <div className="flex flex-col sm:flex-row justify-center items-center gap-6">
-            <button className="w-full sm:w-auto bg-hayrok-orange text-white px-12 py-6 rounded-2xl text-xl font-black hover:bg-orange-600 transition-all transform hover:scale-105 shadow-2xl shadow-orange-500/30">
+            <button 
+              onClick={() => onNavigate?.('early-adopter')}
+              className="w-full sm:w-auto bg-hayrok-orange text-white px-12 py-6 rounded-2xl text-xl font-black hover:bg-orange-600 transition-all transform hover:scale-105 shadow-2xl shadow-orange-500/30"
+            >
               Request Early Access
             </button>
-            <button className="w-full sm:w-auto px-12 py-6 rounded-2xl text-xl font-black text-slate-900 border border-slate-200 hover:bg-slate-50 transition-all bg-white shadow-sm flex items-center justify-center gap-3 group/btn">
+            <button 
+              onClick={() => onNavigate?.('contact')}
+              className="w-full sm:w-auto px-12 py-6 rounded-2xl text-xl font-black text-slate-900 border border-slate-200 hover:bg-slate-50 transition-all bg-white shadow-sm flex items-center justify-center gap-3 group/btn"
+            >
               Talk to Security Team
             </button>
           </div>
