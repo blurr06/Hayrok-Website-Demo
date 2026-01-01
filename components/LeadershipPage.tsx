@@ -29,16 +29,8 @@ const staggerContainer = {
   }
 };
 
-const ProfileCard = ({ name, role, bio, image, initials, fileName }: { name: string, role: string, bio: string, image: string, initials: string, fileName: string }) => {
+const ProfileCard = ({ name, role, bio, image, initials }: { name: string, role: string, bio: string, image: string, initials: string }) => {
   const [imageError, setImageError] = useState(false);
-  const [imgSrc, setImgSrc] = useState(image);
-
-  const handleImageError = () => {
-    // If the first attempt fails (e.g. /image.png), try checking if the server needs it without the slash or vice versa, 
-    // but ultimately fail gracefully to the fallback.
-    // For now, we just show the fallback to keep it clean.
-    setImageError(true);
-  };
 
   return (
     /* Use MotionDiv cast to any to fix type error on variants prop */
@@ -47,18 +39,17 @@ const ProfileCard = ({ name, role, bio, image, initials, fileName }: { name: str
       className="bg-white border border-slate-200 rounded-[3rem] p-8 md:p-12 hover:border-hayrok-orange/30 transition-all duration-500 hover:shadow-2xl group"
     >
       <div className="flex flex-col md:flex-row gap-10 items-start md:items-center mb-10">
-        <div className="w-32 h-32 rounded-[2.2rem] overflow-hidden bg-slate-100 shrink-0 border-4 border-slate-50 shadow-xl group-hover:shadow-hayrok-orange/10 transition-all duration-500 flex items-center justify-center relative">
+        <div className="w-32 h-32 rounded-[2.2rem] overflow-hidden bg-slate-900 shrink-0 border-4 border-slate-50 shadow-xl group-hover:shadow-hayrok-orange/10 transition-all duration-500 flex items-center justify-center relative">
           {!imageError ? (
             <img 
-              src={imgSrc} 
+              src={image} 
               alt={name} 
-              onError={handleImageError}
+              onError={() => setImageError(true)}
               className="w-full h-full object-cover group-hover:scale-105 transition-all duration-700" 
             />
           ) : (
-            <div className="w-full h-full bg-slate-900 flex flex-col items-center justify-center text-white p-2 text-center">
-              <span className="text-2xl font-black tracking-widest mb-1">{initials}</span>
-              <span className="text-[7px] text-slate-400 font-mono leading-tight uppercase tracking-wide">Check<br/>{fileName}</span>
+            <div className="w-full h-full flex flex-col items-center justify-center text-white p-2 text-center">
+              <span className="text-3xl font-black tracking-widest">{initials}</span>
             </div>
           )}
         </div>
@@ -79,10 +70,10 @@ interface LeadershipPageProps {
 }
 
 export const LeadershipPage: React.FC<LeadershipPageProps> = ({ onNavigate }) => {
-  // We use a timestamp to bust the browser cache in case the user previously got a 404.
-  // This ensures that as soon as they upload the file, the browser tries to fetch it again.
+  // We use a timestamp to help the browser find the new file if it was recently added
   const cacheBuster = useMemo(() => new Date().getTime(), []);
   
+  // Note: In Vite/React, files in /public are accessed at the root path '/'
   const herberthPhoto = `/herberth.png?t=${cacheBuster}`; 
   const ebukaPhoto = `/ebuka.png?t=${cacheBuster}`;
 
@@ -197,7 +188,6 @@ export const LeadershipPage: React.FC<LeadershipPageProps> = ({ onNavigate }) =>
             role="Founder & Chief Executive Officer"
             image={herberthPhoto}
             initials="HO"
-            fileName="herberth.png"
             bio="Herberth Oshiemele is a cybersecurity professional with extensive experience in application security, enterprise security operations, and risk management. As Founder and CEO, he is responsible for Hayrok’s overall strategy, execution, and alignment with enterprise security and governance requirements."
           />
           <ProfileCard 
@@ -205,7 +195,6 @@ export const LeadershipPage: React.FC<LeadershipPageProps> = ({ onNavigate }) =>
             role="Co‑Founder & Chief Product Officer"
             image={ebukaPhoto}
             initials="EI"
-            fileName="ebuka.png"
             bio="Ebuka Igwegbe is an AI and product leader with experience in applied AI, machine learning, and enterprise software development. As Co‑Founder and CPO, he leads Hayrok’s product strategy and roadmap, with a focus on delivering AI‑driven capabilities that support transparency, control, and enterprise usability."
           />
         </MotionDiv>
