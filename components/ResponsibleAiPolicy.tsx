@@ -5,7 +5,7 @@ import {
   Scale, FileText, CheckCircle2, Info, 
   ArrowRight, Mail, Sparkles, History,
   Database, Zap, Target, Layers, ShieldAlert, Users,
-  ListChecks, Workflow, AlertCircle, Terminal
+  ListChecks, Workflow, AlertCircle, Terminal, Lock
 } from 'lucide-react';
 import { IntelligenceFabric } from './IntelligenceFabric';
 
@@ -308,4 +308,76 @@ export const ResponsibleAiPolicy: React.FC<{ onNavigate?: (page: string) => void
                       <h5 className="font-black text-slate-900 mb-4 uppercase tracking-tight">Access & Ownership</h5>
                       <p className="text-sm leading-relaxed text-slate-500">AI‑assisted processing does not grant Hayrok ownership of customer data. Data usage is strictly limited to supporting platform functionality and customer workflows.</p>
                    </div>
-                   <div className="p-8 bg-white border border-slate-20
+                   <div className="p-8 bg-white border border-slate-200 rounded-[2.5rem]">
+                      <Database className="text-indigo-500 mb-6" size={32} />
+                      <h5 className="font-black text-slate-900 mb-4 uppercase tracking-tight">Data Isolation</h5>
+                      <p className="text-sm leading-relaxed text-slate-500">Customer data is processed within isolated tenant contexts. We do not use customer data to train global shared models without explicit, opt-in consent.</p>
+                   </div>
+                </div>
+              </div>
+            </motion.div>
+
+            <motion.div {...fadeInUp}>
+              <SectionHeader title="Model Evolution" id="evolution" />
+              <p className="text-lg text-slate-600 font-medium leading-relaxed">
+                Hayrok continuously evaluates and refines its AI capabilities. Updates to reasoning models are tested for safety, accuracy, and bias reduction before deployment. Significant changes to AI functionality are communicated to customers in alignment with our change management policies.
+              </p>
+            </motion.div>
+
+            <motion.div {...fadeInUp}>
+              <SectionHeader title="Industry Alignment" id="alignment" />
+              <p className="text-lg text-slate-600 font-medium leading-relaxed mb-8">
+                Our approach is informed by emerging standards for AI risk management, including:
+              </p>
+              <div className="grid sm:grid-cols-3 gap-6">
+                 {["NIST AI RMF", "ISO/IEC 42001", "EU AI Act Principles"].map((std, i) => (
+                    <div key={i} className="p-6 bg-slate-50 border border-slate-100 rounded-2xl text-center">
+                       <span className="text-sm font-black text-slate-800">{std}</span>
+                    </div>
+                 ))}
+              </div>
+            </motion.div>
+
+            <motion.div {...fadeInUp}>
+              <SectionHeader title="Responsibilities" id="responsibilities" />
+              <div className="p-10 bg-white border border-slate-200 rounded-[3rem]">
+                 <div className="grid md:grid-cols-2 gap-12">
+                    <div>
+                       <h5 className="font-black text-hayrok-orange mb-4 uppercase tracking-widest text-xs">Hayrok Responsibilities</h5>
+                       <ul className="space-y-3">
+                          <li className="text-sm font-bold text-slate-700 flex gap-3"><CheckCircle2 size={16} className="text-hayrok-orange shrink-0" /> Ensuring AI system safety and reliability.</li>
+                          <li className="text-sm font-bold text-slate-700 flex gap-3"><CheckCircle2 size={16} className="text-hayrok-orange shrink-0" /> Maintaining transparency about AI use.</li>
+                          <li className="text-sm font-bold text-slate-700 flex gap-3"><CheckCircle2 size={16} className="text-hayrok-orange shrink-0" /> Protecting customer data privacy.</li>
+                       </ul>
+                    </div>
+                    <div>
+                       <h5 className="font-black text-slate-400 mb-4 uppercase tracking-widest text-xs">Customer Responsibilities</h5>
+                       <ul className="space-y-3">
+                          <li className="text-sm font-bold text-slate-700 flex gap-3"><CheckCircle2 size={16} className="text-slate-400 shrink-0" /> Reviewing and approving AI recommendations.</li>
+                          <li className="text-sm font-bold text-slate-700 flex gap-3"><CheckCircle2 size={16} className="text-slate-400 shrink-0" /> Configuring policies to match risk tolerance.</li>
+                          <li className="text-sm font-bold text-slate-700 flex gap-3"><CheckCircle2 size={16} className="text-slate-400 shrink-0" /> Ensuring authorized use of the platform.</li>
+                       </ul>
+                    </div>
+                 </div>
+              </div>
+            </motion.div>
+
+            <div className="pt-20 border-t border-slate-200 text-center">
+               <p className="text-lg font-bold text-slate-900 mb-6">Questions about our AI governance?</p>
+               <a href="mailto:trust@hayrok.com" className="inline-flex items-center gap-3 px-8 py-4 bg-slate-900 text-white rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-hayrok-orange transition-all">
+                  Contact Trust & Safety <Mail size={16} />
+               </a>
+            </div>
+
+          </main>
+        </div>
+      </section>
+
+      <div className="h-32 flex items-center justify-center border-t border-slate-100 bg-[#FCFCFA]">
+         <p className="text-[11px] font-bold text-slate-300 uppercase tracking-[0.8em] text-center px-6 leading-relaxed max-w-5xl">
+            This policy is reviewed annually by Hayrok’s Trust & Safety Committee. Last updated: October 2024.
+         </p>
+      </div>
+    </div>
+  );
+};
