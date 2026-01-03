@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { CheckCircle2, Shield } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -17,7 +16,9 @@ const BrandIcons: Record<string, React.ReactNode> = {
     <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/azure/azure-original.svg" alt="Azure AD" className="w-full h-full object-contain" />
   ),
   GitHub: (
-    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/github/github-original.svg" alt="GitHub" className="w-full h-full object-contain invert dark:invert-0" />
+    <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full text-white">
+      <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.05-.015-2.07-3.33.72-4.035-1.605-4.035-1.605-.54-1.38-1.335-1.755-1.335-1.755-1.08-.735.09-.72.09-.72 1.2.075 1.83 1.23 1.83 1.23 1.065 1.815 2.805 1.29 3.495.99.105-.78.42-1.29.765-1.59-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.61-5.475 5.91.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.285 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+    </svg>
   ),
   GitLab: (
     <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/gitlab/gitlab-original.svg" alt="GitLab" className="w-full h-full object-contain" />
@@ -85,7 +86,19 @@ const integrations = [
   { name: "ServiceNow", id: "ServiceNow" },
   { name: "AWS", id: "AWS" },
   { name: "GCP", id: "GCP" },
-  { name: "Jenkins", id: "Jenkins" }
+  { name: "Jenkins", id: "Jenkins" },
+  { name: "Splunk", id: "Splunk" },
+  { name: "Elastic", id: "Elastic" },
+  { name: "Vanta", id: "Vanta" },
+  { name: "AuditBoard", id: "AuditBoard" },
+  { name: "Drata", id: "Drata" },
+  { name: "Datadog", id: "Datadog" },
+  { name: "Sentinel", id: "Sentinel" },
+  { name: "Docker", id: "Docker" },
+  { name: "Kubernetes", id: "Kubernetes" },
+  { name: "Bitbucket", id: "Bitbucket" },
+  { name: "ArgoCD", id: "ArgoCD" },
+  { name: "Harness", id: "Harness" }
 ];
 
 export const IntegrationsSection: React.FC<{ condensed?: boolean }> = ({ condensed = false }) => {
@@ -141,7 +154,7 @@ export const IntegrationsSection: React.FC<{ condensed?: boolean }> = ({ condens
                    {/* Card inner glow */}
                    <div className="absolute inset-0 bg-gradient-to-br from-hayrok-orange/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                    
-                   <div className="w-10 h-10 flex items-center justify-center opacity-100 group-hover:scale-110 transition-all duration-500 relative z-10">
+                   <div className="w-10 h-10 flex items-center justify-center opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500 relative z-10">
                       {BrandIcons[item.id] || <Shield className="text-slate-500" />}
                    </div>
                    <span className="text-[8px] font-black uppercase tracking-[0.2em] text-slate-500 group-hover:text-hayrok-orange transition-colors duration-300 relative z-10">

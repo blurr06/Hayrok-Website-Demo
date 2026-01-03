@@ -129,7 +129,7 @@ export const CodeFabricsPage: React.FC<{ onNavigate?: (page: string) => void }> 
             {...fadeInUp}
             className="text-xl md:text-3xl text-slate-500 leading-relaxed max-w-4xl mx-auto font-medium mb-12"
           >
-            CodeFabrics is Hayrok’s application and software supply-chain exposure capability. It helps organizations understand, prioritize, and validate risk across modern applications—without replacing your existing AppSec stack.
+            CodeFabrics is Hayrok's application and software supply-chain exposure capability. It helps organizations understand, prioritize, and validate risk across modern applications - without replacing your existing AppSec stack.
           </motion.p>
 
           <motion.div {...fadeInUp} className="flex flex-col sm:flex-row items-center justify-center gap-6">
@@ -153,7 +153,7 @@ export const CodeFabricsPage: React.FC<{ onNavigate?: (page: string) => void }> 
             <motion.div {...fadeInUp}>
               <h2 className="text-sm font-bold text-hayrok-orange uppercase tracking-[0.4em] mb-6">The Triage Crisis</h2>
               <h3 className="text-4xl md:text-7xl font-black text-slate-900 mb-8 leading-[1.05] tracking-tight uppercase">
-                AppSec Doesn’t Lack Findings. <br/>
+                AppSec Doesn't Lack Findings. <br/>
                 <span className="text-slate-400 italic">It Lacks Decision Support.</span>
               </h3>
               <p className="text-xl text-slate-600 font-medium leading-relaxed mb-10">
@@ -179,7 +179,7 @@ export const CodeFabricsPage: React.FC<{ onNavigate?: (page: string) => void }> 
             <div className="relative">
                <PipelineVisualizer />
                <div className="mt-12 p-8 bg-white border border-slate-200 rounded-[3rem] shadow-sm italic text-slate-500 font-medium text-center">
-                "CodeFabrics addresses these challenges by acting as a unifying exposure and governance layer—not another scanner."
+                "CodeFabrics addresses these challenges by acting as a unifying exposure and governance layer - not another scanner."
               </div>
             </div>
           </div>
@@ -289,7 +289,7 @@ export const CodeFabricsPage: React.FC<{ onNavigate?: (page: string) => void }> 
                    <span className="text-[10px] font-black text-slate-300 uppercase tracking-widest">{pillar.tag}</span>
                 </div>
                 <h4 className="text-2xl font-black text-slate-900 mb-4 tracking-tight leading-tight uppercase">{pillar.t}</h4>
-                <p className="text-slate-500 text-sm font-medium leading-relaxed flex-1">{pillar.d}</p>
+                <p className="text-slate-500 text-sm font-medium leading-relaxed mb-8 flex-1">{pillar.d}</p>
               </motion.div>
             ))}
           </div>
@@ -324,7 +324,7 @@ export const CodeFabricsPage: React.FC<{ onNavigate?: (page: string) => void }> 
                   </div>
                </motion.div>
 
-               <div className="bg-slate-900 rounded-[4rem] p-12 text-white relative overflow-hidden shadow-2xl h-[500px] flex flex-col items-center justify-center text-center">
+               <div className="bg-slate-900 rounded-[4rem] p-12 text-white relative overflow-hidden shadow-2xl h-[500px] flex flex-col items-center justify-center text-center shadow-2xl">
                   <div className="absolute inset-0 bg-grid-white opacity-5" />
                   <div className="relative z-10 max-w-sm">
                      <p className="text-3xl font-black italic mb-10 leading-tight">“One normalized data model. <span className="text-hayrok-orange">Unified governance.</span> Multiple scanner sources.”</p>
@@ -364,9 +364,9 @@ export const CodeFabricsPage: React.FC<{ onNavigate?: (page: string) => void }> 
                   <div className="w-16 h-16 bg-orange-50 text-hayrok-orange rounded-2xl flex items-center justify-center mb-10 group-hover:scale-110 transition-transform">
                      <Zap size={32} />
                   </div>
-                  <h4 className="text-3xl font-black text-slate-900 mb-6 uppercase tracking-tight">Validation‑Driven Support</h4>
+                  <h4 className="text-3xl font-black text-slate-900 mb-6 uppercase tracking-tight">Validation-Driven Support</h4>
                   <p className="text-xl text-slate-500 font-medium leading-relaxed mb-8">
-                     Direct integration with Genesis enables controlled, BAS‑aligned validation. Confirm whether vulnerabilities are actually exploitable under current conditions.
+                     Direct integration with Genesis enables controlled, BAS-aligned validation. Confirm whether vulnerabilities are actually exploitable under current conditions.
                   </p>
                   <div className="h-1 w-full bg-slate-100 rounded-full overflow-hidden">
                      <motion.div initial={{ width: 0 }} whileInView={{ width: '100%' }} transition={{ duration: 1.5, delay: 0.2 }} className="h-full bg-hayrok-orange" />
@@ -398,7 +398,7 @@ export const CodeFabricsPage: React.FC<{ onNavigate?: (page: string) => void }> 
                           Defensible <br/> <span className="text-hayrok-orange italic font-light lowercase">AppSec</span> <br/> Decisions.
                         </h3>
                         <p className="text-xl md:text-2xl text-slate-400 font-medium leading-relaxed mb-20 max-w-2xl">
-                          All CodeFabrics findings flow into Hive, Hayrok’s system of record. Ensure application risk decisions are traceable, reviewable, and audit‑ready.
+                          All CodeFabrics findings flow into Hive, Hayrok's system of record. Ensure application risk decisions are traceable, reviewable, and audit-ready.
                         </p>
                         
                         <div className="grid sm:grid-cols-2 gap-10">
@@ -452,7 +452,7 @@ export const CodeFabricsPage: React.FC<{ onNavigate?: (page: string) => void }> 
             <div className="text-center max-w-4xl mx-auto mb-24">
                <h2 className="text-sm font-bold text-hayrok-orange uppercase tracking-[0.4em] mb-6">Framework Alignment</h2>
                <h3 className="text-4xl md:text-7xl font-black text-slate-900 tracking-tight leading-none uppercase">The CTEM <br/><span className="text-hayrok-orange italic">Lifecycle.</span></h3>
-               <p className="text-xl text-slate-500 font-medium mt-10">AppSec operating as a first‑class input to enterprise exposure management:</p>
+               <p className="text-xl text-slate-500 font-medium mt-10">AppSec operating as a first-class input to enterprise exposure management:</p>
             </div>
 
             <div className="grid md:grid-cols-4 gap-4">
@@ -534,7 +534,7 @@ export const CodeFabricsPage: React.FC<{ onNavigate?: (page: string) => void }> 
                   See how CodeFabrics helps turn application findings into governed, validated risk decisions as part of the Hayrok platform.
                </p>
                <div className="flex flex-col md:flex-row justify-center items-stretch gap-6">
-                 <button onClick={() => onNavigate?.('demo')} className="bg-hayrok-orange text-white px-16 py-8 rounded-[2rem] text-2xl font-black hover:bg-orange-600 transition-all transform hover:scale-105 shadow-2xl shadow-orange-500/30">
+                 <button onClick={() => onNavigate?.('demo')} className="bg-hayrok-orange text-white px-16 py-8 rounded-[2rem] text-2xl font-black hover:bg-orange-600 transition-all transform hover:scale-105 shadow-2xl shadow-orange-500/20">
                     Request a Demo
                  </button>
                  <button onClick={() => onNavigate?.('platform')} className="px-16 py-8 rounded-[2rem] text-2xl font-black text-slate-900 border border-slate-200 hover:bg-slate-50 transition-all bg-white shadow-sm flex items-center justify-center gap-4 group">
@@ -551,7 +551,7 @@ export const CodeFabricsPage: React.FC<{ onNavigate?: (page: string) => void }> 
       {/* Signature Footer */}
       <div className="h-32 flex items-center justify-center border-t border-slate-100 bg-white">
          <p className="text-[11px] font-bold text-slate-300 uppercase tracking-[0.8em] text-center px-6 leading-relaxed max-w-5xl">
-            CodeFabrics supports application and software supply‑chain exposure management through scanner‑agnostic ingestion, governed CTEM workflows, and BAS‑aligned validation.
+            CodeFabrics supports application and software supply-chain exposure management through scanner-agnostic ingestion, governed CTEM workflows, and BAS-aligned validation.
          </p>
       </div>
     </div>

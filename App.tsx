@@ -1,10 +1,11 @@
+
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { 
   CheckCircle2, ChevronRight, TrendingDown, Target, Zap, Clock, 
   Users, BarChart3, Lock, ShieldCheck, MessageSquare, Quote,
   ArrowDown, ShieldAlert, Cpu, Gavel, XCircle, Search, Sparkles,
-  Layers, Globe, Bot, Terminal, Code, Brain, Activity
+  Layers, Globe, Bot, Terminal, Code, Brain, Activity, PlayCircle
 } from 'lucide-react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
@@ -16,7 +17,7 @@ import { AboutUs } from './components/AboutUs';
 import { ValuesPrinciples } from './components/ValuesPrinciples';
 import { PricingSection } from './components/PricingSection';
 import { ComparisonSection } from './components/ComparisonSection';
-import { IndustriesSection } from './components/IndustriesSection';
+import { SolutionsPage } from './components/SolutionsPage';
 import { IntegrationsSection } from './components/IntegrationsSection';
 import { PlatformPage } from './components/PlatformPage';
 import { HayAiSection } from './components/HayAiSection';
@@ -52,75 +53,92 @@ import { CustomerStoriesPage } from './components/CustomerStoriesPage';
 import { ToursWalkthroughsPage } from './components/ToursWalkthroughsPage';
 import { LearningCenter } from './components/LearningCenter';
 import { ResponsibleAiBanner } from './components/ResponsibleAiBanner';
+import { HowItWorks } from './components/HowItWorks';
+import { SubSolutionDetail } from './components/SubSolutionDetail';
+import { ApiSecurityValidation } from './components/ApiSecurityValidation';
+import { SupplyChainRisk } from './components/SupplyChainRisk';
+import { ModernPentesting } from './components/ModernPentesting';
+import { CtemReadiness } from './components/CtemReadiness';
+import { CloudIdentityValidation } from './components/CloudIdentityValidation';
+import { CicdGatekeeping } from './components/CicdGatekeeping';
+import { GovernanceAuditReadiness } from './components/GovernanceAuditReadiness';
+import { AppSecTeams } from './components/AppSecTeams';
+import { SecurityEngineeringPlatformTeams } from './components/SecurityEngineeringPlatformTeams';
+import { DevelopersPlatformTeams } from './components/DevelopersPlatformTeams';
+import { CISOsSecurityLeadership } from './components/CISOsSecurityLeadership';
+import { RegulatedHightrustEnvironments } from './components/RegulatedHightrustEnvironments';
+import { ComplianceRiskTeams } from './components/ComplianceRiskTeams';
+import { FinancialServicesFintech } from './components/FinancialServicesFintech';
+import { SaaSCloudNativeCompanies } from './components/SaaSCloudNativeCompanies';
+import { HealthcareLifeSciences } from './components/HealthcareLifeSciences';
+import { RetailECommerce } from './components/RetailECommerce';
+import { TechnologyAIDrivenOrganizations } from './components/TechnologyAIDrivenOrganizations';
+import { SubprocessorRequest } from './components/SubprocessorRequest';
 
 const VisibilityToValidation = () => (
   <section className="py-40 bg-[#050B1A] text-white relative overflow-hidden">
-     {/* Concentric Orange Core Glow - intensive as requested */}
      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70%] h-full bg-[radial-gradient(circle_at_center,rgba(255,95,0,0.18)_0%,transparent_65%)] blur-[130px] pointer-events-none" />
      <div className="absolute top-0 right-0 w-[40%] h-full bg-[radial-gradient(circle_at_top_right,rgba(255,136,0,0.08)_0%,transparent_70%)] blur-[100px] pointer-events-none" />
      <div className="absolute inset-0 bg-grid-white opacity-[0.03] pointer-events-none" />
      
      <div className="container mx-auto px-6 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-24 items-center">
+        <div className="grid lg:grid-cols-12 gap-16 lg:gap-24 items-center">
            <motion.div
              initial={{ opacity: 0, x: -40 }}
              whileInView={{ opacity: 1, x: 0 }}
-             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+             transition={{ duration: 0.8 }}
+             className="lg:col-span-7"
            >
-              <h3 className="text-[11px] font-black text-hayrok-orange uppercase tracking-[0.6em] mb-12 opacity-80">What Is Hayrok?</h3>
-              <p className="text-5xl md:text-[6.5rem] font-black mb-10 leading-[0.88] tracking-tighter uppercase">
-                 From Visibility to <br/>
-                 <span className="text-hayrok-orange italic font-light block mt-4">Validated Risk Reduction.</span>
-              </p>
-              <p className="text-xl md:text-2xl text-slate-400 font-medium leading-relaxed mb-16 max-w-xl">
+              <h3 className="text-[10px] font-black text-hayrok-orange uppercase tracking-[0.6em] mb-8">What is Hayrok?</h3>
+              <h4 className="text-6xl md:text-[7.5rem] font-black mb-12 leading-[0.85] tracking-tighter uppercase">
+                 From <br/> Visibility <br/> <span className="block italic text-slate-100">To</span> <br/>
+                 <span className="text-hayrok-orange italic">Validated Risk <br/> Reduction.</span>
+              </h4>
+              <p className="text-xl md:text-2xl text-slate-400 font-medium leading-relaxed mb-16 max-w-2xl">
                  Hayrok is a governed, AI-enabled security risk intelligence platform that helps organizations continuously identify, validate, and manage security exposure, turning fragmented security signals into auditable, decision-ready risk insights.
               </p>
               
-              <div className="pt-4 max-w-lg">
-                 <div className="p-10 bg-white/[0.02] border border-white/5 rounded-[3.5rem] backdrop-blur-3xl hover:border-hayrok-orange/30 transition-all shadow-2xl relative overflow-hidden group">
-                    <div className="absolute inset-0 bg-gradient-to-br from-hayrok-orange/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                    <p className="text-2xl font-bold text-white italic mb-4 leading-tight relative z-10">"Hayrok does not replace your existing security tools."</p>
-                    <p className="text-base text-slate-500 font-medium leading-relaxed relative z-10">It connects them, validates their findings, and governs the decisions that follow.</p>
+              <div className="pt-12 border-t border-white/5 max-w-md">
+                 <div className="p-8 bg-white/[0.03] border border-white/5 rounded-[2.5rem] relative overflow-hidden group">
+                    <Quote className="absolute -top-4 -left-4 text-hayrok-orange opacity-20 group-hover:scale-110 transition-transform" size={80} />
+                    <p className="text-lg font-black italic text-slate-300 relative z-10 leading-snug">
+                       "Hayrok does not replace your existing security tools."
+                    </p>
+                    <p className="text-[9px] font-black text-slate-500 uppercase tracking-widest mt-4 relative z-10">Integration Statement</p>
                  </div>
               </div>
            </motion.div>
-
-           <div className="grid gap-6">
+           
+           <div className="lg:col-span-5 space-y-6">
               {[
                 { 
                   q: "What did we find?", 
-                  a: "Most security platforms stop here.", 
-                  color: "text-slate-600",
+                  sub: "MOST SECURITY PLATFORMS STOP HERE.",
                   active: false
                 },
                 { 
                   q: "What is actually exploitable?", 
-                  a: "Hayrok provides technical proof through validation.", 
-                  color: "text-hayrok-orange",
+                  sub: "HAYROK PROVIDES TECHNICAL PROOF THROUGH VALIDATION.",
                   active: true
                 },
                 { 
                   q: "How is our risk changing over time?", 
-                  a: "Continuous tracking driven by proof, not assumptions.", 
-                  color: "text-hayrok-orange",
+                  sub: "CONTINUOUS TRACKING DRIVEN BY PROOF, NOT ASSUMPTIONS.",
                   active: true
                 }
-              ].map((item, i) => (
+              ].map((card, i) => (
                 <motion.div 
-                  key={i} 
-                  initial={{ opacity: 0, x: 50 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.2, duration: 0.8, ease: "easeOut" }}
-                  className={`relative p-10 md:p-12 bg-white/[0.02] border border-white/5 rounded-[3.5rem] backdrop-blur-3xl group hover:bg-white/[0.04] hover:border-white/10 transition-all cursor-default shadow-2xl overflow-hidden`}
+                   key={i}
+                   initial={{ opacity: 0, y: 30 }}
+                   whileInView={{ opacity: 1, y: 0 }}
+                   transition={{ delay: i * 0.1 }}
+                   className={`p-10 md:p-12 rounded-[3.5rem] border transition-all duration-500 hover:scale-[1.02] cursor-default ${card.active ? 'bg-slate-900/40 border-white/5 hover:border-hayrok-orange/30' : 'bg-white/[0.02] border-white/5 opacity-50'}`}
                 >
-                   {item.active && (
-                     <div className="absolute inset-0 bg-gradient-to-r from-hayrok-orange/[0.015] via-transparent to-transparent pointer-events-none" />
-                   )}
-                   <p className={`text-2xl md:text-3xl font-black mb-4 tracking-tight ${item.color}`}>
-                     {item.q}
-                   </p>
-                   <p className="text-slate-500 font-bold text-[10px] md:text-xs uppercase tracking-[0.4em] leading-relaxed">
-                     {item.a}
+                   <h5 className={`text-2xl md:text-3xl font-black mb-4 tracking-tight ${card.active ? 'text-hayrok-orange' : 'text-slate-400'}`}>
+                      {card.q}
+                   </h5>
+                   <p className={`text-[10px] font-black uppercase tracking-[0.4em] leading-relaxed ${card.active ? 'text-slate-100' : 'text-slate-600'}`}>
+                      {card.sub}
                    </p>
                 </motion.div>
               ))}
@@ -132,14 +150,12 @@ const VisibilityToValidation = () => (
 
 const HayAiBrain = () => (
   <section className="py-32 bg-[#020617] relative overflow-hidden">
-     {/* Massive Central Brain Glow */}
      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[50%] h-[80%] bg-hayrok-orange/15 blur-[160px] rounded-full pointer-events-none animate-pulse-slow" />
      <div className="absolute inset-0 bg-grid-white opacity-[0.02] pointer-events-none" />
      
      <div className="container mx-auto px-6 relative z-10">
         <div className="max-w-6xl mx-auto">
            <div className="bg-white/[0.01] border border-white/5 rounded-[4rem] p-12 md:p-24 backdrop-blur-3xl shadow-2xl relative overflow-hidden group border-hayrok-orange/20">
-              {/* Internal Accent Glow */}
               <div className="absolute -top-40 -left-40 w-96 h-96 bg-hayrok-orange/10 blur-[100px] rounded-full opacity-50" />
               
               <div className="grid lg:grid-cols-2 gap-20 items-center">
@@ -152,7 +168,6 @@ const HayAiBrain = () => (
                          className="relative z-10 w-64 h-64 bg-slate-900 border border-hayrok-orange/40 rounded-[3rem] shadow-[0_0_80px_rgba(255,95,0,0.3)] flex items-center justify-center"
                        >
                           <Brain size={120} className="text-hayrok-orange opacity-90" strokeWidth={1} />
-                          {/* Animated "neurons" */}
                           <div className="absolute inset-0">
                              {[...Array(4)].map((_, i) => (
                                <motion.div 
@@ -165,15 +180,14 @@ const HayAiBrain = () => (
                           </div>
                        </motion.div>
                        
-                       {/* Decision Nodes */}
                        {[
-                         { icon: ShieldCheck, label: "Policy", pos: "-top-8 -left-8" },
-                         { icon: Target, label: "Validation", pos: "-top-8 -right-8" },
-                         { icon: Activity, label: "Proof", pos: "-bottom-8 -left-8" },
-                         { icon: BarChart3, label: "Intelligence", pos: "-bottom-8 -right-8" }
+                         { icon: ShieldCheck, label: "Policy", iconProps: { size: 20 }, pos: "-top-8 -left-8" },
+                         { icon: Target, label: "Validation", iconProps: { size: 20 }, pos: "-top-8 -right-8" },
+                         { icon: Activity, label: "Proof", iconProps: { size: 20 }, pos: "-bottom-8 -left-8" },
+                         { icon: BarChart3, label: "Intelligence", iconProps: { size: 20 }, pos: "-bottom-8 -right-8" }
                        ].map((node, i) => (
                          <div key={i} className={`absolute ${node.pos} p-5 bg-slate-900 border border-white/10 rounded-2xl shadow-xl flex flex-col items-center gap-2 group-hover:scale-110 transition-transform duration-500`}>
-                            <node.icon size={20} className="text-hayrok-orange" />
+                            <node.icon {...node.iconProps} className="text-hayrok-orange" />
                             <span className="text-[9px] font-black uppercase tracking-widest text-slate-500">{node.label}</span>
                          </div>
                        ))}
@@ -185,10 +199,10 @@ const HayAiBrain = () => (
                        <Bot size={18} /> The Reasoning Core
                     </div>
                     <h2 className="text-5xl md:text-7xl font-black text-white mb-10 tracking-tight leading-[0.9] uppercase">
-                       Hay‑AI: <br/> <span className="text-hayrok-orange italic font-light">The Brain.</span>
+                       Hay-AI: <br/> <span className="text-hayrok-orange italic font-light">The Brain.</span>
                     </h2>
                     <p className="text-xl text-slate-400 font-medium leading-relaxed mb-12">
-                       Unlike basic automation, Hay‑AI operates as a recursive reasoning engine. It builds complex attack graphs to understand transitive trust and evidence-based risk—ensuring every decision is governed and auditable.
+                       Unlike basic automation, Hay-AI operates as a recursive reasoning engine. It builds complex attack graphs to understand transitive trust and evidence-based risk - ensuring every decision is governed and auditable.
                     </p>
                     
                     <div className="space-y-6">
@@ -316,6 +330,38 @@ function App() {
   const [currentPage, setCurrentPage] = useState('home');
 
   const renderPage = () => {
+    if (currentPage === 'solution-api') return <ApiSecurityValidation onNavigate={setCurrentPage} />;
+    if (currentPage === 'solution-supply-chain') return <SupplyChainRisk onNavigate={setCurrentPage} />;
+    if (currentPage === 'solution-pentesting') return <ModernPentesting onNavigate={setCurrentPage} />;
+    if (currentPage === 'solution-ctem') return <CtemReadiness onNavigate={setCurrentPage} />;
+    if (currentPage === 'solution-cloud') return <CloudIdentityValidation onNavigate={setCurrentPage} />;
+    if (currentPage === 'solution-devsecops') return <CicdGatekeeping onNavigate={setCurrentPage} />;
+    if (currentPage === 'solution-grc') return <GovernanceAuditReadiness onNavigate={setCurrentPage} />;
+    if (currentPage === 'role-appsec') return <AppSecTeams onNavigate={setCurrentPage} />;
+    if (currentPage === 'role-eng') return <SecurityEngineeringPlatformTeams onNavigate={setCurrentPage} />;
+    if (currentPage === 'role-dev') return <DevelopersPlatformTeams onNavigate={setCurrentPage} />;
+    if (currentPage === 'role-ciso') return <CISOsSecurityLeadership onNavigate={setCurrentPage} />;
+    if (currentPage === 'role-compliance') return <ComplianceRiskTeams onNavigate={setCurrentPage} />;
+    if (currentPage === 'industry-enterprise') return <RegulatedHightrustEnvironments onNavigate={setCurrentPage} />;
+    if (currentPage === 'industry-fintech') return <FinancialServicesFintech onNavigate={setCurrentPage} />;
+    if (currentPage === 'industry-saas') return <SaaSCloudNativeCompanies onNavigate={setCurrentPage} />;
+    if (currentPage === 'industry-healthcare') return <HealthcareLifeSciences onNavigate={setCurrentPage} />;
+    if (currentPage === 'industry-retail') return <RetailECommerce onNavigate={setCurrentPage} />;
+    if (currentPage === 'industry-tech-ai') return <TechnologyAIDrivenOrganizations onNavigate={setCurrentPage} />;
+    
+    // Legal & Trust Routes
+    if (['privacy-notice', 'terms', 'privacy-policy', 'security', 'dpa'].includes(currentPage)) {
+        return <TrustCenter onNavigate={setCurrentPage} />;
+    }
+
+    if (currentPage === 'subprocessor-request') {
+        return <SubprocessorRequest onNavigate={setCurrentPage} />;
+    }
+
+    if (currentPage.startsWith('solution-') || currentPage.startsWith('role-') || currentPage.startsWith('industry-')) {
+       return <SubSolutionDetail id={currentPage} onNavigate={setCurrentPage} />;
+    }
+
     switch (currentPage) {
       case 'hive': return <HivePage onNavigate={setCurrentPage} />;
       case 'hay-ai': return <HayAiPage onNavigate={setCurrentPage} />;
@@ -350,7 +396,7 @@ function App() {
       case 'values': return <ValuesPrinciples />;
       case 'platform': return <PlatformPage onNavigate={setCurrentPage} />;
       case 'pricing': return <div className="pt-20"><PricingSection /><FinalCTA onNavigate={setCurrentPage} /></div>;
-      case 'industries': return <div className="pt-20"><IndustriesSection onNavigate={setCurrentPage} /><FinalCTA onNavigate={setCurrentPage} /></div>;
+      case 'solutions': return <div className="pt-20"><SolutionsPage onNavigate={setCurrentPage} /><FinalCTA onNavigate={setCurrentPage} /></div>;
       case 'comparison': return <div className="pt-20"><ComparisonSection /><FinalCTA onNavigate={setCurrentPage} /></div>;
       case 'roi': return <div className="pt-20"><ROIMetrics /><FinalCTA onNavigate={setCurrentPage} /></div>;
       case 'home':

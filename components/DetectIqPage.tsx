@@ -31,7 +31,7 @@ export const DetectIqPage: React.FC<{ onNavigate?: (page: string) => void }> = (
             className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-orange-50/50 border border-orange-100/50 text-hayrok-orange text-[10px] font-black shadow-sm mx-auto mb-10 tracking-[0.4em] uppercase backdrop-blur-sm"
           >
             <Sparkles size={12} className="animate-pulse" />
-            Roadmap — Coming Soon
+            Roadmap - Coming Soon
           </motion.div>
           
           <motion.h1 
@@ -40,7 +40,7 @@ export const DetectIqPage: React.FC<{ onNavigate?: (page: string) => void }> = (
             transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
             className="text-6xl md:text-[8rem] font-black tracking-tight leading-[0.9] text-slate-900 mb-12"
           >
-            Detection‑Aware <br />
+            Detection-Aware <br />
             <span className="text-hayrok-orange italic font-light tracking-tighter">Context.</span>
           </motion.h1>
           
@@ -48,7 +48,7 @@ export const DetectIqPage: React.FC<{ onNavigate?: (page: string) => void }> = (
             {...fadeInUp}
             className="text-xl md:text-2xl text-slate-500 leading-relaxed max-w-4xl mx-auto font-medium mb-16"
           >
-            DetectIQ is an upcoming capability designed to provide detection‑aware context that supports CTEM. Evaluate whether risk is not only exploitable, but also detectable.
+            DetectIQ is an upcoming capability designed to provide detection-aware context that supports CTEM. Evaluate whether risk is not only exploitable, but also detectable.
           </motion.p>
 
           <motion.div {...fadeInUp} className="flex flex-col sm:flex-row items-center justify-center gap-8">
@@ -127,8 +127,8 @@ export const DetectIqPage: React.FC<{ onNavigate?: (page: string) => void }> = (
          <div className="container mx-auto px-6">
             <div className="text-center max-w-4xl mx-auto mb-24">
                <h2 className="text-sm font-bold text-hayrok-orange uppercase tracking-[0.4em] mb-6">CTEM Lifecycle Support</h2>
-               <h3 className="text-5xl md:text-7xl font-black text-slate-900 leading-tight tracking-tight">Detection‑Aware <br/> <span className="text-hayrok-orange italic font-light">Prioritization.</span></h3>
-               <p className="text-xl text-slate-500 font-medium mt-6">DetectIQ is intended to move organizations toward more defensible, risk‑aware decisions.</p>
+               <h3 className="text-5xl md:text-7xl font-black text-slate-900 leading-tight tracking-tight">Detection-Aware <br/> <span className="text-hayrok-orange italic font-light">Prioritization.</span></h3>
+               <p className="text-xl text-slate-500 font-medium mt-6">DetectIQ is intended to move organizations toward more defensible, risk-aware decisions.</p>
             </div>
 
             <div className="grid md:grid-cols-2 gap-10">
@@ -211,7 +211,7 @@ export const DetectIqPage: React.FC<{ onNavigate?: (page: string) => void }> = (
                {[
                  { label: "Hive Enrichment", desc: "Enrich CTEM prioritization with operational detection signals.", icon: BarChart3 },
                  { label: "Genesis Pathing", desc: "Add detection context to validated attack paths.", icon: Target },
-                 { label: "CodeFabrics Context", desc: "Insight into detection gaps for application‑driven risk.", icon: Zap }
+                 { label: "CodeFabrics Context", desc: "Insight into detection gaps for application-driven risk.", icon: Zap }
                ].map((item, i) => (
                  <div key={i} className="p-10 bg-[#FBFBF9] border border-slate-100 rounded-[3.5rem] hover:bg-white hover:shadow-xl transition-all h-full flex flex-col">
                     <div className="w-14 h-14 bg-white rounded-2xl flex items-center justify-center text-hayrok-orange mb-8 shadow-sm">
@@ -250,7 +250,7 @@ export const DetectIqPage: React.FC<{ onNavigate?: (page: string) => void }> = (
       {/* Analyst-Safe Footer */}
       <div className="h-32 flex items-center justify-center border-t border-slate-100 bg-[#FCFCFA]">
          <p className="text-[11px] font-bold text-slate-300 uppercase tracking-[0.8em] text-center px-6 leading-relaxed max-w-5xl">
-            DetectIQ is a planned Hayrok platform capability intended to support CTEM decision‑making by adding detection‑aware context. Functionality and availability are subject to change.
+            DetectIQ is a planned Hayrok platform capability intended to support CTEM decision-making by adding detection-aware context. Functionality and availability are subject to change.
          </p>
       </div>
     </div>

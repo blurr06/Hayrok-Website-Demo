@@ -9,7 +9,6 @@ import {
 } from 'lucide-react';
 import { IntelligenceFabric } from './IntelligenceFabric';
 
-// Added tuple cast to ease to fix Framer Motion type error
 const fadeInUp = {
   initial: { opacity: 0, y: 30 },
   whileInView: { opacity: 1, y: 0 },
@@ -40,7 +39,7 @@ const RoadmapStep = ({ phase, title, status, items, isLive }: any) => (
     <div className="flex flex-col md:flex-row gap-10">
       <div className="md:w-1/3">
         <div className={`inline-flex items-center gap-2 px-3 py-1 rounded-full mb-4 text-[10px] font-black uppercase tracking-widest ${isLive ? 'bg-orange-50 text-hayrok-orange' : 'bg-slate-50 text-slate-400'}`}>
-          {phase} {isLive && "— Live"}
+          {phase} {isLive && " - Live"}
         </div>
         <h3 className="text-3xl font-black text-slate-900 mb-4 tracking-tight uppercase">{title}</h3>
         <p className="text-slate-500 font-medium leading-relaxed">
@@ -92,7 +91,6 @@ export const RoadmapPage: React.FC<{ onNavigate?: (page: string) => void }> = ({
           <motion.h1 
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
-            // Added tuple cast to ease to fix Framer Motion type error
             transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
             className="text-6xl md:text-[8rem] font-black tracking-tight leading-[0.9] text-slate-900 mb-12"
           >
@@ -228,7 +226,7 @@ export const RoadmapPage: React.FC<{ onNavigate?: (page: string) => void }> = ({
       {/* Signature Footer */}
       <div className="h-32 flex items-center justify-center border-t border-slate-100 bg-[#FCFCFA]">
          <p className="text-[11px] font-bold text-slate-300 uppercase tracking-[0.8em] text-center px-6 leading-relaxed max-w-5xl">
-            Hayrok’s roadmap focuses on Continuous Threat Exposure Management (CTEM) expansion through governed AI capabilities designed for enterprise and regulated sectors.
+            Hayrok's roadmap focuses on Continuous Threat Exposure Management (CTEM) expansion through governed AI capabilities designed for enterprise and regulated sectors.
          </p>
       </div>
     </div>

@@ -1,9 +1,12 @@
+
 import React, { useState, useEffect } from 'react';
 import { 
   Menu, X, ChevronRight, ChevronDown, BookOpen, Rss, FileText, FileCode, 
   Video, Users, Compass, GraduationCap, Award, ShieldCheck, Gavel, 
   Rocket, Mail, Newspaper, Layout, BarChart3, Zap, Code, Bot, 
-  Search, Globe, Sparkles, MousePointer2, Briefcase, Handshake
+  Search, Globe, Sparkles, MousePointer2, Briefcase, Handshake,
+  Network, Package, Target, ClipboardCheck, Activity, Landmark,
+  Cloud, HeartPulse, ShoppingBag, Building2, Cpu
 } from 'lucide-react';
 import { Logo } from './Logo';
 
@@ -23,7 +26,45 @@ const navItems = [
       { label: 'Request a Demo', id: 'demo', icon: MousePointer2 }
     ]
   },
-  { label: 'Industries', id: 'industries' },
+  { 
+    label: 'Solutions', 
+    id: 'solutions',
+    groupedSubItems: [
+      {
+        title: 'By Use Case',
+        items: [
+          { label: 'Application & API Security Validation', id: 'solution-api', icon: Globe },
+          { label: 'Software Supply Chain & Dependency Risk', id: 'solution-supply-chain', icon: Package },
+          { label: 'Modern Penetration Testing', id: 'solution-pentesting', icon: Zap },
+          { label: 'CTEM Readiness', id: 'solution-ctem', icon: Target },
+          { label: 'Cloud & Identity Attack Path Validation', id: 'solution-cloud', icon: Network },
+          { label: 'DevSecOps & CI/CD Gatekeeping', id: 'solution-devsecops', icon: Code },
+          { label: 'Governance & Audit Readiness', id: 'solution-grc', icon: Gavel }
+        ]
+      },
+      {
+        title: 'By Role',
+        items: [
+          { label: 'Application Security Teams', id: 'role-appsec', icon: ShieldCheck },
+          { label: 'Security Engineering / Red Teams', id: 'role-eng', icon: Activity },
+          { label: 'Developers & Platform Teams', id: 'role-dev', icon: Layout },
+          { label: 'CISOs & Executives', id: 'role-ciso', icon: BarChart3 },
+          { label: 'Compliance & Risk Teams', id: 'role-compliance', icon: ClipboardCheck }
+        ]
+      },
+      {
+        title: 'By Industry',
+        items: [
+          { label: 'Financial Services & Fintech', id: 'industry-fintech', icon: Landmark },
+          { label: 'SaaS & Cloud-Native Companies', id: 'industry-saas', icon: Cloud },
+          { label: 'Healthcare & Life Sciences', id: 'industry-healthcare', icon: HeartPulse },
+          { label: 'Retail & E-Commerce', id: 'industry-retail', icon: ShoppingBag },
+          { label: 'Enterprise & Regulated Industries', id: 'industry-enterprise', icon: Building2 },
+          { label: 'Technology & AI-Driven Organizations', id: 'industry-tech-ai', icon: Cpu }
+        ]
+      }
+    ]
+  },
   { 
     label: 'Partners', 
     id: 'partners',
@@ -121,7 +162,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate, activePage }) => {
         {/* Desktop Nav */}
         <div className="hidden md:flex items-center gap-8">
           {navItems.map((item) => (
-            item.subItems ? (
+            (item.subItems || item.groupedSubItems) ? (
               <div 
                 key={item.id}
                 className="relative group"
@@ -137,22 +178,47 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate, activePage }) => {
                   {item.label}
                   <ChevronDown size={14} className={`transition-transform duration-200 ${openDropdown === item.id ? 'rotate-180' : ''}`} />
                 </button>
-                <div className={`absolute top-full left-0 pt-4 ${item.id === 'resources' || item.id === 'platform' ? 'w-72' : 'w-56'} transition-all duration-200 ${openDropdown === item.id ? 'opacity-100 translate-y-0 visible' : 'opacity-0 translate-y-2 invisible'}`}>
-                  <div className="bg-white border border-slate-200 rounded-xl shadow-2xl overflow-hidden p-2 backdrop-blur-2xl">
-                    <div className="px-4 py-2 mb-1 border-b border-slate-50">
-                      <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">{item.label}</span>
+
+                <div className={`absolute top-full left-1/2 -translate-x-1/2 pt-4 transition-all duration-300 ${openDropdown === item.id ? 'opacity-100 translate-y-0 visible' : 'opacity-0 translate-y-2 invisible pointer-events-none'}`}>
+                  {item.groupedSubItems ? (
+                    /* Grouped Mega Menu */
+                    <div className="bg-white border border-slate-200 rounded-[2.5rem] shadow-2xl overflow-hidden p-8 backdrop-blur-3xl w-[800px] grid grid-cols-3 gap-10">
+                      {item.groupedSubItems.map((group) => (
+                        <div key={group.title} className="space-y-4">
+                          <p className="text-[10px] font-black text-hayrok-orange uppercase tracking-[0.3em] mb-6 pl-4">{group.title}</p>
+                          <div className="flex flex-col gap-1">
+                            {group.items.map((sub) => (
+                              <button 
+                                key={sub.id}
+                                onClick={() => handleNavClick(sub.id)}
+                                className={`w-full text-left px-4 py-3 text-xs rounded-xl transition-all flex items-center gap-3 ${activePage === sub.id ? 'text-hayrok-orange bg-orange-50' : 'text-slate-500 hover:bg-slate-50 hover:text-slate-900 font-bold'}`}
+                              >
+                                {sub.icon && <sub.icon size={16} strokeWidth={2} className={activePage === sub.id ? 'text-hayrok-orange' : 'text-slate-400'} />}
+                                <span>{sub.label}</span>
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+                      ))}
                     </div>
-                    {item.subItems.map((sub: any) => (
-                      <button 
-                        key={sub.label}
-                        onClick={() => handleNavClick(sub.id)}
-                        className={`w-full text-left px-4 py-2.5 text-sm rounded-lg transition-colors flex items-center gap-3 ${activePage === sub.id ? 'text-hayrok-orange bg-orange-50' : 'text-slate-500 hover:bg-slate-50 hover:text-slate-900'}`}
-                      >
-                        {sub.icon && <sub.icon size={16} className={activePage === sub.id ? 'text-hayrok-orange' : 'text-slate-400'} />}
-                        <span className="font-bold">{sub.label}</span>
-                      </button>
-                    ))}
-                  </div>
+                  ) : (
+                    /* Simple Dropdown */
+                    <div className="bg-white border border-slate-200 rounded-xl shadow-2xl overflow-hidden p-2 backdrop-blur-2xl w-72">
+                      <div className="px-4 py-2 mb-1 border-b border-slate-50">
+                        <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">{item.label}</span>
+                      </div>
+                      {item.subItems?.map((sub: any) => (
+                        <button 
+                          key={sub.label}
+                          onClick={() => handleNavClick(sub.id)}
+                          className={`w-full text-left px-4 py-2.5 text-sm rounded-lg transition-colors flex items-center gap-3 ${activePage === sub.id ? 'text-hayrok-orange bg-orange-50' : 'text-slate-500 hover:bg-slate-50 hover:text-slate-900 font-bold'}`}
+                        >
+                          {sub.icon && <sub.icon size={16} className={activePage === sub.id ? 'text-hayrok-orange' : 'text-slate-400'} />}
+                          <span>{sub.label}</span>
+                        </button>
+                      ))}
+                    </div>
+                  )}
                 </div>
               </div>
             ) : (
@@ -185,7 +251,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate, activePage }) => {
               <ChevronDown size={14} className={`transition-transform duration-200 ${openDropdown === 'company' ? 'rotate-180' : ''}`} />
             </button>
             
-            <div className={`absolute top-full left-0 pt-4 w-64 transition-all duration-200 ${openDropdown === 'company' ? 'opacity-100 translate-y-0 visible' : 'opacity-0 translate-y-2 invisible'}`}>
+            <div className={`absolute top-full left-0 pt-4 w-64 transition-all duration-200 ${openDropdown === 'company' ? 'opacity-100 translate-y-0 visible' : 'opacity-0 translate-y-2 invisible pointer-events-none'}`}>
                <div className="bg-white border border-slate-200 rounded-xl shadow-2xl overflow-hidden p-2 backdrop-blur-2xl">
                  <div className="px-4 py-2 mb-1 border-b border-slate-50">
                     <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Company</span>
@@ -194,10 +260,10 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate, activePage }) => {
                    <button 
                      key={item.id}
                      onClick={() => handleNavClick(item.id)}
-                     className={`w-full text-left px-4 py-2.5 text-sm rounded-lg transition-colors flex items-center gap-3 ${activePage === item.id ? 'text-hayrok-orange bg-orange-50' : 'text-slate-500 hover:bg-slate-50 hover:text-slate-900'}`}
+                     className={`w-full text-left px-4 py-2.5 text-sm rounded-lg transition-colors flex items-center gap-3 ${activePage === item.id ? 'text-hayrok-orange bg-orange-50' : 'text-slate-500 hover:bg-slate-50 hover:text-slate-900 font-bold'}`}
                    >
                      {item.icon && <item.icon size={16} className={activePage === item.id ? 'text-hayrok-orange' : 'text-slate-400'} />}
-                     <span className="font-bold">{item.label}</span>
+                     <span>{item.label}</span>
                    </button>
                  ))}
                </div>
@@ -227,18 +293,39 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate, activePage }) => {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="absolute top-full left-0 w-full bg-white border-b border-slate-200 p-6 flex flex-col gap-4 md:hidden shadow-2xl h-screen overflow-y-auto pb-24 text-left">
+        <div className="absolute top-full left-0 w-full bg-white border-b border-slate-200 p-6 flex flex-col gap-4 md:hidden shadow-2xl h-screen overflow-y-auto pb-24 text-left text-slate-900">
           {navItems.map((item) => (
             <div key={item.id} className="flex flex-col gap-2">
               <button
-                onClick={() => !item.subItems && handleNavClick(item.id)}
+                onClick={() => !item.subItems && !item.groupedSubItems && handleNavClick(item.id)}
                 className={`text-lg font-bold text-left flex items-center justify-between ${
                   activePage === item.id || (item.subItems && (activePage.startsWith(item.id) || ['hive', 'hay-ai', 'detectiq', 'surfaceiq', 'genesis', 'codefabrics', 'roadmap', 'demo'].includes(activePage))) ? 'text-hayrok-orange' : 'text-slate-900'
                 }`}
               >
                 {item.label}
-                {item.subItems && <ChevronDown size={18} />}
+                {(item.subItems || item.groupedSubItems) && <ChevronDown size={18} />}
               </button>
+              
+              {item.groupedSubItems && (
+                <div className="pl-4 flex flex-col gap-6 border-l border-slate-100 mt-2">
+                   {item.groupedSubItems.map(group => (
+                     <div key={group.title} className="space-y-2">
+                        <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-2">{group.title}</p>
+                        {group.items.map(sub => (
+                          <button
+                            key={sub.id}
+                            onClick={() => handleNavClick(sub.id)}
+                            className={`w-full text-left px-4 py-2 text-sm font-bold rounded-lg transition-colors flex items-center gap-3 ${activePage === sub.id ? 'text-hayrok-orange bg-orange-50' : 'text-slate-500 hover:bg-slate-50'}`}
+                          >
+                            {sub.icon && <sub.icon size={16} />}
+                            <span>{sub.label}</span>
+                          </button>
+                        ))}
+                     </div>
+                   ))}
+                </div>
+              )}
+
               {item.subItems && (
                 <div className="pl-4 flex flex-col gap-2 border-l border-slate-100">
                   {item.subItems.map((sub) => (
@@ -248,7 +335,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate, activePage }) => {
                       className={`text-base font-semibold text-left py-1 flex items-center gap-3 ${activePage === sub.id ? 'text-hayrok-orange' : 'text-slate-500'}`}
                     >
                       {sub.icon && <sub.icon size={16} />}
-                      {sub.label}
+                      <span>{sub.label}</span>
                     </button>
                   ))}
                 </div>
@@ -266,7 +353,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate, activePage }) => {
                     className={`text-base font-semibold text-left py-1 flex items-center gap-3 ${activePage === item.id ? 'text-hayrok-orange' : 'text-slate-900'}`}
                   >
                     {item.icon && <item.icon size={16} className={activePage === item.id ? 'text-hayrok-orange' : 'text-slate-400'} />}
-                    {item.label}
+                    <span>{item.label}</span>
                   </button>
               ))}
              </div>

@@ -26,7 +26,7 @@ const fadeInUp = {
   transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }
 };
 
-const IndustryCard = ({ icon: Icon, title, tagline, challenges, helps, accent }: any) => (
+const SolutionCard = ({ icon: Icon, title, tagline, helps, accent }: any) => (
   /* Use MotionDiv cast to any to fix type error on variants prop */
   <MotionDiv 
     variants={fadeInUp as any}
@@ -69,11 +69,11 @@ const IndustryCard = ({ icon: Icon, title, tagline, challenges, helps, accent }:
   </MotionDiv>
 );
 
-interface IndustriesSectionProps {
+interface SolutionsPageProps {
   onNavigate?: (page: string) => void;
 }
 
-export const IndustriesSection: React.FC<IndustriesSectionProps> = ({ onNavigate }) => {
+export const SolutionsPage: React.FC<SolutionsPageProps> = ({ onNavigate }) => {
   return (
     <div className="bg-white min-h-screen pb-32 overflow-x-hidden">
       {/* Blended Background Mesh */}
@@ -91,24 +91,24 @@ export const IndustriesSection: React.FC<IndustriesSectionProps> = ({ onNavigate
             <MotionDiv {...fadeInUp} className="max-w-2xl">
               <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-slate-200 text-hayrok-orange text-[10px] font-black mb-8 tracking-[0.4em] uppercase shadow-sm">
                 <Globe size={12} className="animate-pulse" />
-                ENTERPRISE READY
+                STRATEGIC SOLUTIONS
               </div>
               <h1 className="text-6xl md:text-8xl font-black text-slate-900 mb-8 leading-[0.95] tracking-tight">
                 Security for <br/>
                 <span className="bg-gradient-to-r from-hayrok-orange to-orange-400 bg-clip-text text-transparent italic">High-Stakes.</span>
               </h1>
               <p className="text-xl md:text-2xl text-slate-600 font-semibold leading-relaxed mb-10">
-                Hayrok supports organizations where trust is non-negotiable - providing accurate, explainable, and defensible security decisions.
+                Hayrok provides tailored solutions for organizations where trust is non-negotiable — delivering accurate, explainable, and defensible security decisions.
               </p>
               <div className="flex gap-4">
                 <button 
                   onClick={() => onNavigate?.('contact')}
                   className="bg-hayrok-orange text-white px-8 py-4 rounded-2xl font-black text-sm uppercase tracking-widest shadow-xl shadow-orange-500/20 hover:scale-105 transition-transform"
                 >
-                  Get Started
+                  Request Solution
                 </button>
                 <button className="bg-white text-slate-900 border border-slate-200 px-8 py-4 rounded-2xl font-black text-sm uppercase tracking-widest hover:bg-slate-50 transition-colors">
-                  View Case Studies
+                  Explore Use Cases
                 </button>
               </div>
             </MotionDiv>
@@ -137,14 +137,14 @@ export const IndustriesSection: React.FC<IndustriesSectionProps> = ({ onNavigate
         </div>
       </section>
 
-      {/* Structured Industry Grid */}
+      {/* Structured Solution Grid */}
       <section className="container mx-auto px-6 relative z-10 pt-20">
         {/* Use MotionDiv cast to any to fix type error on spread fadeInUp */}
         <MotionDiv 
           {...fadeInUp}
           className="flex items-center gap-6 mb-16"
         >
-          <span className="text-[11px] font-black text-slate-900 uppercase tracking-[0.5em] shrink-0">Supported Sectors</span>
+          <span className="text-[11px] font-black text-slate-900 uppercase tracking-[0.5em] shrink-0">Solution Verticals</span>
           <div className="h-px w-full bg-slate-100" />
         </MotionDiv>
 
@@ -155,42 +155,42 @@ export const IndustriesSection: React.FC<IndustriesSectionProps> = ({ onNavigate
           whileInView="whileInView"
           className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
         >
-          <IndustryCard 
+          <SolutionCard 
             icon={Landmark}
             title="Financial Services"
             tagline="Regulatory Confidence"
             accent="bg-blue-600"
             helps={["Continuous CTEM Lifecycle", "Regulator-ready reporting", "Revenue-critical mapping"]}
           />
-          <IndustryCard 
+          <SolutionCard 
             icon={Rocket}
             title="SaaS & Technology"
             tagline="Velocity & Trust"
             accent="bg-hayrok-orange"
             helps={["CI/CD Governance", "SBOM Risk Intelligence", "Frictionless Security"]}
           />
-          <IndustryCard 
+          <SolutionCard 
             icon={HeartPulse}
             title="Healthcare"
             tagline="Responsible Safety"
             accent="bg-emerald-600"
             helps={["HIPAA Framework Compliance", "Evidence-driven Validation", "Safe Automation"]}
           />
-          <IndustryCard 
+          <SolutionCard 
             icon={ShoppingBag}
             title="E-Commerce"
             tagline="Revenue Protection"
             accent="bg-purple-600"
             helps={["Transaction Flow Security", "Seasonal Traffic Readiness", "Fraud Risk Analysis"]}
           />
-          <IndustryCard 
+          <SolutionCard 
             icon={Building2}
             title="Energy & Utilities"
             tagline="Critical Reliability"
             accent="bg-slate-800"
             helps={["IT/OT Domain Crossing", "Operational Safety", "Resilience Mapping"]}
           />
-          <IndustryCard 
+          <SolutionCard 
             icon={Gavel}
             title="Public Sector"
             tagline="Defensible Transparency"
@@ -225,10 +225,10 @@ export const IndustriesSection: React.FC<IndustriesSectionProps> = ({ onNavigate
 
             <div className="text-white order-1 lg:order-2">
               <div className="inline-flex items-center gap-3 text-hayrok-orange font-black text-[10px] uppercase tracking-[0.5em] mb-8">
-                <Sparkles size={16} /> Why Choose Hayrok
+                <Sparkles size={16} /> Why Hayrok Solutions
               </div>
               <h2 className="text-4xl md:text-6xl font-black mb-8 leading-[1.1] tracking-tight">
-                Built for industries that <br/>
+                Built for environments that <br/>
                 <span className="text-hayrok-orange">can't afford to guess.</span>
               </h2>
               <div className="space-y-6 mb-12">
@@ -266,7 +266,7 @@ export const IndustriesSection: React.FC<IndustriesSectionProps> = ({ onNavigate
             <span className="text-hayrok-orange italic">Enterprise Results.</span>
           </h3>
           <p className="text-xl md:text-2xl text-slate-600 font-semibold leading-relaxed mb-12 leading-relaxed">
-            Whether you operate in financial services, healthcare, or SaaS, Hayrok adapts to your specific constraints - responsibly.
+            Whether you operate in financial services, healthcare, or SaaS, Hayrok adapts to your specific constraints — responsibly.
           </p>
           <div className="flex flex-col sm:flex-row justify-center items-center gap-6">
             <button 

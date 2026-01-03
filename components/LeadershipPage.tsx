@@ -1,5 +1,4 @@
-
-import React, { useState, useMemo } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { 
   ShieldCheck, Users, Target, Lock, 
@@ -29,53 +28,34 @@ const staggerContainer = {
   }
 };
 
-const ProfileCard = ({ name, role, bio, image, initials }: { name: string, role: string, bio: string, image: string, initials: string }) => {
-  const [imageError, setImageError] = useState(false);
-
-  return (
-    /* Use MotionDiv cast to any to fix type error on variants prop */
-    <MotionDiv 
-      variants={fadeInUp as any}
-      className="bg-white border border-slate-200 rounded-[3rem] p-8 md:p-12 hover:border-hayrok-orange/30 transition-all duration-500 hover:shadow-2xl group"
-    >
-      <div className="flex flex-col md:flex-row gap-10 items-start md:items-center mb-10">
-        <div className="w-32 h-32 rounded-[2.2rem] overflow-hidden bg-slate-900 shrink-0 border-4 border-slate-50 shadow-xl group-hover:shadow-hayrok-orange/10 transition-all duration-500 flex items-center justify-center relative">
-          {!imageError ? (
-            <img 
-              src={image} 
-              alt={name} 
-              onError={() => setImageError(true)}
-              className="w-full h-full object-cover group-hover:scale-105 transition-all duration-700" 
-            />
-          ) : (
-            <div className="w-full h-full flex flex-col items-center justify-center text-white p-2 text-center">
-              <span className="text-3xl font-black tracking-widest">{initials}</span>
-            </div>
-          )}
-        </div>
-        <div>
-          <h3 className="text-3xl font-black text-slate-900 leading-tight mb-2">{name}</h3>
-          <p className="text-sm font-black text-hayrok-orange uppercase tracking-[0.2em]">{role}</p>
-        </div>
+const ProfileCard = ({ name, role, bio, image }: { name: string, role: string, bio: string, image: string }) => (
+  /* Use MotionDiv cast to any to fix type error on variants prop */
+  <MotionDiv 
+    variants={fadeInUp as any}
+    className="bg-white border border-slate-200 rounded-[3rem] p-8 md:p-12 hover:border-hayrok-orange/30 transition-all duration-500 hover:shadow-2xl group"
+  >
+    <div className="flex flex-col md:flex-row gap-10 items-start md:items-center mb-10">
+      <div className="w-32 h-32 rounded-[2.2rem] overflow-hidden bg-slate-100 shrink-0 border-4 border-slate-50 shadow-xl group-hover:shadow-hayrok-orange/10 transition-all duration-500">
+        <img src={image} alt={name} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 scale-110 group-hover:scale-100" />
       </div>
-      <p className="text-slate-600 font-medium leading-relaxed text-lg">
-        {bio}
-      </p>
-    </MotionDiv>
-  );
-};
+      <div>
+        <h3 className="text-3xl font-black text-slate-900 leading-tight mb-2">{name}</h3>
+        <p className="text-sm font-black text-hayrok-orange uppercase tracking-[0.2em]">{role}</p>
+      </div>
+    </div>
+    <p className="text-slate-600 font-medium leading-relaxed text-lg">
+      {bio}
+    </p>
+  </MotionDiv>
+);
 
 interface LeadershipPageProps {
   onNavigate?: (page: string) => void;
 }
 
 export const LeadershipPage: React.FC<LeadershipPageProps> = ({ onNavigate }) => {
-  // We use a timestamp to help the browser find the new file if it was recently added
-  const cacheBuster = useMemo(() => new Date().getTime(), []);
-  
-  // Note: In Vite/React, files in /public are accessed at the root path '/'
-  const herberthPhoto = `/herberth.png?t=${cacheBuster}`; 
-  const ebukaPhoto = `/ebuka.png?t=${cacheBuster}`;
+  // Provided professional portrait
+  const herberthPhoto = "https://raw.githubusercontent.com/Hayrok/media/main/herberth.jpg";
 
   return (
     <div className="bg-white min-h-screen text-slate-900 selection:bg-hayrok-orange/10 selection:text-hayrok-orange overflow-hidden font-sans relative">
@@ -187,20 +167,18 @@ export const LeadershipPage: React.FC<LeadershipPageProps> = ({ onNavigate }) =>
             name="Herberth Oshiemele"
             role="Founder & Chief Executive Officer"
             image={herberthPhoto}
-            initials="HO"
             bio="Herberth Oshiemele is a cybersecurity professional with extensive experience in application security, enterprise security operations, and risk management. As Founder and CEO, he is responsible for Hayrok’s overall strategy, execution, and alignment with enterprise security and governance requirements."
           />
           <ProfileCard 
             name="Ebuka Igwegbe"
             role="Co‑Founder & Chief Product Officer"
-            image={ebukaPhoto}
-            initials="EI"
+            image="https://api.dicebear.com/7.x/initials/svg?seed=EI&backgroundColor=1e293b&textColor=ffffff"
             bio="Ebuka Igwegbe is an AI and product leader with experience in applied AI, machine learning, and enterprise software development. As Co‑Founder and CPO, he leads Hayrok’s product strategy and roadmap, with a focus on delivering AI‑driven capabilities that support transparency, control, and enterprise usability."
           />
         </MotionDiv>
       </section>
 
-      {/* EXECUTIVE SPOTLIGHT */}
+      {/* EXECUTIVE SPOTLIGHT - UPDATED WITH COMPACT SIZE */}
       <section className="container mx-auto px-6 mb-40 relative z-10">
         {/* Use MotionDiv cast to any to fix type error on spread fadeInUp */}
         <MotionDiv 
@@ -211,19 +189,13 @@ export const LeadershipPage: React.FC<LeadershipPageProps> = ({ onNavigate }) =>
           <div className="absolute top-0 right-0 w-[50%] h-full bg-hayrok-orange/10 blur-[120px] rounded-full" />
           
           <div className="grid lg:grid-cols-12 items-stretch">
-            {/* Image Container */}
-            <div className="lg:col-span-5 relative overflow-hidden min-h-[400px] lg:min-h-[550px] bg-slate-800">
+            {/* Image Container - Slightly scaled down height */}
+            <div className="lg:col-span-5 relative overflow-hidden min-h-[400px] lg:min-h-[550px]">
                <img 
                  src={herberthPhoto} 
-                 onError={(e) => { e.currentTarget.style.display = 'none'; }}
                  alt="Herberth Oshiemele" 
                  className="absolute inset-0 w-full h-full object-cover grayscale-[0.3] group-hover:grayscale-0 transition-all duration-1000 group-hover:scale-105"
                />
-               {/* Fallback for spotlight if image fails */}
-               <div className="absolute inset-0 flex flex-col items-center justify-center text-white/10 select-none">
-                  <span className="font-black text-9xl">HO</span>
-               </div>
-               
                <div className="absolute inset-0 bg-gradient-to-r from-slate-900/60 via-transparent to-transparent lg:hidden" />
                <div className="absolute bottom-10 left-10 p-6 bg-white/10 backdrop-blur-2xl border border-white/20 rounded-3xl shadow-2xl">
                  <div className="flex items-center gap-4 text-white">
@@ -233,7 +205,7 @@ export const LeadershipPage: React.FC<LeadershipPageProps> = ({ onNavigate }) =>
                </div>
             </div>
 
-            {/* Content Container */}
+            {/* Content Container - Scaled down text sizing */}
             <div className="lg:col-span-7 p-10 md:p-20 text-white flex flex-col justify-center">
               <h3 className="text-hayrok-orange font-black text-[10px] uppercase tracking-[0.5em] mb-6">Executive Highlight</h3>
               <h4 className="text-3xl md:text-6xl font-black mb-8 leading-[0.95] tracking-tight">

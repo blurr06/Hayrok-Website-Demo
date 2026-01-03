@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
@@ -337,7 +338,10 @@ export const TrustCenter: React.FC<{ onNavigate?: (page: string) => void }> = ({
                       <p className="text-slate-500 font-medium">How we evaluate the partners that power Hayrok.</p>
                     </div>
                   </div>
-                  <button className="px-8 py-3 bg-hayrok-dark text-white rounded-xl font-black text-[10px] uppercase tracking-widest hover:bg-hayrok-orange transition-all shadow-lg">
+                  <button 
+                    onClick={() => onNavigate?.('subprocessor-request')}
+                    className="px-8 py-3 bg-hayrok-dark text-white rounded-xl font-black text-[10px] uppercase tracking-widest hover:bg-hayrok-orange transition-all shadow-lg"
+                  >
                     Request Subprocessor List
                   </button>
                </div>

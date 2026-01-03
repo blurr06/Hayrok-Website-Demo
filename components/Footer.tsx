@@ -10,8 +10,8 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
   return (
     <footer className="bg-white border-t border-slate-100 pt-24 pb-12">
       <div className="container mx-auto px-6">
-        <div className="grid md:grid-cols-4 gap-16 mb-20">
-          <div className="col-span-1 md:col-span-2">
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-12 mb-20">
+          <div className="col-span-2 md:col-span-2 lg:col-span-2">
             <div className="flex items-center gap-2 mb-8 cursor-pointer" onClick={() => onNavigate('home')}>
                <Logo color="dark" />
             </div>
@@ -34,22 +34,33 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           <div>
             <h4 className="text-slate-900 font-black text-xs uppercase tracking-widest mb-8">Capabilities</h4>
             <ul className="space-y-5">
-              <li><button onClick={() => onNavigate('hive')} className="text-slate-500 font-bold hover:text-hayrok-orange transition-colors">Hive - Intelligence</button></li>
-              <li><button onClick={() => onNavigate('genesis')} className="text-slate-500 font-bold hover:text-hayrok-orange transition-colors">Genesis - Validation</button></li>
-              <li><button onClick={() => onNavigate('roadmap')} className="text-slate-500 font-bold hover:text-hayrok-orange transition-colors">Platform Roadmap</button></li>
-              <li><button onClick={() => onNavigate('roi')} className="text-slate-500 font-bold hover:text-hayrok-orange transition-colors">ROI Metrics</button></li>
-              <li><button onClick={() => onNavigate('comparison')} className="text-slate-500 font-bold hover:text-hayrok-orange transition-colors">Comparison Battlecard</button></li>
+              <li><button onClick={() => onNavigate('hive')} className="text-slate-500 font-bold hover:text-hayrok-orange transition-colors text-left">Hive - Intelligence</button></li>
+              <li><button onClick={() => onNavigate('genesis')} className="text-slate-500 font-bold hover:text-hayrok-orange transition-colors text-left">Genesis - Validation</button></li>
+              <li><button onClick={() => onNavigate('roadmap')} className="text-slate-500 font-bold hover:text-hayrok-orange transition-colors text-left">Platform Roadmap</button></li>
+              <li><button onClick={() => onNavigate('roi')} className="text-slate-500 font-bold hover:text-hayrok-orange transition-colors text-left">ROI Metrics</button></li>
+              <li><button onClick={() => onNavigate('comparison')} className="text-slate-500 font-bold hover:text-hayrok-orange transition-colors text-left">Comparison Battlecard</button></li>
             </ul>
           </div>
 
           <div>
             <h4 className="text-slate-900 font-black text-xs uppercase tracking-widest mb-8">Company</h4>
             <ul className="space-y-5">
-              <li><button onClick={() => onNavigate('about')} className="text-slate-500 font-bold hover:text-hayrok-orange transition-colors">About Us</button></li>
-              <li><button onClick={() => onNavigate('trust-center')} className="text-slate-500 font-bold hover:text-hayrok-orange transition-colors">Trust Center</button></li>
-              <li><button onClick={() => onNavigate('responsible-ai-policy')} className="text-slate-500 font-bold hover:text-hayrok-orange transition-colors">Responsible AI Policy</button></li>
-              <li><button onClick={() => onNavigate('values')} className="text-slate-500 font-bold hover:text-hayrok-orange transition-colors">Operating Principles</button></li>
-              <li><button onClick={() => onNavigate('newsroom')} className="text-slate-500 font-bold hover:text-hayrok-orange transition-colors">Newsroom</button></li>
+              <li><button onClick={() => onNavigate('about')} className="text-slate-500 font-bold hover:text-hayrok-orange transition-colors text-left">About Us</button></li>
+              <li><button onClick={() => onNavigate('trust-center')} className="text-slate-500 font-bold hover:text-hayrok-orange transition-colors text-left">Trust Center</button></li>
+              <li><button onClick={() => onNavigate('responsible-ai-policy')} className="text-slate-500 font-bold hover:text-hayrok-orange transition-colors text-left">Responsible AI Policy</button></li>
+              <li><button onClick={() => onNavigate('values')} className="text-slate-500 font-bold hover:text-hayrok-orange transition-colors text-left">Operating Principles</button></li>
+              <li><button onClick={() => onNavigate('newsroom')} className="text-slate-500 font-bold hover:text-hayrok-orange transition-colors text-left">Newsroom</button></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="text-slate-900 font-black text-xs uppercase tracking-widest mb-8">Legal & Trust</h4>
+            <ul className="space-y-5">
+              <li><button onClick={() => onNavigate('privacy-notice')} className="text-slate-500 font-bold hover:text-hayrok-orange transition-colors text-left">Privacy Notice</button></li>
+              <li><button onClick={() => onNavigate('terms')} className="text-slate-500 font-bold hover:text-hayrok-orange transition-colors text-left">Terms of use</button></li>
+              <li><button onClick={() => onNavigate('privacy-policy')} className="text-slate-500 font-bold hover:text-hayrok-orange transition-colors text-left">Privacy Policy</button></li>
+              <li><button onClick={() => onNavigate('security')} className="text-slate-500 font-bold hover:text-hayrok-orange transition-colors text-left">Security</button></li>
+              <li><button onClick={() => onNavigate('dpa')} className="text-slate-500 font-bold hover:text-hayrok-orange transition-colors text-left">Data Processing Addendum</button></li>
             </ul>
           </div>
         </div>

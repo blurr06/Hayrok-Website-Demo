@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-/* Fixed Error in file components/GenesisPage.tsx on line 273: Cannot find name 'FileSearch'. Added FileSearch to imports. */
 import { 
   Zap, Target, ShieldCheck, Activity, BarChart3, 
   ArrowRight, CheckCircle2, History, Scale, Users, 
@@ -125,7 +124,7 @@ export const GenesisPage: React.FC<{ onNavigate?: (page: string) => void }> = ({
             {...fadeInUp}
             className="text-xl md:text-3xl text-slate-500 leading-relaxed max-w-4xl mx-auto font-medium mb-12"
           >
-            Validate which exposures are exploitable in practice—using controlled, evidence-based attack simulation that aligns security posture to attacker reality.
+            Validate which exposures are exploitable in practice - using controlled, evidence-based attack simulation that aligns security posture to attacker reality.
           </motion.p>
 
           <motion.div {...fadeInUp} className="flex flex-col sm:flex-row items-center justify-center gap-6">
@@ -217,7 +216,7 @@ export const GenesisPage: React.FC<{ onNavigate?: (page: string) => void }> = ({
                    <span className="text-hayrok-orange italic">Simulation Engine.</span>
                  </h3>
                  <p className="text-xl md:text-3xl text-slate-400 font-medium leading-relaxed mb-16">
-                    Genesis uses controlled, agent-based automation to evaluate whether identified exposures can be exploited in practice—providing evidence‑based validation for defensible risk decisions.
+                    Genesis uses controlled, agent-based automation to evaluate whether identified exposures can be exploited in practice - providing evidence-based validation for defensible risk decisions.
                  </p>
                  
                  <div className="grid md:grid-cols-2 gap-8">
@@ -255,7 +254,7 @@ export const GenesisPage: React.FC<{ onNavigate?: (page: string) => void }> = ({
             {[
               { 
                 n: "01", t: "Validate Realistic Attack Paths", 
-                d: "Genesis evaluates end-to-end attack paths—initial access, privilege escalation, and lateral movement—reflecting how attackers actually operate, not just how vulns are listed.", 
+                d: "Genesis evaluates end-to-end attack paths - initial access, privilege escalation, and lateral movement - reflecting how attackers actually operate, not just how vulns are listed.", 
                 icon: GitBranch, tag: "ADVERSARY LOGIC" 
               },
               { 
@@ -379,7 +378,7 @@ export const GenesisPage: React.FC<{ onNavigate?: (page: string) => void }> = ({
                      <Lock size={16} /> Governed by Design
                   </div>
                   <h3 className="text-5xl md:text-[8rem] font-black text-white mb-10 tracking-[0.02em] leading-[0.85] uppercase">
-                    Non‑Destructive <br/> <span className="text-hayrok-orange italic font-light lowercase">and</span> <br/> Auditable.
+                    Non-Destructive <br/> <span className="text-hayrok-orange italic font-light lowercase">and</span> <br/> Auditable.
                   </h3>
                   <p className="text-xl md:text-2xl text-slate-400 font-medium leading-relaxed mb-20 max-w-2xl">
                     Built for enterprise and regulated environments. Genesis operates with strict execution policies and automation boundaries.
@@ -447,7 +446,7 @@ export const GenesisPage: React.FC<{ onNavigate?: (page: string) => void }> = ({
                   <p className="text-sm text-slate-500 font-medium">Decision system of record and risk movement tracking.</p>
                </div>
                <div className="p-8 bg-white border border-slate-100 rounded-3xl text-center">
-                  <p className="text-xl font-black text-slate-900 uppercase mb-4 tracking-tighter">Hay‑AI Reasons</p>
+                  <p className="text-xl font-black text-slate-900 uppercase mb-4 tracking-tighter">Hay-AI Reasons</p>
                   <p className="text-sm text-slate-500 font-medium">Ensures controlled orchestration and decision traceability.</p>
                </div>
             </div>
@@ -511,13 +510,13 @@ export const GenesisPage: React.FC<{ onNavigate?: (page: string) => void }> = ({
                  Turn Assumptions <br/> <span className="text-hayrok-orange italic tracking-tighter">Into Proof.</span>
                </h3>
                <p className="text-xl md:text-3xl text-slate-500 font-medium mb-16 leading-relaxed max-w-3xl mx-auto">
-                  Genesis provides the validation layer that connects exposure to real‑world risk. See how it works as part of the Hayrok platform.
+                  Genesis provides the validation layer that connects exposure to real-world risk. See how it works as part of the Hayrok platform.
                </p>
                <div className="flex flex-col md:flex-row justify-center items-stretch gap-6">
-                 <button onClick={() => onNavigate?.('demo')} className="bg-hayrok-orange text-white px-16 py-8 rounded-[2rem] text-2xl font-black hover:bg-orange-600 transition-all transform hover:scale-105 shadow-2xl shadow-orange-500/30">
+                 <button onClick={() => onNavigate?.('demo')} className="bg-hayrok-orange text-white px-16 py-8 rounded-[2rem] text-2xl font-black hover:bg-orange-600 transition-all transform hover:scale-105 shadow-2xl shadow-orange-500/20">
                     Request a Demo
                  </button>
-                 <button onClick={() => onNavigate?.('platform')} className="px-16 py-8 rounded-[2rem] text-2xl font-black text-slate-900 border border-slate-200 hover:bg-slate-50 transition-all bg-white shadow-sm flex items-center justify-center gap-4 group">
+                 <button onClick={() => onNavigate?.('platform')} className="px-16 py-8 rounded-[2rem] text-2xl font-black text-slate-900 border border-slate-200 hover:bg-white transition-all bg-white shadow-sm flex items-center justify-center gap-4 group">
                     Explore Platform <ArrowRight size={28} className="group-hover:translate-x-2 transition-transform" />
                  </button>
                  <button onClick={() => onNavigate?.('contact')} className="px-16 py-8 rounded-[2rem] text-2xl font-black text-white bg-slate-900 hover:bg-slate-800 transition-all shadow-xl flex items-center justify-center gap-4 group">

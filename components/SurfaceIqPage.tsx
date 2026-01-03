@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
 import { 
@@ -8,7 +7,6 @@ import {
   Network, ShieldCheck, Activity, History,
   UserCheck, Scale, MessageSquare, ChevronRight,
   Gavel, FileText, Cpu,
-  // Added missing icon imports to fix Cannot find name errors
   BarChart3, Code
 } from 'lucide-react';
 import { IntelligenceFabric } from './IntelligenceFabric';
@@ -36,7 +34,7 @@ export const SurfaceIqPage: React.FC<{ onNavigate?: (page: string) => void }> = 
             className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-orange-50/50 border border-orange-100/50 text-hayrok-orange text-[10px] font-black shadow-sm mx-auto mb-10 tracking-[0.4em] uppercase backdrop-blur-sm"
           >
             <Sparkles size={12} className="animate-pulse" />
-            Roadmap — Coming Soon
+            Roadmap - Coming Soon
           </motion.div>
           
           <motion.h1 
@@ -57,7 +55,7 @@ export const SurfaceIqPage: React.FC<{ onNavigate?: (page: string) => void }> = 
           </motion.p>
 
           <motion.div {...fadeInUp} className="flex flex-col sm:flex-row items-center justify-center gap-8">
-            <button onClick={() => onNavigate?.('early-adopter')} className="w-full sm:w-auto bg-hayrok-orange hover:bg-orange-600 text-white px-14 py-6 rounded-full font-black text-lg flex items-center justify-center gap-3 transition-all transform hover:scale-105 shadow-[0_20px_40px_-10px_rgba(255,95,0,0.3)]">
+            <button onClick={() => onNavigate?.('early-adopter')} className="w-full sm:w-auto bg-hayrok-orange text-white px-14 py-6 rounded-full font-black text-lg flex items-center justify-center gap-3 transition-all transform hover:scale-105 shadow-[0_20px_40px_-10px_rgba(255,95,0,0.3)]">
               Join the Early Adopter Program
             </button>
             <button onClick={() => onNavigate?.('contact')} className="w-full sm:w-auto px-14 py-6 rounded-full font-black text-lg text-slate-900 border border-slate-200 hover:bg-white transition-all shadow-sm">
@@ -204,7 +202,7 @@ export const SurfaceIqPage: React.FC<{ onNavigate?: (page: string) => void }> = 
             <div className="text-center max-w-4xl mx-auto mb-24">
                <h2 className="text-sm font-bold text-hayrok-orange uppercase tracking-[0.4em] mb-6">Planned Integrations</h2>
                <h3 className="text-5xl md:text-7xl font-black text-slate-900 tracking-tight">Better Together.</h3>
-               <p className="text-xl text-slate-500 font-medium mt-6">SurfaceIQ provides the validation layer that connects exposure to real‑world risk across the platform.</p>
+               <p className="text-xl text-slate-500 font-medium mt-6">SurfaceIQ provides the validation layer that connects exposure to real-world risk across the platform.</p>
             </div>
 
             <div className="grid md:grid-cols-3 gap-10">

@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
@@ -176,7 +177,7 @@ export const HivePage: React.FC<{ onNavigate?: (page: string) => void }> = ({ on
                <div className="bg-slate-900 rounded-[4rem] p-12 shadow-2xl relative overflow-hidden text-white min-h-[500px] flex flex-col justify-center border border-white/5">
                   <div className="absolute inset-0 bg-grid-white opacity-5" />
                   <div className="relative z-10 text-center">
-                     <p className="text-3xl font-black italic text-hayrok-orange mb-10 leading-tight uppercase">"Security produces signals. <br/> <span className="text-white underline decoration-hayrok-orange decoration-4">Hive owns the decision.</span>"</p>
+                     <p className="text-3xl font-black italic text-hayrok-orange mb-10 leading-tight uppercase">"Security produces signals. <br/> <span className="text-white underline decoration-hayrok-orange decoration-4 underline-offset-8">Hive owns the decision.</span>"</p>
                      <div className="flex justify-center gap-4 text-slate-400 text-[10px] font-black tracking-[0.5em] uppercase">
                         <span>No spreadsheets</span>
                         <div className="w-1.5 h-1.5 rounded-full bg-hayrok-orange mt-1" />
@@ -203,7 +204,7 @@ export const HivePage: React.FC<{ onNavigate?: (page: string) => void }> = ({ on
                    <span className="text-hayrok-orange italic">Layer for Risk.</span>
                  </h3>
                  <p className="text-xl md:text-3xl text-slate-400 font-medium leading-relaxed mb-16">
-                    Hive is Hayrok’s Security Risk Intelligence platform. It ingests multi‑tool signals, validates them with adversary truth, and produces governed, auditable risk decisions - not alerts.
+                    Hive is Hayrok’s Security Risk Intelligence platform. It ingests multi-tool signals, validates them with adversary truth, and produces governed, auditable risk decisions - not alerts.
                  </p>
                  <div className="h-px w-full bg-white/10 mb-12" />
                  <p className="text-2xl md:text-4xl font-black italic">
@@ -226,7 +227,7 @@ export const HivePage: React.FC<{ onNavigate?: (page: string) => void }> = ({ on
             <div className="lg:col-span-7 grid gap-6">
               {[
                 { 
-                  n: "01", t: "Aggregates Multi‑Tool Signals", 
+                  n: "01", t: "Aggregates Multi-Tool Signals", 
                   d: "Hive consumes data from CTEM, CNAPP, AppSec, and ASM tools. It does not replace your stack - it orchestrates and elevates it into a unified system of record.", 
                   icon: Database, tag: "INGESTION" 
                 },
@@ -237,16 +238,16 @@ export const HivePage: React.FC<{ onNavigate?: (page: string) => void }> = ({ on
                 },
                 { 
                   n: "03", t: "Correlates Into Risk Graphs", 
-                  d: "Attacker behavior is graph‑based; security thinking shouldn't be list‑based. Hive correlates signals across cloud, identity, and supply chain into actionable risk graphs.", 
+                  d: "Attacker behavior is graph-based; security thinking shouldn't be list-based. Hive correlates signals across cloud, identity, and supply chain into actionable risk graphs.", 
                   icon: Network, tag: "CORRELATION" 
                 },
                 { 
                   n: "04", t: "Governs AI Security Decisions", 
-                  d: "Hive’s AI is not autonomous chaos. Decisions are policy‑constrained, explainable, and auditable - delivering AI you can defend to auditors, regulators, and boards.", 
+                  d: "Hive’s AI is not autonomous chaos. Decisions are policy-constrained, explainable, and auditable - delivering AI you can defend to auditors, regulators, and boards.", 
                   icon: Gavel, tag: "GOVERNANCE" 
                 },
                 { 
-                  n: "05", t: "Executive‑Grade Decisioning", 
+                  n: "05", t: "Executive-Grade Decisioning", 
                   d: "Output is not an alert; it's a decision: Fix, Accept, Compensate, or Monitor. Every decision is tied to business impact, ownership, and confidence levels.", 
                   icon: UserCheck, tag: "MOBILIZATION" 
                 }
@@ -347,7 +348,7 @@ export const HivePage: React.FC<{ onNavigate?: (page: string) => void }> = ({ on
                      <Lock size={16} /> Governance by Design
                   </div>
                   <h3 className="text-5xl md:text-[7rem] font-black text-white mb-10 tracking-[0.02em] leading-[0.85] uppercase">
-                    Audit‑Ready <br/> <span className="text-hayrok-orange italic font-light lowercase">Risk</span> <br/> Decisions.
+                    Audit-Ready <br/> <span className="text-hayrok-orange italic font-light lowercase">Risk</span> <br/> Decisions.
                   </h3>
                   <p className="text-xl md:text-2xl text-slate-400 font-medium leading-relaxed mb-20 max-w-2xl">
                     Built for organizations that must defend their security choices to auditors, regulators, and boards without sacrificing velocity.
@@ -383,9 +384,9 @@ export const HivePage: React.FC<{ onNavigate?: (page: string) => void }> = ({ on
                   
                   <div className="grid grid-cols-1 gap-3">
                     {[
-                      { l: "Decision‑driven", r: "vs Alert‑driven" },
-                      { l: "Outcome‑centric", r: "vs Tool‑centric" },
-                      { l: "Evidence‑based", r: "vs Severity‑based" },
+                      { l: "Decision-driven", r: "vs Alert-driven" },
+                      { l: "Outcome-centric", r: "vs Tool-centric" },
+                      { l: "Evidence-based", r: "vs Severity-based" },
                       { l: "Auditable by design", r: "vs Hard to audit" },
                       { l: "AI with governance", r: "vs AI as hype" }
                     ].map((row, i) => (
@@ -466,7 +467,7 @@ export const HivePage: React.FC<{ onNavigate?: (page: string) => void }> = ({ on
                  Own The <br/> <span className="text-hayrok-orange italic tracking-tighter">Decision.</span>
                </h3>
                <p className="text-xl md:text-3xl text-slate-500 font-medium mb-16 leading-relaxed max-w-3xl mx-auto">
-                  Hive turns continuous security validation into accountable, enterprise‑grade risk decisions. Join the future of Security Risk Intelligence.
+                  Hive turns continuous security validation into accountable, enterprise-grade risk decisions. Join the future of Security Risk Intelligence.
                </p>
                <div className="flex flex-col md:flex-row justify-center items-stretch gap-6">
                  <button onClick={() => onNavigate?.('demo')} className="bg-hayrok-orange text-white px-16 py-8 rounded-[2rem] text-2xl font-black hover:bg-orange-600 transition-all transform hover:scale-105 shadow-2xl shadow-orange-500/20">
@@ -486,7 +487,7 @@ export const HivePage: React.FC<{ onNavigate?: (page: string) => void }> = ({ on
       {/* Signature Footer */}
       <div className="h-32 flex items-center justify-center border-t border-slate-100 bg-white">
          <p className="text-[11px] font-bold text-slate-300 uppercase tracking-[0.8em] text-center px-6 leading-relaxed max-w-5xl">
-            Hive is the governed intelligence layer that turns continuous security validation into accountable, enterprise‑grade risk decisions.
+            Hive is the governed intelligence layer that turns continuous security validation into accountable, enterprise-grade risk decisions.
          </p>
       </div>
     </div>
