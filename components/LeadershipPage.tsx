@@ -6,392 +6,469 @@ import {
   Award, ArrowRight, Briefcase, Heart,
   Terminal, Globe, Cpu, CheckCircle2,
   Scale, FileText, History, Zap, Lightbulb, 
-  Quote, TrendingUp, Landmark
+  Quote, TrendingUp, Landmark, ExternalLink,
+  Linkedin, Bot, ShieldAlert, Search, 
+  ClipboardCheck, Activity, Code, BarChart3,
+  GitBranch, HeartHandshake, UserPlus, Shield,
+  // Added Layers import to fix Cannot find name error
+  Layers
 } from 'lucide-react';
-
-// Cast motion elements to any to bypass type sync issues in this environment
-const MotionDiv = motion.div as any;
+import { IntelligenceFabric } from './IntelligenceFabric';
 
 const fadeInUp = {
-  initial: { opacity: 0, y: 20 },
+  initial: { opacity: 0, y: 30 },
   whileInView: { opacity: 1, y: 0 },
   viewport: { once: true },
-  transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }
+  transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }
 };
 
 const staggerContainer = {
   initial: {},
-  whileInView: {
-    transition: {
-      staggerChildren: 0.08
-    }
-  }
+  whileInView: { transition: { staggerChildren: 0.1 } }
 };
 
-const ProfileCard = ({ name, role, bio, image }: { name: string, role: string, bio: string, image: string }) => (
-  /* Use MotionDiv cast to any to fix type error on variants prop */
-  <MotionDiv 
-    variants={fadeInUp as any}
-    className="bg-white border border-slate-200 rounded-[3rem] p-8 md:p-12 hover:border-hayrok-orange/30 transition-all duration-500 hover:shadow-2xl group"
-  >
-    <div className="flex flex-col md:flex-row gap-10 items-start md:items-center mb-10">
-      <div className="w-32 h-32 rounded-[2.2rem] overflow-hidden bg-slate-100 shrink-0 border-4 border-slate-50 shadow-xl group-hover:shadow-hayrok-orange/10 transition-all duration-500">
-        <img src={image} alt={name} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 scale-110 group-hover:scale-100" />
-      </div>
-      <div>
-        <h3 className="text-3xl font-black text-slate-900 leading-tight mb-2">{name}</h3>
-        <p className="text-sm font-black text-hayrok-orange uppercase tracking-[0.2em]">{role}</p>
-      </div>
-    </div>
-    <p className="text-slate-600 font-medium leading-relaxed text-lg">
-      {bio}
-    </p>
-  </MotionDiv>
+// Custom Graphic: The Collaboration Mesh
+const CollaborationMesh = () => (
+  <div className="relative w-full h-[300px] flex items-center justify-center">
+    <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,95,0,0.05)_0%,transparent_70%)]" />
+    <svg className="w-full h-full max-w-md overflow-visible" viewBox="0 0 200 200">
+      {/* Central Leadership Node */}
+      <motion.circle 
+        cx="100" cy="100" r="30" 
+        fill="#FF5F00" 
+        className="opacity-10"
+        animate={{ r: [30, 35, 30] }}
+        transition={{ duration: 4, repeat: Infinity }}
+      />
+      <circle cx="100" cy="100" r="10" fill="#FF5F00" />
+      
+      {/* Surrounding Team Nodes */}
+      {[
+        { x: 40, y: 60, label: "Engineering" },
+        { x: 160, y: 60, label: "Product" },
+        { x: 100, y: 160, label: "Success" }
+      ].map((node, i) => (
+        <g key={i}>
+          <motion.line 
+            x1="100" y1="100" x2={node.x} y2={node.y} 
+            stroke="#FF5F00" strokeWidth="1" strokeDasharray="4 4"
+            className="opacity-30"
+          />
+          <motion.circle 
+            cx={node.x} cy={node.y} r="8" 
+            fill="#0F172A"
+            animate={{ y: [node.y, node.y - 10, node.y] }}
+            transition={{ duration: 3, delay: i * 0.5, repeat: Infinity }}
+          />
+          <text 
+            x={node.x} y={node.y - 20} 
+            textAnchor="middle" 
+            className="text-[8px] font-black uppercase tracking-widest fill-slate-400"
+          >
+            {node.label}
+          </text>
+        </g>
+      ))}
+      
+      {/* Animated Pulse Rays */}
+      <motion.circle 
+        cx="100" cy="100" r="10" 
+        fill="none" stroke="#FF5F00"
+        animate={{ r: [10, 80], opacity: [0.5, 0] }}
+        transition={{ duration: 2, repeat: Infinity }}
+      />
+    </svg>
+  </div>
 );
 
-interface LeadershipPageProps {
-  onNavigate?: (page: string) => void;
-}
-
-export const LeadershipPage: React.FC<LeadershipPageProps> = ({ onNavigate }) => {
-  // Provided professional portrait
+export const LeadershipPage: React.FC<{ onNavigate?: (page: string) => void }> = ({ onNavigate }) => {
+  // Provided portrait of CEO Herberth
   const herberthPhoto = "https://raw.githubusercontent.com/Hayrok/media/main/herberth.jpg";
 
   return (
-    <div className="bg-white min-h-screen text-slate-900 selection:bg-hayrok-orange/10 selection:text-hayrok-orange overflow-hidden font-sans relative">
+    <div className="bg-white min-h-screen text-slate-900 font-sans selection:bg-hayrok-orange/10 selection:text-hayrok-orange overflow-x-hidden relative">
       
-      {/* Background Ambience */}
-      <div className="fixed inset-0 pointer-events-none z-0">
-        <div className="absolute top-[-5%] right-[-5%] w-[80%] h-[80%] bg-[radial-gradient(circle_at_center,rgba(255,95,0,0.03)_0%,transparent_70%)] blur-[100px]" />
-        <div className="absolute inset-0 bg-grid-white opacity-[0.03]" />
-      </div>
-
-      <div className="h-32 md:h-40"></div>
-
-      {/* Hero Section */}
-      <section className="container mx-auto px-6 mb-32 relative z-10">
-        <div className="max-w-7xl mx-auto">
-          {/* Use MotionDiv cast to any to fix type error on spread fadeInUp */}
-          <MotionDiv {...fadeInUp} className="flex items-center gap-3 mb-10">
-            <div className="h-[2px] w-12 bg-hayrok-orange"></div>
-            <span className="text-[10px] font-black text-hayrok-orange uppercase tracking-[0.5em]">Practitioner-Led Stewardship</span>
-          </MotionDiv>
-          
-          <div className="grid lg:grid-cols-12 gap-12 items-start">
-            {/* Use MotionDiv cast to any to fix type error on initial/whileInView props */}
-            <MotionDiv 
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              className="lg:col-span-12"
-            >
-              {/* SCALED DOWN HEADER - Better visual balance */}
-              <h1 className="text-5xl md:text-7xl font-black mb-12 leading-[0.9] tracking-tight text-slate-900 flex flex-col uppercase">
-                <span className="block">Leadership Focused</span>
-                <span className="block lowercase italic">on</span>
-                <span className="bg-gradient-to-r from-[#FF5F00] via-[#D946EF] to-[#8B5CF6] bg-clip-text text-transparent italic block py-2">Accountability and</span>
-                <span className="bg-gradient-to-r from-[#8B5CF6] to-[#4F46E5] bg-clip-text text-transparent italic block">Execution.</span>
-              </h1>
-              
-              <div className="grid md:grid-cols-2 gap-12 items-start">
-                <p className="text-xl md:text-2xl text-slate-600 leading-relaxed font-semibold max-w-2xl">
-                  Hayrok is led by founders and operators with deep experience across cybersecurity, AI, and enterprise product development.
-                </p>
-                <div className="space-y-6">
-                  <p className="text-lg text-slate-500 font-medium">
-                    The leadership team brings a practical perspective shaped by operating in environments where security decisions, audits, and risk management have real consequences.
-                  </p>
-                  <p className="text-lg text-slate-500 font-medium">
-                    Our approach reflects the same principles embedded in our platform: governance, accountability, transparency, and measurable outcomes.
-                  </p>
-                </div>
-              </div>
-            </MotionDiv>
-          </div>
-        </div>
-      </section>
-
-      {/* Leadership Philosophy */}
-      <section className="container mx-auto px-6 mb-40 relative z-10">
-        <div className="bg-slate-50 border border-slate-200 rounded-[4rem] p-10 md:p-24 overflow-hidden relative shadow-sm group">
-          <div className="grid lg:grid-cols-12 gap-16 items-start">
-            {/* Use MotionDiv cast to any to fix type error on spread fadeInUp */}
-            <MotionDiv {...fadeInUp} className="lg:col-span-5">
-              <h3 className="text-[10px] font-black text-hayrok-orange uppercase tracking-[0.5em] mb-8">Leadership Philosophy</h3>
-              <h4 className="text-4xl md:text-5xl font-black text-slate-900 mb-10 tracking-tight leading-tight">
-                Grounded in <br/> <span className="text-slate-400 italic">Core Controls.</span>
-              </h4>
-              <p className="text-lg text-slate-600 font-medium leading-relaxed mb-12">
-                These principles guide how the company is built, how products are designed, and how customer relationships are managed.
-              </p>
-              <div className="p-8 bg-white rounded-3xl border border-slate-100 shadow-sm italic text-slate-500 font-medium">
-                "Long-term trust matters more than short-term speed."
-              </div>
-            </MotionDiv>
-
-            <div className="lg:col-span-7 grid sm:grid-cols-2 gap-6">
-              {[
-                { title: "Defined Controls", desc: "Automation must operate within defined controls.", icon: Gavel },
-                { title: "Human Support", desc: "AI systems should support human decision-making, not replace it.", icon: UserCheck },
-                { title: "Scrutiny Readiness", desc: "Platforms must withstand executive, regulatory, and audit scrutiny.", icon: ShieldCheck },
-                { title: "Trust Primacy", desc: "Prioritizing long-term trust over short-term expansion speed.", icon: Heart }
-              ].map((p, i) => (
-                <div key={i} className="p-8 bg-white border border-slate-100 rounded-[2.5rem] shadow-sm hover:shadow-xl transition-all duration-500 group/item">
-                  <div className="w-12 h-12 bg-slate-50 rounded-xl flex items-center justify-center text-hayrok-orange mb-6 group-hover/item:bg-hayrok-orange group-hover/item:text-white transition-all">
-                    <p.icon size={22} />
-                  </div>
-                  <h5 className="text-xl font-black text-slate-900 mb-3">{p.title}</h5>
-                  <p className="text-sm text-slate-500 font-medium leading-relaxed">{p.desc}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Founder Profiles */}
-      <section className="container mx-auto px-6 mb-20 relative z-10">
-        <div className="text-center max-w-3xl mx-auto mb-20">
-           <h2 className="text-[10px] font-black text-hayrok-orange uppercase tracking-[0.5em] mb-6">Executive Founders</h2>
-           <h3 className="text-4xl md:text-6xl font-black text-slate-900 mb-6 tracking-tight">Practitioners at the Helm.</h3>
-           <p className="text-lg text-slate-500 font-medium">Factual positioning for analyst and procurement reviews.</p>
-        </div>
-
-        {/* Use MotionDiv cast to any to fix type error on variants/initial/whileInView props */}
-        <MotionDiv 
-          variants={staggerContainer as any}
-          initial="initial"
-          whileInView="whileInView"
-          className="grid lg:grid-cols-2 gap-8"
-        >
-          <ProfileCard 
-            name="Herberth Oshiemele"
-            role="Founder & Chief Executive Officer"
-            image={herberthPhoto}
-            bio="Herberth Oshiemele is a cybersecurity professional with extensive experience in application security, enterprise security operations, and risk management. As Founder and CEO, he is responsible for Hayrok’s overall strategy, execution, and alignment with enterprise security and governance requirements."
-          />
-          <ProfileCard 
-            name="Ebuka Igwegbe"
-            role="Co‑Founder & Chief Product Officer"
-            image="https://api.dicebear.com/7.x/initials/svg?seed=EI&backgroundColor=1e293b&textColor=ffffff"
-            bio="Ebuka Igwegbe is an AI and product leader with experience in applied AI, machine learning, and enterprise software development. As Co‑Founder and CPO, he leads Hayrok’s product strategy and roadmap, with a focus on delivering AI‑driven capabilities that support transparency, control, and enterprise usability."
-          />
-        </MotionDiv>
-      </section>
-
-      {/* EXECUTIVE SPOTLIGHT - UPDATED WITH COMPACT SIZE */}
-      <section className="container mx-auto px-6 mb-40 relative z-10">
-        {/* Use MotionDiv cast to any to fix type error on spread fadeInUp */}
-        <MotionDiv 
-          {...fadeInUp}
-          className="bg-slate-900 rounded-[4rem] overflow-hidden relative shadow-2xl group border border-white/5"
-        >
-          <div className="absolute inset-0 bg-grid-white opacity-[0.03]" />
-          <div className="absolute top-0 right-0 w-[50%] h-full bg-hayrok-orange/10 blur-[120px] rounded-full" />
-          
-          <div className="grid lg:grid-cols-12 items-stretch">
-            {/* Image Container - Slightly scaled down height */}
-            <div className="lg:col-span-5 relative overflow-hidden min-h-[400px] lg:min-h-[550px]">
-               <img 
-                 src={herberthPhoto} 
-                 alt="Herberth Oshiemele" 
-                 className="absolute inset-0 w-full h-full object-cover grayscale-[0.3] group-hover:grayscale-0 transition-all duration-1000 group-hover:scale-105"
-               />
-               <div className="absolute inset-0 bg-gradient-to-r from-slate-900/60 via-transparent to-transparent lg:hidden" />
-               <div className="absolute bottom-10 left-10 p-6 bg-white/10 backdrop-blur-2xl border border-white/20 rounded-3xl shadow-2xl">
-                 <div className="flex items-center gap-4 text-white">
-                   <div className="w-2.5 h-2.5 rounded-full bg-hayrok-orange animate-pulse" />
-                   <span className="font-black uppercase tracking-[0.3em] text-[10px]">Strategic Visionary</span>
-                 </div>
-               </div>
-            </div>
-
-            {/* Content Container - Scaled down text sizing */}
-            <div className="lg:col-span-7 p-10 md:p-20 text-white flex flex-col justify-center">
-              <h3 className="text-hayrok-orange font-black text-[10px] uppercase tracking-[0.5em] mb-6">Executive Highlight</h3>
-              <h4 className="text-3xl md:text-6xl font-black mb-8 leading-[0.95] tracking-tight">
-                Architecting the Next <br/>
-                <span className="italic text-slate-400">Evolution of Trust.</span>
-              </h4>
-              
-              <div className="relative mb-10">
-                <Quote size={32} className="absolute -top-4 -left-4 text-hayrok-orange opacity-20" />
-                <p className="text-lg md:text-xl text-slate-200 font-medium leading-relaxed relative z-10 italic">
-                  "We aren't just building faster tools; we are building systems that inherit the accountability required by the modern enterprise. Security is a governance problem, solved with intelligence."
-                </p>
-              </div>
-              
-              <div className="space-y-4 border-t border-white/10 pt-10">
-                {[
-                  "Expertise in global Enterprise SecOps",
-                  "Alignment with critical regulatory frameworks",
-                  "Driving the strategy for Auditable Agentic AI"
-                ].map((point, i) => (
-                  <div key={i} className="flex items-center gap-4 text-sm font-bold text-slate-400">
-                    <div className="p-1 rounded-full bg-hayrok-orange/20 text-hayrok-orange">
-                      <CheckCircle2 size={14} strokeWidth={3} />
-                    </div>
-                    {point}
-                  </div>
-                ))}
-              </div>
-
-              <div className="mt-12 flex items-center gap-6">
-                 <span className="text-[10px] font-black text-slate-500 uppercase tracking-[0.4em]">Herberth Oshiemele - CEO</span>
-                 <div className="h-px flex-1 bg-gradient-to-r from-white/10 to-transparent"></div>
-              </div>
-            </div>
-          </div>
-        </MotionDiv>
-      </section>
-
-      {/* Leadership Standards */}
-      <section className="container mx-auto px-6 mb-40 relative z-10">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex items-center gap-6 mb-16">
-            <span className="text-[10px] font-black text-slate-900 uppercase tracking-[0.5em] shrink-0">Leadership Standards</span>
-            <div className="h-px w-full bg-slate-100" />
-          </div>
-
-          {/* Use MotionDiv cast to any to fix type error on variants/initial/whileInView props */}
-          <MotionDiv 
-            variants={staggerContainer as any}
-            initial="initial"
-            whileInView="whileInView"
-            className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
+      {/* Editorial Header */}
+      <section className="relative pt-48 pb-20 border-b border-slate-100 overflow-hidden">
+        <IntelligenceFabric density={1} isDark={false} />
+        <div className="container mx-auto px-6 relative z-10">
+          <motion.div 
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-50 border border-slate-200 text-hayrok-orange text-[10px] font-black mb-10 tracking-[0.4em] uppercase shadow-sm"
           >
-            {[
-              { title: "Decision Ownership", desc: "Clear ownership of decisions and outcomes across the org.", icon: Target },
-              { title: "Transparency", desc: "Explicit transparency in company strategy and execution.", icon: Eye },
-              { title: "Governance Alignment", desc: "Alignment with governance and compliance expectations.", icon: Scale },
-              { title: "Customer-Driven", desc: "Prioritization driven strictly by customer security needs.", icon: Users },
-              { title: "Measured Innovation", desc: "Innovation that is responsible, auditable, and safe.", icon: Zap },
-              { title: "Operating Integrity", desc: "Applying these standards to product, ops, and partnerships.", icon: Briefcase }
-            ].map((std, i) => (
-              /* Use MotionDiv cast to any to fix type error on variants prop */
-              <MotionDiv key={i} variants={fadeInUp as any} className="p-10 bg-slate-50 border border-slate-200 rounded-[2.5rem] hover:bg-white hover:shadow-xl transition-all duration-500">
-                <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center text-hayrok-orange mb-8 shadow-sm">
-                  <std.icon size={20} />
-                </div>
-                <h4 className="text-xl font-black text-slate-900 mb-4 tracking-tight">{std.title}</h4>
-                <p className="text-sm text-slate-500 font-medium leading-relaxed">{std.desc}</p>
-              </MotionDiv>
-            ))}
-          </MotionDiv>
+            <Sparkles size={12} className="animate-pulse" />
+            Practitioner-Led Stewardship
+          </motion.div>
+          <h1 className="text-5xl md:text-[9.5rem] font-black leading-[0.85] tracking-tight uppercase text-slate-900 mb-12">
+            Trusted, <br/>
+            <span className="text-hayrok-orange italic font-light tracking-tighter">Defended.</span>
+          </h1>
+          <p className="text-xl md:text-3xl text-slate-500 font-medium max-w-4xl leading-relaxed mb-12">
+            Hayrok is led by practitioners and builders who understand a simple truth: 
+            Security only works when decisions are <span className="text-slate-900 font-black">Defensible</span> — to engineers, executives, auditors, and regulators alike.
+          </p>
+          <p className="text-lg text-slate-400 font-medium max-w-2xl leading-relaxed">
+            Our leadership team brings deep experience across application security, risk management, enterprise platforms, and regulated environments. We focus on building technology that supports human judgment, evidence-based validation, and governance at scale.
+          </p>
         </div>
       </section>
 
-      {/* Advisors & Ecosystem */}
-      <section className="container mx-auto px-6 mb-40 relative z-10">
-        <div className="bg-slate-900 rounded-[4rem] p-10 md:p-24 text-white relative overflow-hidden shadow-2xl">
-          <div className="absolute inset-0 bg-grid-white opacity-[0.03]" />
-          <div className="absolute top-0 right-0 w-[50%] h-full bg-hayrok-orange/10 blur-[120px] rounded-full" />
-          
-          <div className="relative z-10">
-            <div className="max-w-3xl mb-16">
-              <h3 className="text-[10px] font-black text-hayrok-orange uppercase tracking-[0.5em] mb-8">Advisors & Ecosystem</h3>
-              <h4 className="text-4xl md:text-6xl font-black mb-8 leading-tight tracking-tight">Ensuring External <br/> <span className="text-hayrok-orange italic">Alignment.</span></h4>
-              <p className="text-xl text-slate-400 font-medium leading-relaxed">
-                Hayrok works with advisors and partners who bring experience across high-stakes sectors to ensure we remain aligned with evolving market and regulatory requirements.
-              </p>
-            </div>
+      {/* Philosophy Section */}
+      <section className="py-32 bg-[#FBFBF9] relative overflow-hidden">
+        <div className="container mx-auto px-6">
+           <div className="max-w-4xl mb-24">
+              <h2 className="text-[10px] font-black text-hayrok-orange uppercase tracking-[0.5em] mb-8">The Philosophy</h2>
+              <h3 className="text-4xl md:text-7xl font-black text-slate-900 leading-tight tracking-tight uppercase">Governed <br/> <span className="text-slate-400 italic font-light">By Conviction.</span></h3>
+           </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+           <div className="grid md:grid-cols-3 gap-8">
               {[
-                { label: "Enterprise Security", desc: "Practitioner-led insight for CISOs.", icon: ShieldCheck },
-                { label: "Risk & Compliance", desc: "Deep audit and GRC expertise.", icon: FileText },
-                { label: "Cloud Platforms", desc: "Infrastructure and SaaS scaling.", icon: Globe },
-                { label: "Regulated Industries", icon: Landmark, desc: "Alignment with high-stakes sectors." }
-              ].map((item, i) => (
-                <div key={i} className="p-8 bg-white/5 border border-white/10 rounded-3xl backdrop-blur-md">
-                   <item.icon size={24} className="text-hayrok-orange mb-6" />
-                   <h5 className="text-lg font-bold text-white mb-2 leading-tight">{item.label}</h5>
-                   <p className="text-xs text-slate-500 font-medium">{item.desc}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Building the Organization */}
-      <section className="container mx-auto px-6 mb-40 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-20 items-center">
-          {/* Use MotionDiv cast to any to fix type error on spread fadeInUp */}
-          <MotionDiv {...fadeInUp}>
-            <h3 className="text-[10px] font-black text-hayrok-orange uppercase tracking-[0.5em] mb-8">Intentional Growth</h3>
-            <h4 className="text-4xl md:text-5xl font-black text-slate-900 mb-8 tracking-tight">Building the <br/> <span className="text-hayrok-orange italic text-3xl md:text-5xl">Outcome-Owned Culture.</span></h4>
-            <p className="text-xl text-slate-600 font-medium leading-relaxed mb-10">
-              Hayrok is intentionally building its leadership and management team with individuals who have experience operating in environments where security, reliability, and accountability are critical.
-            </p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              {[
-                "Thoughtful execution over speed",
-                "Long-term customer trust",
-                "Clear communication with stakeholders",
-                "Enterprise & Regulated alignment"
+                { 
+                  title: "Evidence Over Assumptions", 
+                  desc: "We believe security decisions must be backed by proof, not severity scores or vendor claims.",
+                  icon: Target 
+                },
+                { 
+                  title: "Governance Over Automation", 
+                  desc: "Automation should assist humans — not replace accountability or oversight.",
+                  icon: Gavel 
+                },
+                { 
+                  title: "Trust Over Hype", 
+                  desc: "We build for enterprises that value reliability, transparency, and long-term risk reduction.",
+                  icon: ShieldCheck 
+                }
               ].map((p, i) => (
-                <div key={i} className="flex items-center gap-3 text-sm font-black text-slate-900 uppercase tracking-tighter">
-                  <CheckCircle2 size={18} className="text-hayrok-orange" />
-                  {p}
-                </div>
+                <motion.div 
+                  key={i} 
+                  {...fadeInUp}
+                  className="p-12 bg-white border border-slate-200 rounded-[3rem] hover:shadow-2xl transition-all duration-500 group"
+                >
+                  <div className="w-14 h-14 bg-slate-50 rounded-2xl flex items-center justify-center text-hayrok-orange mb-8 group-hover:bg-hayrok-orange group-hover:text-white transition-all">
+                    <p.icon size={28} />
+                  </div>
+                  <h4 className="text-2xl font-black text-slate-900 mb-4 uppercase tracking-tight">{p.title}</h4>
+                  <p className="text-slate-500 font-medium leading-relaxed text-sm">{p.desc}</p>
+                </motion.div>
               ))}
-            </div>
-          </MotionDiv>
-          
-          <div className="relative">
-             <div className="aspect-[4/3] rounded-[3rem] overflow-hidden shadow-2xl relative group">
-                <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070" alt="Team Session" className="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-1000" />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent" />
-                <div className="absolute bottom-10 left-10 right-10">
-                   <div className="p-6 bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl text-white">
-                      <p className="text-xs font-black uppercase tracking-widest mb-2">Focus & Fidelity</p>
-                      <p className="text-sm font-bold opacity-80">Building a foundation of accountable security intelligence.</p>
+           </div>
+        </div>
+      </section>
+
+      {/* CEO Spotlight: Herberth Oshiemele */}
+      <section className="relative py-32 bg-white">
+        <div className="container mx-auto px-6">
+          <div className="grid lg:grid-cols-12 gap-16 lg:gap-24 items-start">
+            <div className="lg:col-span-6">
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.95, y: 40 }}
+                whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+                className="relative aspect-[3/4] rounded-[4rem] overflow-hidden shadow-3xl border-8 border-white group"
+              >
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent z-10" />
+                <img 
+                  src={herberthPhoto} 
+                  alt="Herberth Oshiemele" 
+                  className="w-full h-full object-cover transition-all duration-1000 group-hover:scale-[1.03]" 
+                />
+                <div className="absolute bottom-12 left-12 right-12 z-20">
+                   <div className="flex flex-col gap-2 text-white">
+                      <p className="text-[10px] font-black uppercase tracking-[0.5em] opacity-80">Founder & Chief Executive Officer</p>
+                      <h2 className="text-4xl font-black tracking-tight uppercase">Herberth Oshiemele</h2>
+                      <div className="h-1 w-20 bg-hayrok-orange rounded-full mt-4" />
                    </div>
                 </div>
+              </motion.div>
+            </div>
+
+            <div className="lg:col-span-6 pt-10">
+              <motion.div {...fadeInUp} className="space-y-10">
+                <div className="relative">
+                  <Quote size={60} className="absolute -top-10 -left-8 text-hayrok-orange opacity-10" />
+                  <p className="text-3xl md:text-5xl font-black italic text-slate-900 leading-[1.1] tracking-tight relative z-10 uppercase">
+                    “Security teams are drowning in data — but still struggle to prove <span className="text-hayrok-orange underline decoration-hayrok-orange/20 decoration-8 underline-offset-8">which risks actually matter.</span>”
+                  </p>
+                </div>
+
+                <div className="space-y-6 prose prose-slate max-w-none">
+                  <p className="text-xl text-slate-500 font-medium leading-relaxed">
+                    Herberth is a cybersecurity leader with deep experience across application security, product security, risk management, and regulated enterprise environments.
+                  </p>
+                  <p className="text-lg text-slate-600 leading-relaxed">
+                    He has spent his career working at the intersection of security engineering, governance, and business — helping organizations move from reactive security practices to structured, defensible risk management. 
+                  </p>
+                  <p className="text-lg text-slate-600 leading-relaxed">
+                    Before founding Hayrok, Herberth worked across multiple industries including financial services, e-commerce, healthcare, energy, and SaaS, partnering closely with engineering teams, CISOs, and compliance leaders. He leads Hayrok with a focus on clarity, accountability, and building systems that stand up to real-world scrutiny.
+                  </p>
+                </div>
+
+                <div className="pt-10 flex items-center gap-6">
+                   <a href="#" className="w-12 h-12 rounded-2xl bg-slate-50 border border-slate-200 flex items-center justify-center text-slate-400 hover:text-hayrok-orange transition-all">
+                      <Linkedin size={20} />
+                   </a>
+                   <div className="h-px flex-1 bg-slate-100" />
+                </div>
+              </motion.div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CPO Spotlight: Ebuka Igwegbe */}
+      <section className="py-40 bg-[#FBFBF9]">
+        <div className="container mx-auto px-6">
+           <div className="max-w-6xl mx-auto">
+              <div className="grid lg:grid-cols-12 gap-20 items-center">
+                 <div className="lg:col-span-7 order-2 lg:order-1">
+                    <motion.div {...fadeInUp} className="space-y-10">
+                       <div className="inline-flex items-center gap-3 text-hayrok-orange font-black text-[10px] uppercase tracking-[0.5em]">
+                          <Bot size={16} /> Product Stewardship
+                       </div>
+                       <h3 className="text-4xl md:text-7xl font-black text-slate-900 uppercase tracking-tighter leading-none">
+                         Ebuka Igwegbe
+                       </h3>
+                       <p className="text-hayrok-orange font-black text-[10px] uppercase tracking-[0.5em] mb-6">Co-Founder & Chief Product Officer</p>
+                       
+                       <div className="space-y-8">
+                         <p className="text-xl text-slate-500 font-medium leading-relaxed">
+                            Ebuka is a product leader with experience in AI-driven platforms and enterprise product management. 
+                         </p>
+                         <p className="text-lg text-slate-600 leading-relaxed">
+                            As CPO, he leads Hayrok’s product strategy and ensures the platform’s AI capabilities are practical, explainable, and aligned with real-world security and governance needs. 
+                         </p>
+                         <p className="text-lg text-slate-600 leading-relaxed">
+                            Together with the engineering and security teams, he ensures Hayrok delivers practical, trustworthy, and scalable security validation, making sure the AI enhances human decision-making rather than replacing it.
+                         </p>
+                       </div>
+                    </motion.div>
+                 </div>
+                 
+                 <div className="lg:col-span-5 order-1 lg:order-2">
+                    <motion.div 
+                      initial={{ opacity: 0, x: 20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 1 }}
+                      className="aspect-square bg-slate-200 rounded-[5rem] overflow-hidden border-8 border-white shadow-2xl relative group flex items-center justify-center"
+                    >
+                       <div className="absolute inset-0 flex items-center justify-center text-[10rem] font-black text-slate-300 group-hover:text-hayrok-orange transition-colors duration-700 select-none">EI</div>
+                       <div className="absolute inset-0 bg-gradient-to-t from-slate-900/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                    </motion.div>
+                 </div>
+              </div>
+           </div>
+        </div>
+      </section>
+
+      {/* NEW: Culture & Safe Environment Section */}
+      <section className="py-40 bg-white relative overflow-hidden">
+        <div className="container mx-auto px-6">
+           <div className="grid lg:grid-cols-2 gap-24 items-center">
+              <div className="order-2 lg:order-1">
+                 <CollaborationMesh />
+              </div>
+              <div className="order-1 lg:order-2">
+                 <h2 className="text-[10px] font-black text-hayrok-orange uppercase tracking-[0.6em] mb-8">Culture & Environment</h2>
+                 <h3 className="text-4xl md:text-6xl font-black text-slate-900 leading-tight uppercase tracking-tight mb-10">
+                    A Safe Harbor for <br/> <span className="text-hayrok-orange italic font-light lowercase">Exceptional Builders.</span>
+                 </h3>
+                 <p className="text-xl text-slate-500 font-medium leading-relaxed mb-12">
+                    Good leadership isn't just about technical direction—it's about creating an environment where high-stakes engineering can happen with clarity and psychological safety.
+                 </p>
+                 
+                 <div className="grid gap-8">
+                    {[
+                      { 
+                        title: "Cross-Functional Sync", 
+                        desc: "Weekly 'Zero-Friction' loops where engineers, design, and leadership remove bottlenecks collectively.", 
+                        icon: HeartHandshake 
+                      },
+                      { 
+                        title: "The Growth Standard", 
+                        desc: "Explicit internal paths for professional evolution. We manage people as builders, not resources.", 
+                        icon: UserPlus 
+                      },
+                      { 
+                        title: "Governance of Self", 
+                        desc: "We hold ourselves to the same high audit standards we build for our customers.", 
+                        icon: ClipboardCheck 
+                      }
+                    ].map((item, i) => (
+                      <motion.div 
+                        key={i} 
+                        {...fadeInUp}
+                        className="flex gap-6 items-start"
+                      >
+                         <div className="p-4 bg-slate-50 rounded-2xl text-hayrok-orange shrink-0">
+                            <item.icon size={24} />
+                         </div>
+                         <div>
+                            <h4 className="text-lg font-black text-slate-900 uppercase mb-1">{item.title}</h4>
+                            <p className="text-slate-500 text-sm font-medium">{item.desc}</p>
+                         </div>
+                      </motion.div>
+                    ))}
+                 </div>
+              </div>
+           </div>
+        </div>
+      </section>
+
+      {/* Expertise Domain Grid */}
+      <section className="py-40 bg-white border-t border-slate-100">
+        <div className="container mx-auto px-6">
+          <div className="max-w-4xl mb-24">
+            <h2 className="text-[10px] font-black text-hayrok-orange uppercase tracking-[0.6em] mb-8">Product & Engineering Leadership</h2>
+            <h3 className="text-4xl md:text-7xl font-black mb-10 leading-tight uppercase tracking-tight">Our Collective <br/> <span className="text-hayrok-orange italic">Intelligence.</span></h3>
+            <p className="text-xl text-slate-500 font-medium leading-relaxed">
+              Hayrok’s leadership is focused on building governed, explainable security systems that scale safely in high-trust environments where reliability is non-negotiable.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[
+              { title: "Offensive Engineering", items: ["Application security engineering", "Cloud vulnerability research", "Attack path analysis"], icon: Zap },
+              { title: "Governance Tech", items: ["Policy-as-code (OPA)", "Risk management frameworks", "Auditable decision paths"], icon: Gavel },
+              { title: "Safe Simulation", items: ["Breach simulation mechanics", "Non-destructive probing", "Control testing"], icon: Shield },
+              { title: "Agentic AI", items: ["Explainable reasoning", "HITL AI controls", "Governed orchestration"], icon: Bot },
+              { title: "Enterprise SaaS", items: ["Distributed system design", "Multi-tenant isolation", "Production safety"], icon: Layers },
+              { title: "Audit Integrity", items: ["Decision lineage", "Regulator reporting", "Evidence persistence"], icon: History }
+            ].map((domain, i) => (
+              <motion.div 
+                key={i} 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.05 }}
+                className="p-10 bg-slate-50 border border-slate-100 rounded-[3rem] hover:bg-white hover:shadow-xl transition-all group"
+              >
+                <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center text-hayrok-orange mb-8 shadow-sm group-hover:scale-110 transition-transform">
+                  <domain.icon size={20} />
+                </div>
+                <h4 className="text-lg font-black mb-6 uppercase tracking-tight text-slate-900">{domain.title}</h4>
+                <ul className="space-y-3">
+                  {domain.items.map((item, j) => (
+                    <li key={j} className="flex items-center gap-3 text-xs font-bold text-slate-400 uppercase tracking-widest">
+                       <div className="w-1 h-1 rounded-full bg-hayrok-orange/40" /> {item}
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Advisory & Customer Commitment Section */}
+      <section className="py-40 bg-[#020617] text-white relative overflow-hidden">
+        <div className="absolute inset-0 bg-grid-white opacity-[0.03] pointer-events-none" />
+        <div className="container mx-auto px-6 relative z-10">
+          <div className="grid lg:grid-cols-2 gap-24 items-center">
+             <div>
+                <h3 className="text-hayrok-orange font-black text-[10px] uppercase tracking-[0.5em] mb-8">Ecosystem Support</h3>
+                <h4 className="text-4xl md:text-7xl font-black mb-10 leading-[0.95] tracking-tight uppercase">Advisory & <br/> <span className="text-hayrok-orange">Industry Guidance.</span></h4>
+                <p className="text-xl text-slate-400 font-medium leading-relaxed mb-12">
+                  Hayrok is supported by advisors and industry experts who bring perspective from CISO-level leadership, risk and audit teams, and cloud-native DevSecOps environments.
+                </p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {["Enterprise CISO Perspectives", "Product & AppSec Experts", "Risk, Audit & Compliance", "Cloud-Native Pioneers"].map((adv, i) => (
+                    <div key={i} className="flex items-center gap-3 p-4 bg-white/5 border border-white/10 rounded-2xl">
+                       <CheckCircle2 size={16} className="text-hayrok-orange" />
+                       <span className="text-[10px] font-black uppercase tracking-widest text-slate-300">{adv}</span>
+                    </div>
+                  ))}
+                </div>
+             </div>
+             
+             <div className="p-12 md:p-20 bg-white/5 border border-white/10 rounded-[5rem] text-center shadow-2xl backdrop-blur-md relative overflow-hidden">
+                <div className="absolute top-0 right-0 p-8 opacity-10">
+                   <Heart size={140} className="text-hayrok-orange" />
+                </div>
+                <h5 className="text-2xl font-black mb-10 uppercase tracking-tight relative z-10">Accountable to You.</h5>
+                <div className="space-y-10 relative z-10">
+                   {[
+                      { l: "Transparency", d: "Clear explanations of platform boundaries." },
+                      { l: "Safety", d: "Non-destructive, policy-bound workflows." },
+                      { l: "Defensibility", d: "Evidence and audit trails you can rely on." }
+                   ].map((item, i) => (
+                      <div key={i} className="group">
+                        <p className="text-hayrok-orange font-black text-xs uppercase tracking-widest mb-1 group-hover:scale-110 transition-transform">{item.l}</p>
+                        <p className="text-sm font-medium text-slate-300">{item.d}</p>
+                      </div>
+                   ))}
+                </div>
+                <p className="mt-12 text-[9px] font-black text-slate-500 uppercase tracking-[0.4em]">No black boxes. No autonomous chaos.</p>
              </div>
           </div>
         </div>
       </section>
 
-      {/* Learn More Final Block */}
-      <section className="container mx-auto px-6 mb-48 relative z-10 text-center">
-        {/* Use MotionDiv cast to any to fix type error on spread fadeInUp */}
-        <MotionDiv 
-          {...fadeInUp}
-          className="max-w-6xl mx-auto p-12 md:p-32 bg-slate-50 border border-slate-200 rounded-[4rem] relative overflow-hidden"
-        >
-          <div className="relative z-10">
-             <h3 className="text-4xl md:text-7xl font-black mb-12 tracking-tight leading-tight">Learn More.</h3>
-             <p className="text-xl text-slate-500 font-medium mb-16 max-w-2xl mx-auto">
-               To learn more about Hayrok’s leadership and approach:
-             </p>
-             
-             <div className="flex flex-col md:flex-row justify-center items-center gap-6">
-                <button 
-                  onClick={() => onNavigate && onNavigate('platform')}
-                  className="w-full md:w-auto bg-hayrok-orange text-white px-12 py-6 rounded-2xl font-black text-sm uppercase tracking-widest hover:bg-orange-600 transition-all shadow-xl shadow-orange-500/20"
-                >
-                   Explore the Platform
-                </button>
-                <button 
-                  onClick={() => onNavigate && onNavigate('values')}
-                  className="w-full md:w-auto bg-white text-slate-900 border border-slate-200 px-12 py-6 rounded-2xl font-black text-sm uppercase tracking-widest hover:bg-slate-50 transition-all"
-                >
-                   Our Values & Principles
-                </button>
-                <button 
-                  onClick={() => onNavigate && onNavigate('contact')}
-                  className="w-full md:w-auto bg-hayrok-dark text-white px-12 py-6 rounded-2xl font-black text-sm uppercase tracking-widest hover:bg-slate-800 transition-all shadow-xl shadow-black/20"
-                >
-                   Contact Us
-                </button>
-             </div>
-          </div>
-        </MotionDiv>
-        <p className="mt-12 text-slate-400 font-black text-[10px] uppercase tracking-[0.8em]">Accountability in Every Decision.</p>
+      {/* Building for the Long Term */}
+      <section className="py-40 bg-white">
+         <div className="container mx-auto px-6">
+            <div className="max-w-5xl mx-auto p-12 md:p-24 bg-slate-50 border border-slate-200 rounded-[5rem] text-center group shadow-sm hover:shadow-2xl transition-all duration-700">
+               <h3 className="text-4xl md:text-6xl font-black text-slate-900 mb-10 tracking-tight uppercase leading-[0.9]">Building for the <br/> <span className="text-hayrok-orange italic font-light tracking-tighter">Long Term.</span></h3>
+               <p className="text-xl text-slate-500 font-medium mb-16 max-w-2xl mx-auto leading-relaxed">
+                 We are committed to building a platform — and a company — that customers can rely on for years, not just quarters.
+               </p>
+               <div className="grid md:grid-cols-4 gap-8">
+                  {[
+                    { label: "Trust & Accountability", icon: ShieldCheck },
+                    { label: "Sustainable Programs", icon: RefreshCw },
+                    { label: "Measurable Reduction", icon: TrendingUp },
+                    { label: "Strong Relationships", icon: Users }
+                  ].map((item, i) => (
+                    <div key={i} className="flex flex-col items-center gap-4">
+                       <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center text-slate-300 group-hover:text-hayrok-orange transition-all shadow-sm">
+                          <item.icon size={20} />
+                       </div>
+                       <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest leading-tight">{item.label}</span>
+                    </div>
+                  ))}
+               </div>
+            </div>
+         </div>
       </section>
 
-      <div className="h-32"></div>
+      {/* Final Call to Action */}
+      <section className="py-40 bg-[#FCFCFA] text-center border-t border-slate-100">
+         <div className="container mx-auto px-6 relative z-10">
+            <motion.div {...fadeInUp} className="max-w-5xl mx-auto">
+               <h3 className="text-5xl md:text-[8rem] font-black text-slate-900 mb-12 tracking-tight leading-[0.8] uppercase">Join Us on <br/> <span className="text-hayrok-orange italic">The Journey.</span></h3>
+               <p className="text-xl md:text-2xl text-slate-500 font-medium mb-16 leading-relaxed max-w-3xl mx-auto">
+                  We are building the future of governed security validation and risk intelligence. Connect with our team to start your maturity journey.
+               </p>
+               <div className="flex flex-col md:flex-row justify-center items-stretch gap-6">
+                 <button onClick={() => onNavigate?.('demo')} className="bg-hayrok-orange text-white px-12 py-6 rounded-2xl font-black text-xl hover:bg-orange-600 transition-all transform hover:scale-105 shadow-2xl shadow-orange-500/20">
+                    Request a Demo
+                 </button>
+                 <button onClick={() => onNavigate?.('contact')} className="px-12 py-6 rounded-2xl font-black text-xl text-slate-900 border border-slate-200 hover:bg-slate-50 transition-all bg-white shadow-sm flex items-center justify-center gap-4 group">
+                    Contact Us
+                 </button>
+                 <button onClick={() => onNavigate?.('careers')} className="px-12 py-6 rounded-2xl font-black text-xl text-white bg-slate-900 hover:bg-slate-800 transition-all shadow-xl">
+                    View Careers
+                 </button>
+               </div>
+            </motion.div>
+         </div>
+      </section>
+
+      {/* Summary Footer */}
+      <div className="h-32 flex items-center justify-center border-t border-slate-100 bg-white">
+         <p className="text-[11px] font-bold text-slate-300 uppercase tracking-[0.8em] text-center px-6 leading-relaxed max-w-5xl">
+            Hayrok is led by experienced security practitioners focused on building governed, evidence-based security validation and risk intelligence solutions.
+         </p>
+      </div>
     </div>
   );
 };
+
+// Internal icon helpers
+const RefreshCw = ({ size, className }: { size: number, className?: string }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"></path>
+    <path d="M21 3v5h-5"></path>
+    <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"></path>
+    <path d="M3 21v-5h5"></path>
+  </svg>
+);

@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { 
@@ -73,7 +72,6 @@ import { SaaSCloudNativeCompanies } from './components/SaaSCloudNativeCompanies'
 import { HealthcareLifeSciences } from './components/HealthcareLifeSciences';
 import { RetailECommerce } from './components/RetailECommerce';
 import { TechnologyAIDrivenOrganizations } from './components/TechnologyAIDrivenOrganizations';
-import { SubprocessorRequest } from './components/SubprocessorRequest';
 
 const VisibilityToValidation = () => (
   <section className="py-40 bg-[#050B1A] text-white relative overflow-hidden">
@@ -352,10 +350,6 @@ function App() {
     // Legal & Trust Routes
     if (['privacy-notice', 'terms', 'privacy-policy', 'security', 'dpa'].includes(currentPage)) {
         return <TrustCenter onNavigate={setCurrentPage} />;
-    }
-
-    if (currentPage === 'subprocessor-request') {
-        return <SubprocessorRequest onNavigate={setCurrentPage} />;
     }
 
     if (currentPage.startsWith('solution-') || currentPage.startsWith('role-') || currentPage.startsWith('industry-')) {

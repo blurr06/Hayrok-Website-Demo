@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
@@ -339,7 +338,7 @@ export const TrustCenter: React.FC<{ onNavigate?: (page: string) => void }> = ({
                     </div>
                   </div>
                   <button 
-                    onClick={() => onNavigate?.('subprocessor-request')}
+                    onClick={() => onNavigate?.('contact')}
                     className="px-8 py-3 bg-hayrok-dark text-white rounded-xl font-black text-[10px] uppercase tracking-widest hover:bg-hayrok-orange transition-all shadow-lg"
                   >
                     Request Subprocessor List
