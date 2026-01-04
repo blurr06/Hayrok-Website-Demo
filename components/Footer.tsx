@@ -1,5 +1,5 @@
 import React from 'react';
-import { Twitter, Linkedin, Github, Mail, ShieldCheck } from 'lucide-react';
+import { Twitter, Linkedin, Instagram, Mail, ShieldCheck } from 'lucide-react';
 import { Logo } from './Logo';
 
 interface FooterProps {
@@ -19,14 +19,14 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               Hayrok - Agentic AI for Security, Built With Accountability.
             </p>
             <div className="flex gap-4">
-              <a href="#" className="w-12 h-12 rounded-2xl bg-slate-50 border border-slate-200 flex items-center justify-center text-slate-400 hover:text-hayrok-orange hover:bg-white hover:border-hayrok-orange hover:shadow-xl transition-all">
+              <a href="https://www.twitter.com/hayrok" target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-2xl bg-slate-50 border border-slate-200 flex items-center justify-center text-slate-400 hover:text-hayrok-orange hover:bg-white hover:border-hayrok-orange hover:shadow-xl transition-all">
                 <Twitter size={20} />
               </a>
-              <a href="#" className="w-12 h-12 rounded-2xl bg-slate-50 border border-slate-200 flex items-center justify-center text-slate-400 hover:text-hayrok-orange hover:bg-white hover:border-hayrok-orange hover:shadow-xl transition-all">
+              <a href="https://www.linkedin.com/company/hayrok/" target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-2xl bg-slate-50 border border-slate-200 flex items-center justify-center text-slate-400 hover:text-hayrok-orange hover:bg-white hover:border-hayrok-orange hover:shadow-xl transition-all">
                 <Linkedin size={20} />
               </a>
-              <a href="#" className="w-12 h-12 rounded-2xl bg-slate-50 border border-slate-200 flex items-center justify-center text-slate-400 hover:text-hayrok-orange hover:bg-white hover:border-hayrok-orange hover:shadow-xl transition-all">
-                <Github size={20} />
+              <a href="http://instagram.com/hayroksecurity" target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-2xl bg-slate-50 border border-slate-200 flex items-center justify-center text-slate-400 hover:text-hayrok-orange hover:bg-white hover:border-hayrok-orange hover:shadow-xl transition-all">
+                <Instagram size={20} />
               </a>
             </div>
           </div>
@@ -70,10 +70,10 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             © {new Date().getFullYear()} Hayrok Security Inc. Built with Governed Autonomy.
           </p>
           <div className="flex items-center gap-6">
-            <div className="flex items-center gap-2 text-slate-500 text-sm font-bold">
+            <a href="mailto:contact@hayrok.com" className="flex items-center gap-2 text-slate-500 text-sm font-bold hover:text-hayrok-orange transition-colors">
               <Mail size={14} className="text-hayrok-orange" />
-              <span>hello@hayrok.com</span>
-            </div>
+              <span>contact@hayrok.com</span>
+            </a>
           </div>
         </div>
       </div>

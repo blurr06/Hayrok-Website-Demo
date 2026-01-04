@@ -47,7 +47,7 @@ const ValidationVisualizer = () => {
           <div className="space-y-6 font-mono text-[11px]">
             <div className="flex gap-4">
               <span className="text-hayrok-orange opacity-50">[SCAN]</span>
-              <span className="text-slate-300">Evaluating access path: <span className="text-white italic">Public_Internet -> S3_Policy_Alpha</span></span>
+              <span className="text-slate-300">Evaluating access path: <span className="text-white italic">Public_Internet → S3_Policy_Alpha</span></span>
             </div>
             <div className="flex gap-4">
               <span className="text-hayrok-orange opacity-50">[TEST]</span>

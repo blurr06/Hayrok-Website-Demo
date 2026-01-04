@@ -39,19 +39,19 @@ const BrandIcons: Record<string, React.ReactNode> = {
     <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/jenkins/jenkins-original.svg" alt="Jenkins" className="w-full h-full object-contain" />
   ),
   Splunk: (
-    <img src="https://www.vectorlogo.zone/logos/splunk/splunk-icon.svg" alt="Splunk" className="w-full h-full object-contain" />
+    <img src="/logos/splunk.png" alt="Splunk" className="w-full h-full object-contain" />
   ),
   Elastic: (
     <img src="https://www.vectorlogo.zone/logos/elastic/elastic-icon.svg" alt="Elastic" className="w-full h-full object-contain" />
   ),
   Vanta: (
-    <img src="https://www.vectorlogo.zone/logos/vanta/vanta-icon.svg" alt="Vanta" className="w-full h-full object-contain" />
+    <img src="/logos/vanta.png" alt="Vanta" className="w-full h-full object-contain" />
   ),
   AuditBoard: (
     <img src="https://www.auditboard.com/favicon.ico" alt="AuditBoard" className="w-full h-full object-contain" />
   ),
   Drata: (
-    <img src="https://drata.com/favicon.ico" alt="Drata" className="w-full h-full object-contain" />
+    <img src="/logos/drata.png" alt="Drata" className="w-full h-full object-contain" />
   ),
   Datadog: (
     <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/datadog/datadog-original.svg" alt="Datadog" className="w-full h-full object-contain" />
@@ -69,10 +69,10 @@ const BrandIcons: Record<string, React.ReactNode> = {
     <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/bitbucket/bitbucket-original.svg" alt="Bitbucket" className="w-full h-full object-contain" />
   ),
   ArgoCD: (
-    <img src="https://raw.githubusercontent.com/argoproj/argo-cd/master/assets/logo.png" alt="ArgoCD" className="w-full h-full object-contain" />
+    <img src="/logos/argocd.png" alt="ArgoCD" className="w-full h-full object-contain" />
   ),
   Harness: (
-    <img src="https://www.vectorlogo.zone/logos/harnessio/harnessio-icon.svg" alt="Harness" className="w-full h-full object-contain" />
+    <img src="/logos/harness.png" alt="Harness" className="w-full h-full object-contain" />
   )
 };
 

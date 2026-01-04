@@ -8,246 +8,274 @@ import {
   Settings, UserPlus, Box, FileText, Globe, ShieldAlert,
   ChevronDown, BarChart3, Clock, CheckCircle2, TrendingUp as TrendingUpIcon,
   AlertTriangle, Filter, Terminal, Info, Share2, Eye,
-  Sparkles
+  Sparkles, Home, Package, Crosshair, PieChart, ScanLine,
+  Calendar, Download, Play, ChevronUp
 } from 'lucide-react';
 import { IntelligenceFabric } from './IntelligenceFabric';
 
 const MotionDiv = motion.div as any;
 
-const GenesisDashboardMock = () => {
-  const [currentTime, setCurrentTime] = useState(new Date());
-
+// Interactive Hive Dashboard - Enterprise Level
+const HiveDashboardMock = () => {
+  const [activeNav, setActiveNav] = useState('Dashboard');
+  const [assetExpanded, setAssetExpanded] = useState(true);
+  const [vulnCounts, setVulnCounts] = useState({ critical: 0, high: 0, medium: 0, low: 0 });
+  const [isScanning, setIsScanning] = useState(false);
+  
+  // Animate vulnerability counts on mount
   useEffect(() => {
-    const interval = setInterval(() => setCurrentTime(new Date()), 1000);
-    return () => clearInterval(interval);
+    const targets = { critical: 32, high: 12, medium: 8, low: 40 };
+    const duration = 1500;
+    const steps = 30;
+    const interval = duration / steps;
+    
+    let step = 0;
+    const timer = setInterval(() => {
+      step++;
+      const progress = step / steps;
+      setVulnCounts({
+        critical: Math.round(targets.critical * progress),
+        high: Math.round(targets.high * progress),
+        medium: Math.round(targets.medium * progress),
+        low: Math.round(targets.low * progress),
+      });
+      if (step >= steps) clearInterval(timer);
+    }, interval);
+    
+    return () => clearInterval(timer);
   }, []);
 
+  const navItems = [
+    { name: 'Dashboard', icon: LayoutDashboard, active: true },
+    { name: 'Asset Management', icon: Package, expandable: true, expanded: assetExpanded },
+    { name: 'Scorecards', icon: ClipboardList },
+    { name: 'Reporting & Insights', icon: PieChart },
+    { name: 'Scan Config', icon: Settings },
+    { name: 'Scan Results', icon: ScanLine },
+  ];
+
+  const assetSubItems = ['Inventory', 'Continuous Discovery', 'Asset Risk Profiling'];
+
   return (
-    <div className="w-full bg-[#FDFDFD] rounded-[2.5rem] shadow-2xl overflow-hidden flex h-[780px] border border-slate-200/60 font-sans">
-      {/* Sidebar */}
-      <aside className="w-64 bg-white border-r border-slate-100 flex flex-col shrink-0 relative z-20">
-        <div className="p-8 mb-4 flex items-center gap-3">
-          <div className="w-8 h-8 rounded-xl bg-hayrok-orange flex items-center justify-center shadow-lg shadow-orange-500/20">
-            <Shield size={18} className="text-white" />
-          </div>
-          <span className="text-slate-900 font-black text-xl tracking-tight">Hayrok</span>
-        </div>
+    <div className="relative w-full rounded-[1.5rem] shadow-2xl overflow-hidden border border-slate-200/60 bg-white">
+      {/* Traffic light dots */}
+      <div className="absolute top-4 right-4 flex items-center gap-1.5 z-50">
+        <div className="w-3 h-3 rounded-full bg-red-400" />
+        <div className="w-3 h-3 rounded-full bg-yellow-400" />
+        <div className="w-3 h-3 rounded-full bg-emerald-400" />
+      </div>
 
-        <nav className="flex-1 px-4 space-y-1">
-          {[
-            { label: 'Dashboard', icon: LayoutDashboard, active: true },
-            { label: 'Asset Center', icon: DatabaseIcon },
-            { label: 'Scorecards', icon: BarChart3 },
-            { label: 'Live Validation', icon: Zap },
-            { label: 'Attack Paths', icon: Target },
-            { label: 'CodeFabrics', icon: CodeIcon },
-            { label: 'Trust Reports', icon: FileText },
-            { label: 'Integrations', icon: Layers },
-          ].map((item, i) => (
-            <button 
-              key={i} 
-              className={`w-full px-5 py-3 rounded-2xl flex items-center gap-4 transition-all duration-300 ${item.active ? 'bg-hayrok-orange text-white shadow-xl shadow-orange-500/20' : 'text-slate-400 hover:text-slate-900 hover:bg-slate-50'}`}
-            >
-              <item.icon size={18} strokeWidth={item.active ? 2.5 : 2} />
-              <span className="text-sm font-bold tracking-tight">{item.label}</span>
-            </button>
-          ))}
-        </nav>
-        
-        <div className="p-6 border-t border-slate-50">
-           <div className="p-4 bg-slate-50 rounded-2xl border border-slate-100 flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                <span className="text-[10px] font-black uppercase text-slate-400 tracking-widest">Active Guard</span>
+      <div className="flex h-[580px]">
+        {/* Sidebar */}
+        <div className="w-72 bg-slate-900 flex flex-col">
+          {/* Logo */}
+          <div className="p-6 border-b border-slate-700/50">
+            <div className="flex items-center gap-3">
+              <div className="w-9 h-9 bg-hayrok-orange rounded-xl flex items-center justify-center">
+                <Shield size={18} className="text-white" />
               </div>
-              <div className="h-1 w-12 bg-emerald-500 rounded-full" />
-           </div>
+              <div>
+                <h3 className="text-white font-black text-lg tracking-tight">Hayrok</h3>
+                <p className="text-hayrok-orange text-[11px] font-medium">Hive</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Navigation */}
+          <div className="flex-1 py-4 px-3">
+            <p className="text-slate-500 text-[10px] font-bold uppercase tracking-wider px-3 mb-3">Main</p>
+            <nav className="space-y-1">
+              {navItems.map((item) => (
+                <div key={item.name}>
+                  <button
+                    onClick={() => {
+                      setActiveNav(item.name);
+                      if (item.expandable) setAssetExpanded(!assetExpanded);
+                    }}
+                    className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-sm font-medium transition-all ${
+                      activeNav === item.name 
+                        ? 'bg-hayrok-orange text-white' 
+                        : 'text-slate-400 hover:text-white hover:bg-slate-800'
+                    }`}
+                  >
+                    <div className="flex items-center gap-3">
+                      <item.icon size={18} />
+                      <span>{item.name}</span>
+                    </div>
+                    {item.expandable && (
+                      <ChevronDown 
+                        size={16} 
+                        className={`transition-transform ${item.expanded ? 'rotate-180' : ''}`} 
+                      />
+                    )}
+                  </button>
+                  {item.expandable && item.expanded && (
+                    <div className="ml-9 mt-1 space-y-1">
+                      {assetSubItems.map((sub) => (
+                        <button 
+                          key={sub}
+                          className="w-full text-left px-3 py-2 text-sm text-slate-500 hover:text-slate-300 transition-colors"
+                        >
+                          {sub}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </nav>
+          </div>
+
+          {/* Bottom bar */}
+          <div className="p-4 border-t border-slate-700/50">
+            <div className="flex items-center gap-3">
+              <div className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" />
+              <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Live Dashboard</span>
+            </div>
+            <p className="text-[10px] text-slate-600 mt-1 ml-5">Hive Platform v2.0</p>
+          </div>
         </div>
-      </aside>
 
-      {/* Main Content Area */}
-      <main className="flex-1 flex flex-col overflow-hidden bg-[#F8F9FB]">
-        {/* Header */}
-        <header className="h-20 flex items-center justify-between px-10 shrink-0 z-10">
-          <h2 className="text-2xl font-black text-slate-900 tracking-tight">Genesis</h2>
-
-          <div className="flex items-center gap-4">
-            <div className="relative">
-              <button className="bg-orange-50 text-hayrok-orange px-6 py-2.5 rounded-2xl font-black text-xs uppercase tracking-widest flex items-center gap-2 border border-orange-100 shadow-sm transition-all hover:bg-hayrok-orange hover:text-white group">
-                <Bot size={18} />
+        {/* Main Content */}
+        <div className="flex-1 flex flex-col bg-slate-50">
+          {/* Top Header */}
+          <div className="bg-white border-b border-slate-100 px-6 py-4 flex items-center justify-between">
+            <div className="flex items-center gap-4">
+              <div className="flex items-center gap-2">
+                <div className="w-8 h-8 bg-gradient-to-br from-hayrok-orange to-orange-500 rounded-xl flex items-center justify-center">
+                  <Bot size={16} className="text-white" />
+                </div>
+                <span className="font-black text-slate-800 text-lg">Genesis</span>
+              </div>
+              <div className="text-[10px] text-slate-400 font-medium">Governed & Actionable AI Security</div>
+            </div>
+            
+            <div className="flex items-center gap-4">
+              {/* Search */}
+              <div className="flex items-center gap-2 px-4 py-2 bg-slate-50 rounded-xl border border-slate-100">
+                <Search size={16} className="text-slate-400" />
+                <span className="text-sm text-slate-400">Search</span>
+              </div>
+              
+              {/* Ask Hay-AI */}
+              <button className="flex items-center gap-2 px-4 py-2 bg-hayrok-orange/10 rounded-xl border border-hayrok-orange/20 text-hayrok-orange font-bold text-sm hover:bg-hayrok-orange/20 transition-colors">
+                <Bot size={16} />
                 Ask Hay-AI
               </button>
               
-              {/* Reasoning Engine Bubble */}
-              <div className="absolute top-full mt-4 right-0 w-64 bg-white rounded-3xl shadow-2xl border border-slate-100 p-5 z-30">
-                <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 bg-hayrok-orange rounded-xl flex items-center justify-center text-white shrink-0 shadow-lg shadow-orange-500/20">
-                    <Bot size={20} />
-                  </div>
-                  <div>
-                    <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest leading-none mb-1">Hay-AI Active</p>
-                    <p className="text-xs font-black text-slate-900 leading-tight">Reasoning Engine v2.0</p>
-                  </div>
+              {/* Notifications */}
+              <button className="relative p-2 hover:bg-slate-100 rounded-xl transition-colors">
+                <Bell size={20} className="text-slate-500" />
+                <div className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full" />
+              </button>
+              
+              {/* Profile */}
+              <div className="flex items-center gap-2 pl-4 border-l border-slate-100">
+                <div className="w-8 h-8 bg-slate-200 rounded-full flex items-center justify-center">
+                  <Users size={14} className="text-slate-500" />
                 </div>
+                <span className="text-sm font-bold text-slate-700">Hayrok Inc.</span>
+                <ChevronDown size={16} className="text-slate-400" />
               </div>
             </div>
-            
-            <div className="w-10 h-10 rounded-full bg-slate-200 overflow-hidden border-2 border-white shadow-sm">
-              <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" alt="avatar" />
-            </div>
           </div>
-        </header>
 
-        {/* Content Body */}
-        <div className="px-10 pb-10 space-y-8 overflow-y-auto no-scrollbar">
-          
-          {/* Top Stat Cards */}
-          <div className="grid grid-cols-4 gap-6">
-            {[
-              { label: 'Total Assets', value: '2,410', trend: '+12%', color: 'text-hayrok-orange' },
-              { label: 'Critical Risk', value: '0', trend: '-100%', color: 'text-emerald-500' },
-              { label: 'High Sensitivity', value: '14', trend: 'Stable', color: 'text-slate-400' },
-              { label: 'Security Score', value: '94%', trend: '+4%', color: 'text-indigo-500' },
-            ].map((stat, i) => (
-              <div key={i} className="bg-white p-8 rounded-[2rem] border border-slate-100 shadow-sm group hover:shadow-xl transition-all">
-                <div className="flex justify-between items-start mb-6">
-                  <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">{stat.label}</p>
-                  <div className="w-16 h-8 flex items-center justify-center">
-                    <svg viewBox="0 0 100 40" className="w-full h-full opacity-30">
-                      <path d="M0,35 L20,32 L40,38 L60,25 L80,28 L100,15" fill="none" stroke="currentColor" strokeWidth="3" className={stat.color} />
-                    </svg>
-                  </div>
+          {/* Dashboard Content */}
+          <div className="flex-1 p-6 overflow-auto">
+            {/* Breadcrumb & Actions */}
+            <div className="flex items-center justify-between mb-6">
+              <div className="flex items-center gap-2 text-sm">
+                <Home size={16} className="text-hayrok-orange" />
+                <ChevronRight size={14} className="text-slate-300" />
+                <span className="font-bold text-slate-800">Dashboard</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <button className="p-2 hover:bg-white rounded-lg transition-colors">
+                  <Calendar size={18} className="text-slate-400" />
+                </button>
+                <button className="flex items-center gap-2 px-4 py-2 border border-hayrok-orange text-hayrok-orange rounded-xl font-bold text-sm hover:bg-hayrok-orange/5 transition-colors">
+                  <Download size={16} />
+                  Report
+                </button>
+                <button 
+                  onClick={() => setIsScanning(!isScanning)}
+                  className="flex items-center gap-2 px-4 py-2 bg-hayrok-orange text-white rounded-xl font-bold text-sm hover:bg-orange-600 transition-colors"
+                >
+                  <Play size={16} />
+                  Run Scan
+                </button>
+              </div>
+            </div>
+
+            {/* Target URL Card */}
+            <div className="bg-white rounded-2xl border border-slate-100 p-4 mb-6 flex items-center justify-between">
+              <div className="flex items-center gap-4">
+                <div className="px-4 py-2 bg-slate-50 rounded-xl border border-slate-100">
+                  <span className="text-sm font-bold text-slate-700">www.hayrok.com</span>
                 </div>
-                <div className="flex items-end justify-between">
-                  <span className="text-4xl font-black text-slate-900 tracking-tighter tabular-nums leading-none">{stat.value}</span>
-                  <span className={`text-[10px] font-black px-2 py-1 rounded-lg ${stat.trend.startsWith('+') ? 'bg-emerald-50 text-emerald-600' : stat.trend === 'Stable' ? 'bg-slate-50 text-slate-500' : 'bg-orange-50 text-hayrok-orange'}`}>
-                    {stat.trend}
+                <div className="flex items-center gap-2">
+                  <span className="text-xs text-slate-400">Status</span>
+                  <span className="px-3 py-1 bg-emerald-100 text-emerald-700 rounded-lg text-xs font-bold uppercase">
+                    {isScanning ? 'Scanning...' : 'Completed'}
                   </span>
                 </div>
               </div>
-            ))}
-          </div>
-
-          <div className="grid grid-cols-12 gap-8 items-start">
-            {/* Main Posture Card */}
-            <div className="col-span-8 space-y-8">
-              <div className="bg-white rounded-[3rem] p-10 border border-slate-100 shadow-sm relative overflow-hidden h-[450px] flex flex-col">
-                <div className="flex items-center justify-between mb-10">
-                  <div className="flex items-center gap-4">
-                    <div className="w-14 h-14 bg-orange-50 rounded-2xl flex items-center justify-center text-hayrok-orange shadow-sm border border-orange-100">
-                      <Activity size={24} className="animate-pulse" />
-                    </div>
-                    <div>
-                      <h3 className="text-xl font-black text-slate-900 tracking-tight">Posture Monitoring Active</h3>
-                      <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest flex items-center gap-2">
-                        <Clock size={12} /> Last validation 2m ago
-                      </p>
-                    </div>
-                  </div>
-                  <div className="px-4 py-2 bg-[#F8F9FB] border border-slate-100 rounded-xl text-[10px] font-black text-slate-400 uppercase tracking-widest flex items-center gap-2">
-                    <Sparkles size={14} className="text-hayrok-orange" />
-                    Hay-AI Insights Enabled
-                  </div>
-                </div>
-
-                <div className="flex-1 flex flex-col items-center justify-center text-center">
-                  <p className="text-xl font-medium text-slate-500 max-w-lg mb-10 leading-relaxed">
-                    Hay-AI is currently analyzing <span className="text-slate-900 font-black">214 attack vectors</span> across your cloud environment.
-                  </p>
-
-                  {/* Log View */}
-                  <div className="w-full max-w-xl bg-[#1E293B] rounded-3xl p-6 font-mono text-[11px] text-left shadow-2xl relative overflow-hidden">
-                    <div className="absolute top-0 right-0 p-4 opacity-5 pointer-events-none">
-                      <Terminal size={100} className="text-white" />
-                    </div>
-                    <div className="space-y-2 relative z-10">
-                      <div className="flex gap-3">
-                        <span className="text-hayrok-orange opacity-60">[08:56:11]</span>
-                        <span className="text-slate-300">Validation: <span className="text-white">non-destructive probe sent to Port 443</span></span>
-                      </div>
-                      <div className="flex gap-3">
-                        <span className="text-hayrok-orange opacity-60">[08:56:11]</span>
-                        <span className="text-slate-300">Risk Score adjusted: <span className="text-hayrok-orange font-bold">+2.4 impact detected</span></span>
-                      </div>
-                      <div className="flex gap-3">
-                        <span className="text-hayrok-orange opacity-60">[08:56:11]</span>
-                        <span className="text-slate-300">Scanning software SBOM in 'billing-service' repository</span>
-                      </div>
-                      <div className="flex gap-3">
-                        <span className="text-hayrok-orange opacity-60">[08:56:11]</span>
-                        <span className="text-slate-300">
-                          <span className="inline-block w-2.5 h-4 bg-hayrok-orange align-middle mr-2" />
-                          Governance: <span className="text-white font-bold italic">OPA policy 'Restricted-Data-Access' verified</span>
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="mt-10">
-                  <div className="h-2 w-full bg-slate-50 rounded-full overflow-hidden shadow-inner border border-slate-100">
-                    <motion.div 
-                      initial={{ width: 0 }}
-                      animate={{ width: '65%' }}
-                      transition={{ duration: 2, ease: "easeInOut" }}
-                      className="h-full bg-hayrok-orange rounded-full shadow-[0_0_10px_rgba(255,95,0,0.4)]"
-                    />
-                  </div>
-                </div>
+              <div className="flex items-center gap-6 text-xs text-slate-400">
+                <span>Start time <span className="font-bold text-slate-600">1:46 PM</span></span>
+                <span>End time <span className="font-bold text-slate-600">2:46 PM</span></span>
+                <span>Duration <span className="font-bold text-slate-600">1 hour</span></span>
               </div>
             </div>
 
-            {/* Findings Sidebar */}
-            <div className="col-span-4 space-y-6 h-full flex flex-col">
-              <div className="bg-white rounded-[3rem] p-10 border border-slate-100 shadow-sm flex-1 flex flex-col">
-                <div className="flex items-center justify-between mb-10">
-                  <h4 className="text-[11px] font-black text-slate-900 uppercase tracking-[0.3em]">Recent Findings</h4>
-                  <button className="text-[10px] font-black text-hayrok-orange uppercase tracking-widest hover:underline transition-all">View All</button>
+            {/* Vulnerability Status */}
+            <div className="bg-white rounded-2xl border border-slate-100 p-6">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="p-2 bg-red-50 rounded-xl">
+                  <ShieldAlert size={20} className="text-red-500" />
                 </div>
-
-                <div className="space-y-4">
-                  {[
-                    { title: 'Insecure S3 Policy', tag: 'Verified by Hay-AI • 10m ago', icon: ShieldAlert },
-                    { title: 'Outdated SSH Library', tag: 'Hay-AI Probe Sent • 25m ago', icon: Zap },
-                  ].map((finding, i) => (
-                    <div key={i} className="bg-[#F8F9FB] rounded-[2rem] p-8 border border-slate-50 group hover:border-hayrok-orange/30 transition-all cursor-pointer">
-                      <h5 className="text-base font-black text-slate-900 mb-3 tracking-tight">{finding.title}</h5>
-                      <div className="flex items-center gap-2">
-                        <div className="w-5 h-5 bg-hayrok-orange/10 rounded-lg flex items-center justify-center text-hayrok-orange">
-                          <finding.icon size={12} />
-                        </div>
-                        <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{finding.tag}</span>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-
-                <div className="mt-auto pt-10 text-center">
-                   <div className="p-6 bg-slate-50 rounded-[2rem] border border-dashed border-slate-200">
-                      <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest leading-relaxed">System is continuously learning from environment shifts.</p>
-                   </div>
-                </div>
+                <h3 className="font-black text-slate-800">Vulnerability Status</h3>
               </div>
+              
+              <div className="grid grid-cols-4 gap-4">
+                {[
+                  { label: 'Critical', count: vulnCounts.critical, color: 'from-red-500 to-red-600', icon: AlertTriangle },
+                  { label: 'High', count: vulnCounts.high, color: 'from-orange-400 to-orange-500', icon: AlertTriangle },
+                  { label: 'Medium', count: vulnCounts.medium, color: 'from-yellow-400 to-yellow-500', icon: Info },
+                  { label: 'Low', count: vulnCounts.low, color: 'from-blue-400 to-blue-500', icon: Info },
+                ].map((item) => (
+                  <motion.div 
+                    key={item.label}
+                    whileHover={{ scale: 1.02, y: -2 }}
+                    className={`relative overflow-hidden rounded-2xl bg-gradient-to-br ${item.color} p-5 cursor-pointer transition-shadow hover:shadow-lg`}
+                  >
+                    <div className="flex items-center gap-2 mb-3">
+                      <BarChart3 size={16} className="text-white/80" />
+                      <span className="text-white/90 text-sm font-bold">{item.label}</span>
+                    </div>
+                    <p className="text-4xl font-black text-white">{item.count}</p>
+                    <div className="absolute -bottom-4 -right-4 opacity-10">
+                      <item.icon size={80} className="text-white" />
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+
+            {/* Bottom Section Headers */}
+            <div className="grid grid-cols-3 gap-4 mt-6">
+              {['Active Assets', 'Remediation Overview', 'Compliance Score'].map((title) => (
+                <div key={title} className="bg-white rounded-2xl border border-slate-100 p-4 flex items-center justify-between">
+                  <span className="font-bold text-slate-700 text-sm">{title}</span>
+                  <Info size={16} className="text-slate-300" />
+                </div>
+              ))}
             </div>
           </div>
         </div>
-      </main>
+      </div>
     </div>
   );
 };
-
-// Custom icons for the sidebar/dashboard to match screenshot
-const DatabaseIcon = ({ size }: { size: number }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/><path d="M3 12c0 1.66 4 3 9 3s9-1.34 9-3"/>
-  </svg>
-);
-
-const CodeIcon = ({ size }: { size: number }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
-  </svg>
-);
 
 export const Hero: React.FC<{ onNavigate?: (page: string) => void }> = ({ onNavigate }) => {
   return (
@@ -309,7 +337,7 @@ export const Hero: React.FC<{ onNavigate?: (page: string) => void }> = ({ onNavi
              transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
              className="relative z-20 dashboard-shadow"
            >
-              <GenesisDashboardMock />
+              <HiveDashboardMock />
            </MotionDiv>
 
            {/* Floating Background Accents */}

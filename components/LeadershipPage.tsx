@@ -83,7 +83,7 @@ const CollaborationMesh = () => (
 
 export const LeadershipPage: React.FC<{ onNavigate?: (page: string) => void }> = ({ onNavigate }) => {
   // Provided portrait of CEO Herberth
-  const herberthPhoto = "https://raw.githubusercontent.com/Hayrok/media/main/herberth.jpg";
+  const herberthPhoto = "/logos/herberth.png";
 
   return (
     <div className="bg-white min-h-screen text-slate-900 font-sans selection:bg-hayrok-orange/10 selection:text-hayrok-orange overflow-x-hidden relative">
@@ -217,47 +217,104 @@ export const LeadershipPage: React.FC<{ onNavigate?: (page: string) => void }> =
       </section>
 
       {/* CPO Spotlight: Ebuka Igwegbe */}
-      <section className="py-40 bg-[#FBFBF9]">
+      <section className="relative py-32 bg-[#FBFBF9]">
         <div className="container mx-auto px-6">
-           <div className="max-w-6xl mx-auto">
-              <div className="grid lg:grid-cols-12 gap-20 items-center">
-                 <div className="lg:col-span-7 order-2 lg:order-1">
-                    <motion.div {...fadeInUp} className="space-y-10">
-                       <div className="inline-flex items-center gap-3 text-hayrok-orange font-black text-[10px] uppercase tracking-[0.5em]">
-                          <Bot size={16} /> Product Stewardship
-                       </div>
-                       <h3 className="text-4xl md:text-7xl font-black text-slate-900 uppercase tracking-tighter leading-none">
-                         Ebuka Igwegbe
-                       </h3>
-                       <p className="text-hayrok-orange font-black text-[10px] uppercase tracking-[0.5em] mb-6">Co-Founder & Chief Product Officer</p>
-                       
-                       <div className="space-y-8">
-                         <p className="text-xl text-slate-500 font-medium leading-relaxed">
-                            Ebuka is a product leader with experience in AI-driven platforms and enterprise product management. 
-                         </p>
-                         <p className="text-lg text-slate-600 leading-relaxed">
-                            As CPO, he leads Hayrok’s product strategy and ensures the platform’s AI capabilities are practical, explainable, and aligned with real-world security and governance needs. 
-                         </p>
-                         <p className="text-lg text-slate-600 leading-relaxed">
-                            Together with the engineering and security teams, he ensures Hayrok delivers practical, trustworthy, and scalable security validation, making sure the AI enhances human decision-making rather than replacing it.
-                         </p>
-                       </div>
-                    </motion.div>
-                 </div>
-                 
-                 <div className="lg:col-span-5 order-1 lg:order-2">
-                    <motion.div 
-                      initial={{ opacity: 0, x: 20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 1 }}
-                      className="aspect-square bg-slate-200 rounded-[5rem] overflow-hidden border-8 border-white shadow-2xl relative group flex items-center justify-center"
-                    >
-                       <div className="absolute inset-0 flex items-center justify-center text-[10rem] font-black text-slate-300 group-hover:text-hayrok-orange transition-colors duration-700 select-none">EI</div>
-                       <div className="absolute inset-0 bg-gradient-to-t from-slate-900/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                    </motion.div>
-                 </div>
+          <div className="grid lg:grid-cols-12 gap-16 lg:gap-24 items-start">
+            <div className="lg:col-span-6 order-2 lg:order-1 pt-10">
+              <motion.div {...fadeInUp} className="space-y-10">
+                <div className="inline-flex items-center gap-3 text-hayrok-orange font-black text-[10px] uppercase tracking-[0.5em]">
+                   <Bot size={16} /> Product Stewardship
+                </div>
+                
+                <div className="relative">
+                  <Quote size={60} className="absolute -top-10 -left-8 text-hayrok-orange opacity-10" />
+                  <p className="text-3xl md:text-5xl font-black italic text-slate-900 leading-[1.1] tracking-tight relative z-10 uppercase">
+                    "Great products do not just solve problems - they <span className="text-hayrok-orange underline decoration-hayrok-orange/20 decoration-8 underline-offset-8">earn trust through clarity.</span>"
+                  </p>
+                </div>
+
+                <div className="space-y-6 prose prose-slate max-w-none">
+                  <p className="text-xl text-slate-500 font-medium leading-relaxed">
+                    Ebuka is a product leader with experience in AI-driven platforms and enterprise product management.
+                  </p>
+                  <p className="text-lg text-slate-600 leading-relaxed">
+                    As CPO, he leads Hayrok product strategy and ensures the platform AI capabilities are practical, explainable, and aligned with real-world security and governance needs.
+                  </p>
+                  <p className="text-lg text-slate-600 leading-relaxed">
+                    Together with the engineering and security teams, he ensures Hayrok delivers practical, trustworthy, and scalable security validation, making sure the AI enhances human decision-making rather than replacing it.
+                  </p>
+                </div>
+
+                <div className="pt-10 flex items-center gap-6">
+                   <a href="#" className="w-12 h-12 rounded-2xl bg-white border border-slate-200 flex items-center justify-center text-slate-400 hover:text-hayrok-orange transition-all">
+                      <Linkedin size={20} />
+                   </a>
+                   <div className="h-px flex-1 bg-slate-200" />
+                </div>
+              </motion.div>
+            </div>
+
+            <div className="lg:col-span-6 order-1 lg:order-2">
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.95, y: 40 }}
+                whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+                className="relative aspect-[3/4] rounded-[4rem] overflow-hidden shadow-3xl border-8 border-white group"
+              >
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent z-10" />
+                <img 
+                  src="/logos/ebuka2.png" 
+                  alt="Ebuka Igwegbe" 
+                  className="w-full h-full object-cover transition-all duration-1000 group-hover:scale-[1.03]" 
+                />
+                <div className="absolute bottom-12 left-12 right-12 z-20">
+                   <div className="flex flex-col gap-2 text-white">
+                      <p className="text-[10px] font-black uppercase tracking-[0.5em] opacity-80">Co-Founder and Chief Product Officer</p>
+                      <h2 className="text-4xl font-black tracking-tight uppercase">Ebuka Igwegbe</h2>
+                      <div className="h-1 w-20 bg-hayrok-orange rounded-full mt-4" />
+                   </div>
+                </div>
+              </motion.div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Product Advisor: Tyler Giles */}
+      <section className="relative py-20 bg-slate-50/50">
+        <div className="container mx-auto px-6">
+          <div className="max-w-4xl mx-auto">
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="flex flex-col md:flex-row items-center gap-10 p-10 bg-white rounded-3xl border border-slate-100 shadow-sm"
+            >
+              {/* Photo */}
+              <div className="relative w-40 h-40 md:w-48 md:h-48 rounded-2xl overflow-hidden flex-shrink-0 shadow-lg">
+                <img 
+                  src="/logos/tyler2.jpeg" 
+                  alt="Tyler Giles" 
+                  className="w-full h-full object-cover" 
+                />
               </div>
-           </div>
+
+              {/* Info */}
+              <div className="flex-1 text-center md:text-left">
+                <div className="inline-flex items-center gap-2 text-hayrok-orange font-bold text-[10px] uppercase tracking-[0.3em] mb-3">
+                   <Lightbulb size={14} /> Product Advisor
+                </div>
+                <h3 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight mb-4">Tyler Giles</h3>
+                <p className="text-slate-500 leading-relaxed mb-6">
+                  Tyler brings deep expertise in scalable systems architecture and cloud infrastructure to his advisory role at Hayrok. He provides strategic guidance on product direction, technical architecture decisions, and enterprise readiness.
+                </p>
+                <a href="#" className="inline-flex items-center gap-2 text-sm font-bold text-slate-400 hover:text-hayrok-orange transition-colors">
+                  <Linkedin size={18} />
+                  <span>Connect on LinkedIn</span>
+                </a>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </section>
 
