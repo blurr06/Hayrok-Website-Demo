@@ -280,40 +280,80 @@ export const LeadershipPage: React.FC<{ onNavigate?: (page: string) => void }> =
         </div>
       </section>
 
-      {/* Product Advisor: Tyler Giles */}
-      <section className="relative py-20 bg-slate-50/50">
+      {/* Product Security Advisor: Tyler Giles */}
+      <section className="relative py-32 bg-gradient-to-b from-slate-50 to-white">
         <div className="container mx-auto px-6">
-          <div className="max-w-4xl mx-auto">
-            <motion.div 
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="flex flex-col md:flex-row items-center gap-10 p-10 bg-white rounded-3xl border border-slate-100 shadow-sm"
-            >
+          <div className="max-w-6xl mx-auto">
+            <div className="grid lg:grid-cols-2 gap-16 items-center">
               {/* Photo */}
-              <div className="relative w-40 h-40 md:w-48 md:h-48 rounded-2xl overflow-hidden flex-shrink-0 shadow-lg">
-                <img 
-                  src="/logos/tyler2.jpeg" 
-                  alt="Tyler Giles" 
-                  className="w-full h-full object-cover" 
-                />
-              </div>
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.95, x: -40 }}
+                whileInView={{ opacity: 1, scale: 1, x: 0 }}
+                transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+                className="relative"
+              >
+                <div className="relative aspect-square max-w-md mx-auto rounded-3xl overflow-hidden shadow-2xl border-4 border-white">
+                  <img 
+                    src="/logos/tyler2.jpeg" 
+                    alt="Tyler Giles" 
+                    className="w-full h-full object-cover" 
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 via-transparent to-transparent" />
+                  <div className="absolute bottom-8 left-8 right-8">
+                    <p className="text-[10px] font-black uppercase tracking-[0.4em] text-white/80 mb-2">Product Security Advisor</p>
+                    <h3 className="text-3xl font-black text-white tracking-tight">Tyler Giles</h3>
+                    <div className="h-1 w-16 bg-hayrok-orange rounded-full mt-4" />
+                  </div>
+                </div>
+                {/* Decorative accent */}
+                <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-hayrok-orange/10 rounded-3xl -z-10" />
+              </motion.div>
 
               {/* Info */}
-              <div className="flex-1 text-center md:text-left">
-                <div className="inline-flex items-center gap-2 text-hayrok-orange font-bold text-[10px] uppercase tracking-[0.3em] mb-3">
-                   <Lightbulb size={14} /> Product Advisor
+              <motion.div 
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="space-y-8"
+              >
+                <div className="inline-flex items-center gap-3 text-hayrok-orange font-black text-[10px] uppercase tracking-[0.4em]">
+                   <Shield size={16} /> Advisory Leadership
                 </div>
-                <h3 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight mb-4">Tyler Giles</h3>
-                <p className="text-slate-500 leading-relaxed mb-6">
-                  Tyler brings deep expertise in scalable systems architecture and cloud infrastructure to his advisory role at Hayrok. He provides strategic guidance on product direction, technical architecture decisions, and enterprise readiness.
-                </p>
-                <a href="#" className="inline-flex items-center gap-2 text-sm font-bold text-slate-400 hover:text-hayrok-orange transition-colors">
-                  <Linkedin size={18} />
-                  <span>Connect on LinkedIn</span>
-                </a>
-              </div>
-            </motion.div>
+                
+                <h2 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tight leading-tight">
+                  Guiding Product Security <span className="text-hayrok-orange italic">Strategy</span>
+                </h2>
+
+                <div className="space-y-5 text-lg text-slate-600 leading-relaxed">
+                  <p>
+                    Tyler advises Hayrok on product and application security, bringing practical experience in secure product design. He provides an independent perspective that supports secure-by-design decisions and helps guide the development of a scalable, trusted platform aligned with customer needs.
+                  </p>
+                </div>
+
+                {/* Focus Areas */}
+                <div className="grid grid-cols-2 gap-4 pt-4">
+                  {[
+                    { label: 'Secure SDLC', icon: Code },
+                    { label: 'Threat Modeling', icon: Target },
+                    { label: 'AppSec Strategy', icon: ShieldAlert },
+                    { label: 'Supply Chain Security', icon: GitBranch },
+                  ].map((item) => (
+                    <div key={item.label} className="flex items-center gap-3 p-3 bg-slate-50 rounded-xl border border-slate-100">
+                      <item.icon size={18} className="text-hayrok-orange" />
+                      <span className="text-sm font-bold text-slate-700">{item.label}</span>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="pt-6 flex items-center gap-6">
+                   <a href="#" className="inline-flex items-center gap-2 px-5 py-3 bg-slate-900 text-white rounded-xl font-bold text-sm hover:bg-slate-800 transition-colors">
+                      <Linkedin size={18} />
+                      Connect on LinkedIn
+                   </a>
+                   <div className="h-px flex-1 bg-slate-100" />
+                </div>
+              </motion.div>
+            </div>
           </div>
         </div>
       </section>

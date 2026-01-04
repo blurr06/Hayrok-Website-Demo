@@ -66,9 +66,16 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
         </div>
 
         <div className="border-t border-slate-100 pt-10 flex flex-col md:flex-row justify-between items-center gap-6">
-          <p className="text-slate-400 text-sm font-medium">
-            © {new Date().getFullYear()} Hayrok Security Inc. Built with Governed Autonomy.
-          </p>
+          <div className="flex items-center gap-6">
+            <p className="text-slate-400 text-sm font-medium">
+              © {new Date().getFullYear()} Hayrok Security Inc. Built with Governed Autonomy.
+            </p>
+            {/* SOC 2 Badge */}
+            <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-50 border border-emerald-200">
+              <ShieldCheck size={14} className="text-emerald-600" />
+              <span className="text-xs font-bold text-emerald-700">SOC 2 Type II In Progress</span>
+            </div>
+          </div>
           <div className="flex items-center gap-6">
             <a href="mailto:contact@hayrok.com" className="flex items-center gap-2 text-slate-500 text-sm font-bold hover:text-hayrok-orange transition-colors">
               <Mail size={14} className="text-hayrok-orange" />

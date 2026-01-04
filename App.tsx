@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { 
   CheckCircle2, ChevronRight, TrendingDown, Target, Zap, Clock, 
@@ -72,6 +72,9 @@ import { SaaSCloudNativeCompanies } from './components/SaaSCloudNativeCompanies'
 import { HealthcareLifeSciences } from './components/HealthcareLifeSciences';
 import { RetailECommerce } from './components/RetailECommerce';
 import { TechnologyAIDrivenOrganizations } from './components/TechnologyAIDrivenOrganizations';
+import { TermsOfService } from './components/TermsOfService';
+import { PrivacyPolicy } from './components/PrivacyPolicy';
+import { TestimonialSection } from './components/TestimonialSection';
 
 const VisibilityToValidation = () => (
   <section className="py-40 bg-[#050B1A] text-white relative overflow-hidden">
@@ -327,6 +330,11 @@ const FinalCTA = ({ onNavigate }: { onNavigate: (page: string) => void }) => (
 function App() {
   const [currentPage, setCurrentPage] = useState('home');
 
+  // Scroll to top whenever page changes
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }, [currentPage]);
+
   const renderPage = () => {
     if (currentPage === 'solution-api') return <ApiSecurityValidation onNavigate={setCurrentPage} />;
     if (currentPage === 'solution-supply-chain') return <SupplyChainRisk onNavigate={setCurrentPage} />;
@@ -348,7 +356,9 @@ function App() {
     if (currentPage === 'industry-tech-ai') return <TechnologyAIDrivenOrganizations onNavigate={setCurrentPage} />;
     
     // Legal & Trust Routes
-    if (['privacy-notice', 'terms', 'privacy-policy', 'security', 'dpa'].includes(currentPage)) {
+    if (currentPage === 'terms') return <TermsOfService onNavigate={setCurrentPage} />;
+    if (currentPage === 'privacy-policy') return <PrivacyPolicy onNavigate={setCurrentPage} />;
+    if (['privacy-notice', 'security', 'dpa'].includes(currentPage)) {
         return <TrustCenter onNavigate={setCurrentPage} />;
     }
 
@@ -400,6 +410,7 @@ function App() {
             <Hero onNavigate={setCurrentPage} />
             <ResponsibleAiBanner onClick={() => setCurrentPage('responsible-ai-policy')} />
             <IntegrationsSection condensed={true} />
+            <TestimonialSection />
             <ProblemSection />
             <VisibilityToValidation />
             <HayAiBrain />

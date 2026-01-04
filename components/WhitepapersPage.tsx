@@ -38,6 +38,7 @@ export const WHITEPAPERS = [
     author: "Ebuka Igwegbe, CPO",
     date: "Nov 2024",
     readTime: "15 min read",
+    image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=2070",
     snippet: "Autonomous security requires more than just faster execution; it requires a recursive reasoning engine capable of understanding transitive trust and complex attack graphs within a human-reviewable framework.",
     tags: ["AI", "SecOps", "Logic"],
     isDraft: false
@@ -49,6 +50,7 @@ export const WHITEPAPERS = [
     author: "Herberth Oshiemele, CEO",
     date: "Dec 2024",
     readTime: "10 min read",
+    image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=2070",
     snippet: "Modern software builds introduce hundreds of third-party dependencies. This paper outlines a policy-driven approach to managing supply chain risk using CodeFabrics and Genesis validation.",
     tags: ["AppSec", "Supply Chain", "SCA"],
     isDraft: false

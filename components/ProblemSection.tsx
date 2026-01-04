@@ -10,12 +10,12 @@ export const ProblemSection: React.FC = () => {
           <div>
             <h2 className="text-sm font-bold text-hayrok-orange uppercase tracking-widest mb-6">The Visibility Paradox</h2>
             <h3 className="text-4xl md:text-6xl font-black mb-8 text-slate-900 leading-[1.1]">
-              Security Has Visibility. <br/>
-              <span className="text-hayrok-orange">What It Lacks Is Validated Decision Ownership.</span>
+              You Have Data. <br/>
+              <span className="text-hayrok-orange">You Don't Have Answers.</span>
             </h3>
             
             <p className="text-xl text-slate-500 font-medium mb-12 leading-relaxed">
-              Organizations today deploy specialized tools to understand posture, yet leadership still lacks clear answers on owned risk.
+              Your team runs scans, reviews alerts, and triages findings — but when leadership asks "which risks do we actually own?" the room goes quiet. That's the gap Hayrok closes.
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-16">
@@ -43,10 +43,10 @@ export const ProblemSection: React.FC = () => {
                   <ShieldAlert size={120} />
                </div>
                <p className="text-2xl font-bold leading-tight relative z-10 mb-4">
-                  Security produces insights. <br/>
-                  <span className="text-hayrok-orange italic font-black">No system owns the final decision.</span>
+                  Every tool tells you what's wrong. <br/>
+                  <span className="text-hayrok-orange italic font-black">None of them prove what to do about it.</span>
                </p>
-               <p className="text-slate-400 font-bold uppercase tracking-widest text-[10px] relative z-10">Hayrok doesn't replace your stack. It completes it.</p>
+               <p className="text-slate-400 font-bold uppercase tracking-widest text-[10px] relative z-10">Hayrok gives you validated decisions you can defend to the board.</p>
             </div>
           </div>
 
@@ -65,10 +65,10 @@ export const ProblemSection: React.FC = () => {
                    
                    <div className="space-y-4 max-w-sm mx-auto text-left">
                       {[
-                        "High volumes of limited context",
-                        "Point-in-time assessments",
-                        "Disconnected tools without validation",
-                        "Manual spreadsheet decisions"
+                        "10,000 findings. No idea which ones matter.",
+                        "Quarterly pentests that age out in weeks.",
+                        "Six tools. Zero shared context.",
+                        "Spreadsheets as your source of truth."
                       ].map((ans, i) => (
                         <div key={i} className="flex gap-3 items-center">
                            <div className="w-1.5 h-1.5 rounded-full bg-red-500 shrink-0" />

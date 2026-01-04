@@ -65,7 +65,7 @@ const HiveDashboardMock = () => {
         <div className="w-3 h-3 rounded-full bg-emerald-400" />
       </div>
 
-      <div className="flex h-[580px]">
+      <div className="flex h-[750px]">
         {/* Sidebar */}
         <div className="w-72 bg-slate-900 flex flex-col">
           {/* Logo */}
@@ -261,14 +261,104 @@ const HiveDashboardMock = () => {
               </div>
             </div>
 
-            {/* Bottom Section Headers */}
+            {/* Active Assets Section */}
+            <div className="bg-white rounded-2xl border border-slate-100 p-6 mt-6">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="font-black text-slate-800">Active Assets</h3>
+                <span className="text-xs text-slate-400">24 total</span>
+              </div>
+              <div className="overflow-x-auto">
+                <table className="w-full text-sm">
+                  <thead>
+                    <tr className="border-b border-slate-100">
+                      <th className="text-left py-3 px-2 text-xs font-bold text-slate-400 uppercase tracking-wider">Domain</th>
+                      <th className="text-left py-3 px-2 text-xs font-bold text-slate-400 uppercase tracking-wider">Status</th>
+                      <th className="text-left py-3 px-2 text-xs font-bold text-slate-400 uppercase tracking-wider">Progress</th>
+                      <th className="text-left py-3 px-2 text-xs font-bold text-slate-400 uppercase tracking-wider">Timestamp</th>
+                      <th className="text-left py-3 px-2 text-xs font-bold text-slate-400 uppercase tracking-wider">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {[
+                      { domain: 'www.hayrok.com', status: 'Active', progress: 100, date: '03 Aug 25', action: 'View' },
+                      { domain: 'api.hayrok.com', status: 'Active', progress: 100, date: '03 Aug 25', action: 'View' },
+                      { domain: 'dashboard.hayrok.com/public', status: 'Pending', progress: 45, date: '02 Aug 25', action: 'Resume' },
+                    ].map((row, i) => (
+                      <tr key={i} className="border-b border-slate-50 hover:bg-slate-50 transition-colors">
+                        <td className="py-3 px-2 font-medium text-slate-700">{row.domain}</td>
+                        <td className="py-3 px-2">
+                          <span className={`px-2 py-1 rounded-lg text-xs font-bold ${row.status === 'Active' ? 'bg-emerald-100 text-emerald-700' : 'bg-yellow-100 text-yellow-700'}`}>{row.status}</span>
+                        </td>
+                        <td className="py-3 px-2">
+                          <div className="flex items-center gap-2">
+                            <div className="w-20 h-2 bg-slate-100 rounded-full overflow-hidden">
+                              <div className="h-full bg-hayrok-orange rounded-full" style={{ width: `${row.progress}%` }} />
+                            </div>
+                            <span className="text-xs text-slate-500">{row.progress}%</span>
+                          </div>
+                        </td>
+                        <td className="py-3 px-2 text-slate-500">{row.date}</td>
+                        <td className="py-3 px-2">
+                          <button className="text-hayrok-orange font-bold text-xs hover:underline">{row.action}</button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            {/* Bottom Stats Grid */}
             <div className="grid grid-cols-3 gap-4 mt-6">
-              {['Active Assets', 'Remediation Overview', 'Compliance Score'].map((title) => (
-                <div key={title} className="bg-white rounded-2xl border border-slate-100 p-4 flex items-center justify-between">
-                  <span className="font-bold text-slate-700 text-sm">{title}</span>
-                  <Info size={16} className="text-slate-300" />
+              {/* Remediation Overview */}
+              <div className="bg-white rounded-2xl border border-slate-100 p-5">
+                <div className="flex items-center justify-between mb-4">
+                  <span className="font-bold text-slate-700 text-sm">Remediation Overview</span>
+                  <Info size={14} className="text-slate-300" />
                 </div>
-              ))}
+                <div className="flex items-center justify-center">
+                  <div className="relative w-24 h-24">
+                    <svg className="w-full h-full -rotate-90">
+                      <circle cx="48" cy="48" r="40" stroke="#f1f5f9" strokeWidth="8" fill="none" />
+                      <circle cx="48" cy="48" r="40" stroke="#22c55e" strokeWidth="8" fill="none" strokeDasharray="251" strokeDashoffset="63" strokeLinecap="round" />
+                    </svg>
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <span className="text-xl font-black text-slate-800">75%</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Compliance Score */}
+              <div className="bg-white rounded-2xl border border-slate-100 p-5">
+                <div className="flex items-center justify-between mb-4">
+                  <span className="font-bold text-slate-700 text-sm">Compliance Score</span>
+                  <Info size={14} className="text-slate-300" />
+                </div>
+                <div className="text-center">
+                  <p className="text-4xl font-black text-emerald-500">87%</p>
+                  <p className="text-xs text-slate-400 mt-1">SOC 2 Ready</p>
+                </div>
+              </div>
+
+              {/* Agent Validation */}
+              <div className="bg-white rounded-2xl border border-slate-100 p-5">
+                <div className="flex items-center justify-between mb-4">
+                  <span className="font-bold text-slate-700 text-sm">Agent Validation</span>
+                  <Info size={14} className="text-slate-300" />
+                </div>
+                <div className="space-y-2">
+                  {[
+                    { label: 'MITTO', status: 'Validated', color: 'emerald' },
+                    { label: 'SOTTA', status: 'Pending', color: 'yellow' },
+                  ].map((agent) => (
+                    <div key={agent.label} className="flex items-center justify-between text-xs">
+                      <span className="font-bold text-slate-600">{agent.label}</span>
+                      <span className={`px-2 py-0.5 rounded text-${agent.color}-700 bg-${agent.color}-100 font-bold`}>{agent.status}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -305,9 +395,13 @@ export const Hero: React.FC<{ onNavigate?: (page: string) => void }> = ({ onNavi
             Aligned to <span className="text-slate-400 italic">CTEM</span> and <br />
             <span className="bg-gradient-to-r from-hayrok-orange via-[#FF5F00] to-orange-400 bg-clip-text text-transparent italic">Security Validation.</span>
           </h1>
+
+          <p className="text-xl md:text-2xl text-slate-700 leading-relaxed max-w-4xl mx-auto font-bold tracking-tight">
+            The security validation platform that connects your tools, validates your findings, and gives you proof — not opinions.
+          </p>
           
-          <p className="text-xl md:text-3xl text-slate-500 leading-relaxed max-w-4xl mx-auto font-medium tracking-tight">
-            Turn continuous security exposure into validated, auditable risk decisions.
+          <p className="text-lg md:text-xl text-slate-500 leading-relaxed max-w-3xl mx-auto font-medium">
+            When the board asks "are we secure?" — answer with evidence.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6 pt-6">
